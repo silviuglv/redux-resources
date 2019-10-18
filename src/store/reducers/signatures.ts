@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable'
 import { signatureActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
-import { SignaturesState } from '../../types/app'
+import { SignaturesState } from '../../types'
 
 const state: SignaturesState = {
 	list: stateUtility.getPaginationInitialState(),

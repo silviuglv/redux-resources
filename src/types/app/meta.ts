@@ -1,7 +1,7 @@
-export interface ImmutableJS {
-	merge
-	toJS
-	fromJS
+export type ENVIRONMENT = 'development' | 'production' | string
+
+export interface Dictionary<T> {
+	[index: string]: T
 }
 
 export interface UI {
