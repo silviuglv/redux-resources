@@ -1,4 +1,4 @@
-export interface PaginatedResponse<T> {
+export interface PaginatedApiResponse<T> {
 	current_page: number
 	data: Array<T>
 	first_page_url: string

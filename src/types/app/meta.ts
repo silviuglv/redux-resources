@@ -18,6 +18,11 @@ export interface Error {
 	fields: null | []
 }
 
+export interface Observer {
+	ui: UI
+	error: Error
+}
+
 export interface Item<T> {
 	ui: UI
 	data: T
