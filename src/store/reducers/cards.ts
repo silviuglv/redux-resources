@@ -1,20 +1,18 @@
 import { fromJS } from 'immutable'
 import { cardActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { CardsState } from '../../types'
 
-const initialState = fromJS({
+const state: CardsState = {
 	list: stateUtility.getPaginationInitialState(),
-
-	item: stateUtility.getObserverInitialState(),
-
+	item: stateUtility.getItemInitialState(),
 	createCard: stateUtility.getObserverInitialState(),
-
 	updateCard: stateUtility.getObserverInitialState(),
-
 	deleteCard: stateUtility.getObserverInitialState(),
-
 	setDefaultCard: stateUtility.getObserverInitialState(),
-})
+}
+
+const initialState = fromJS(state)
 
 export default (state = initialState, action) => {
 	switch (action.type) {

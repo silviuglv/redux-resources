@@ -1,16 +1,16 @@
 import { fromJS } from 'immutable'
 import { folderActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { FoldersState } from '../../types/app'
 
-const initialState = fromJS({
+const state: FoldersState = {
 	list: stateUtility.getPaginationInitialState(),
-
-	item: stateUtility.getObserverInitialState(),
-
+	item: stateUtility.getItemInitialState(),
 	createFolder: stateUtility.getObserverInitialState(),
-
 	updateFolder: stateUtility.getObserverInitialState(),
-})
+}
+
+const initialState = fromJS(state)
 
 export default (state = initialState, action) => {
 	switch (action.type) {

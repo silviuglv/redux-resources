@@ -1,13 +1,16 @@
 import { fromJS } from 'immutable'
 import { connectedServiceActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { ConnectedServicesState } from '../../types'
 
-const initialState = fromJS({
+const state: ConnectedServicesState = {
 	list: stateUtility.getPaginationInitialState(),
 	item: stateUtility.getItemInitialState(),
 	connected: [],
 	available: [],
-})
+}
+
+const initialState = fromJS(state)
 
 export default (state = initialState, action) => {
 	switch (action.type) {

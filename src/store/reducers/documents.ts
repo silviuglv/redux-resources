@@ -1,11 +1,14 @@
 import { fromJS } from 'immutable'
 import { documentActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { DocumentsState } from '../../types'
 
-const initialState = fromJS({
+const state: DocumentsState = {
 	list: stateUtility.getPaginationInitialState(),
 	download: stateUtility.getObserverInitialState(),
-})
+}
+
+const initialState = fromJS(state)
 
 export default (state = initialState, action) => {
 	switch (action.type) {

@@ -1,15 +1,18 @@
 import { fromJS } from 'immutable'
 import { userActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { UsersState } from '../../types/app'
 
-const initialState = fromJS({
+const state: UsersState = {
 	updatePassword: stateUtility.getObserverInitialState(),
 	resendEmailConfirmation: stateUtility.getObserverInitialState(),
 	notificationPreferences: stateUtility.getItemInitialState(),
 	getNotificationPreferences: stateUtility.getObserverInitialState(),
 	updateNotificationPreferences: stateUtility.getObserverInitialState(),
 	confirmEmail: stateUtility.getObserverInitialState(),
-})
+}
+
+const initialState = fromJS(state)
 
 export default (state = initialState, action) => {
 	switch (action.type) {

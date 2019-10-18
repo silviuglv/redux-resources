@@ -1,10 +1,11 @@
 import { fromJS } from 'immutable'
 import { notificationActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { NotificationsState } from '../../types/app'
 
 const DEFAULT_AUTO_HIDE_DURATION = 4000
 
-const initialState = fromJS({
+const state: NotificationsState = {
 	snackBar: {
 		open: false,
 		autoHideDuration: DEFAULT_AUTO_HIDE_DURATION,
@@ -19,7 +20,9 @@ const initialState = fromJS({
 	deleteNotification: stateUtility.getObserverInitialState(),
 	connectToNotificationService: stateUtility.getObserverInitialState(),
 	subscribeToUserEvents: stateUtility.getObserverInitialState(),
-})
+}
+
+const initialState = fromJS(state)
 
 export default function(state = initialState, action) {
 	switch (action.type) {

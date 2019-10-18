@@ -1,45 +1,23 @@
 import { fromJS } from 'immutable'
 import { accountActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
-import { Account, ImmutableJS, Invoice, Item, Observer, Pagination, User } from '../../types'
+import { AccountsState } from '../../types'
 
-interface InitialState extends ImmutableJS {
-	list: Pagination<Account>
-	item: Item<Account>
-	users: Pagination<User>
-	defaultAccount: Item<Account>
-	setDefaultAccount: Observer
-	createAccount: Item<Account>
-	deleteAccountMember: Observer
-	updateAccountMember: Observer
-	updateAccount: Observer
-	updatePhoto: Observer
-	invoices: Pagination<Invoice>
+const state: AccountsState = {
+	list: stateUtility.getPaginationFromLocalStorage('accountList'),
+	item: stateUtility.getItemInitialState(),
+	users: stateUtility.getPaginationInitialState(),
+	defaultAccount: stateUtility.getItemFromLocalStorage('defaultAccount'),
+	setDefaultAccount: stateUtility.getObserverInitialState(),
+	createAccount: stateUtility.getItemInitialState(),
+	deleteAccountMember: stateUtility.getObserverInitialState(),
+	updateAccountMember: stateUtility.getObserverInitialState(),
+	updateAccount: stateUtility.getObserverInitialState(),
+	updatePhoto: stateUtility.getObserverInitialState(),
+	invoices: stateUtility.getPaginationInitialState(),
 }
 
-const initialState: InitialState = fromJS({
-	list: stateUtility.getPaginationFromLocalStorage('accountList'),
-
-	item: stateUtility.getItemInitialState(),
-
-	users: stateUtility.getPaginationInitialState(),
-
-	defaultAccount: stateUtility.getItemFromLocalStorage('defaultAccount'),
-
-	setDefaultAccount: stateUtility.getObserverInitialState(),
-
-	createAccount: stateUtility.getItemInitialState(),
-
-	deleteAccountMember: stateUtility.getObserverInitialState(),
-
-	updateAccountMember: stateUtility.getObserverInitialState(),
-
-	updateAccount: stateUtility.getObserverInitialState(),
-
-	updatePhoto: stateUtility.getObserverInitialState(),
-
-	invoices: stateUtility.getPaginationInitialState(),
-})
+const initialState = fromJS(state)
 
 export default (state = initialState, action) => {
 	switch (action.type) {

@@ -9,3 +9,10 @@ export interface PersonalAccessToken {
 	updated_at: string
 	expires_at: string
 }
+
+export interface AccessToken {
+	token_type: string
+	expires_in: number
+	access_token: string
+	refresh_token: string
+}

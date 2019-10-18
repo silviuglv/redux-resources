@@ -1,10 +1,13 @@
 import { fromJS } from 'immutable'
 import { planActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { PlansState } from '../../types/app'
 
-const initialState = fromJS({
+const state: PlansState = {
 	list: stateUtility.getPaginationInitialState(),
-})
+}
+
+const initialState = fromJS(state)
 
 export default (state = initialState, action) => {
 	//  list

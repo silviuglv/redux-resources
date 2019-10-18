@@ -1,20 +1,18 @@
 import { fromJS } from 'immutable'
 import { accountInviteActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { AccountInvitesState } from '../../types'
 
-const initialState = fromJS({
+const state: AccountInvitesState = {
 	list: stateUtility.getPaginationInitialState(),
-
 	getMyAccountInvites: stateUtility.getPaginationInitialState(),
-
 	item: stateUtility.getItemInitialState(),
-
 	deleteAccountInvite: stateUtility.getObserverInitialState(),
-
 	acceptAccountInvite: stateUtility.getObserverInitialState(),
-
 	createAccountInvite: stateUtility.getItemInitialState(),
-})
+}
+
+const initialState = fromJS(state)
 
 export default (state = initialState, action) => {
 	switch (action.type) {

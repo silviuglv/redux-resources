@@ -1,8 +1,9 @@
 import { fromJS } from 'immutable'
 import { packageActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { PackagesState } from '../../types/app'
 
-const initialState = fromJS({
+const state: PackagesState = {
 	list: stateUtility.getPaginationInitialState(),
 	lexicon: stateUtility.getItemInitialState(),
 	item: stateUtility.getItemInitialState(),
@@ -13,7 +14,9 @@ const initialState = fromJS({
 	deleteDocument: stateUtility.getObserverInitialState(),
 	createPackage: stateUtility.getObserverInitialState(),
 	recipient: stateUtility.getItemInitialState(),
-})
+}
+
+const initialState = fromJS(state)
 
 export default (state = initialState, action) => {
 	switch (action.type) {

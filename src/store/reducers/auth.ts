@@ -1,20 +1,18 @@
 import { fromJS } from 'immutable'
 import { authActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { AuthState } from '../../types'
 
-const initialState = fromJS({
+const state: AuthState = {
 	accessToken: stateUtility.getStringFromLocalStorage('accessToken'),
-
 	user: stateUtility.getItemFromLocalStorage('authUser'),
-
 	meta: stateUtility.getItemFromLocalStorage('userMeta'),
-
 	updateUser: stateUtility.getObserverInitialState(),
-
 	createUser: stateUtility.getObserverInitialState(),
-
 	updatePhoto: stateUtility.getObserverInitialState(),
-})
+}
+
+const initialState = fromJS(state)
 
 export default (state = initialState, action) => {
 	//  log user out

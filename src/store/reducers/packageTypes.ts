@@ -1,10 +1,13 @@
 import { fromJS } from 'immutable'
 import { packageTypeActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { PackageTypesState } from '../../types/app'
 
-const initialState = fromJS({
+const state: PackageTypesState = {
 	list: stateUtility.getPaginationInitialState(),
-})
+}
+
+const initialState = fromJS(state)
 
 export default (state = initialState, action) => {
 	//  list
