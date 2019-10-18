@@ -1,8 +1,23 @@
 import { fromJS } from 'immutable'
 import { accountActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
+import { Account, ImmutableJS, Invoice, Item, Observer, Pagination, User } from '../../types'
 
-const initialState = fromJS({
+interface InitialState extends ImmutableJS {
+	list: Pagination<Account>
+	item: Item<Account>
+	users: Pagination<User>
+	defaultAccount: Item<Account>
+	setDefaultAccount: Observer
+	createAccount: Item<Account>
+	deleteAccountMember: Observer
+	updateAccountMember: Observer
+	updateAccount: Observer
+	updatePhoto: Observer
+	invoices: Pagination<Invoice>
+}
+
+const initialState: InitialState = fromJS({
 	list: stateUtility.getPaginationFromLocalStorage('accountList'),
 
 	item: stateUtility.getItemInitialState(),

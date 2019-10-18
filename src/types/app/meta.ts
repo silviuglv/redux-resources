@@ -1,3 +1,9 @@
+export interface ImmutableJS {
+	merge
+	toJS
+	fromJS
+}
+
 export interface UI {
 	loaded: boolean
 	loading: boolean
