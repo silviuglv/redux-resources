@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable'
 import { subscriptionActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
-import { SubscriptionsState } from '../../types/app'
+import { SubscriptionsState } from '../../types'
 
 const state: SubscriptionsState = {
 	list: stateUtility.getPaginationInitialState(),

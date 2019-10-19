@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable'
 import { notificationActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
-import { NotificationsState } from '../../types/app'
+import { NotificationsState } from '../../types'
 
 const DEFAULT_AUTO_HIDE_DURATION = 4000
 

@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable'
 import { userActions } from '../actions'
 import stateUtility from '../../utilities/stateUtility'
-import { UsersState } from '../../types/app'
+import { UsersState } from '../../types'
 
 const state: UsersState = {
 	updatePassword: stateUtility.getObserverInitialState(),
