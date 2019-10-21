@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable'
 import { folderActions } from '../actions'
-import stateUtility from '../../utilities/stateUtility'
+import { stateUtility } from '../../utilities'
 import { FoldersState } from '../../types'
 
 const state: FoldersState = {

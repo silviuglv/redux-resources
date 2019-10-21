@@ -1,6 +1,6 @@
 import axios from 'axios'
 import config from '../config'
-import { keysToSnakeCase } from '../utilities/helpers'
+import { keysToSnakeCase } from '../utilities'
 
 export default {
 	getPackages: (params) => {

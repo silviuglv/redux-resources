@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable'
 import { connectedServiceActions } from '../actions'
-import stateUtility from '../../utilities/stateUtility'
+import { stateUtility } from '../../utilities'
 import { ConnectedServicesState } from '../../types'
 
 const state: ConnectedServicesState = {

@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable'
 import { fieldTypeActions } from '../actions'
-import stateUtility from '../../utilities/stateUtility'
+import { stateUtility } from '../../utilities'
 import { FieldTypesState } from '../../types'
 
 const state: FieldTypesState = {

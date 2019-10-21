@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable'
 import { userActions } from '../actions'
-import stateUtility from '../../utilities/stateUtility'
+import { stateUtility } from '../../utilities'
 import { UsersState } from '../../types'
 
 const state: UsersState = {
