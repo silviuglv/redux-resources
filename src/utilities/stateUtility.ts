@@ -1,6 +1,6 @@
-import { Item, Observer, Pagination, PaginatedApiResponse, Error } from '../types'
+import { ItemResponse, Observer, PaginatedResponse, PaginatedApiResponse, Error } from '../types'
 
-const getPaginationInitialState = (): Pagination<any> => {
+const getPaginationInitialState = (): PaginatedResponse<any> => {
 	return {
 		ui: {
 			loaded: false,
@@ -19,7 +19,7 @@ const getPaginationInitialState = (): Pagination<any> => {
 	}
 }
 
-const getPaginationLoading = (): Pagination<any> => {
+const getPaginationLoading = (): PaginatedResponse<any> => {
 	return {
 		ui: {
 			loaded: false,
@@ -38,7 +38,7 @@ const getPaginationLoading = (): Pagination<any> => {
 	}
 }
 
-const getPaginationFulfilled = (data: PaginatedApiResponse<any>): Pagination<any> => {
+const getPaginationFulfilled = (data: PaginatedApiResponse<any>): PaginatedResponse<any> => {
 	return {
 		ui: {
 			loaded: true,
@@ -57,7 +57,7 @@ const getPaginationFulfilled = (data: PaginatedApiResponse<any>): Pagination<any
 	}
 }
 
-const getPaginationFromLocalStorage = (name: string): Pagination<any> => {
+const getPaginationFromLocalStorage = (name: string): PaginatedResponse<any> => {
 	const value = window.localStorage.getItem(name)
 	if (value === null) {
 		return getPaginationInitialState()
@@ -68,10 +68,10 @@ const getPaginationFromLocalStorage = (name: string): Pagination<any> => {
 }
 
 const addItemToPagination = (
-	list: Pagination<any>,
+	list: PaginatedResponse<any>,
 	data: PaginatedApiResponse<any>,
 	prepend = true
-): Pagination<any> => {
+): PaginatedResponse<any> => {
 	return {
 		ui: {
 			loaded: true,
@@ -90,7 +90,7 @@ const addItemToPagination = (
 	}
 }
 
-const removeItemFromPagination = (list: Pagination<any>, resourceId: string): Pagination<any> => {
+const removeItemFromPagination = (list: PaginatedResponse<any>, resourceId: string): PaginatedResponse<any> => {
 	return {
 		ui: {
 			loaded: true,
@@ -109,7 +109,7 @@ const removeItemFromPagination = (list: Pagination<any>, resourceId: string): Pa
 	}
 }
 
-const getPaginationRejected = (error: Error): Pagination<any> => {
+const getPaginationRejected = (error: Error): PaginatedResponse<any> => {
 	return {
 		ui: {
 			loaded: false,
@@ -128,7 +128,7 @@ const getPaginationRejected = (error: Error): Pagination<any> => {
 	}
 }
 
-const getItemInitialState = (data = null): Item<any> => {
+const getItemInitialState = (data = null): ItemResponse<any> => {
 	return {
 		ui: {
 			loaded: false,
@@ -139,7 +139,7 @@ const getItemInitialState = (data = null): Item<any> => {
 	}
 }
 
-const getItemLoading = (data = null): Item<any> => {
+const getItemLoading = (data = null): ItemResponse<any> => {
 	return {
 		ui: {
 			loaded: false,
@@ -150,7 +150,7 @@ const getItemLoading = (data = null): Item<any> => {
 	}
 }
 
-const getItemFulfilled = (data = {}): Item<any> => {
+const getItemFulfilled = (data = {}): ItemResponse<any> => {
 	return {
 		ui: {
 			loaded: true,
@@ -161,7 +161,7 @@ const getItemFulfilled = (data = {}): Item<any> => {
 	}
 }
 
-const getItemRejected = (error: Error, data = null): Item<any> => {
+const getItemRejected = (error: Error, data = null): ItemResponse<any> => {
 	return {
 		ui: {
 			loaded: true,
@@ -172,7 +172,7 @@ const getItemRejected = (error: Error, data = null): Item<any> => {
 	}
 }
 
-const getStringFromLocalStorage = (name: string): Item<any> => {
+const getStringFromLocalStorage = (name: string): ItemResponse<any> => {
 	const value = window.localStorage.getItem(name)
 	if (value === null) {
 		return getItemInitialState()
@@ -181,7 +181,7 @@ const getStringFromLocalStorage = (name: string): Item<any> => {
 	}
 }
 
-const getItemFromLocalStorage = (name: string): Item<any> => {
+const getItemFromLocalStorage = (name: string): ItemResponse<any> => {
 	const value = window.localStorage.getItem(name)
 	if (value === null) {
 		return getItemInitialState()

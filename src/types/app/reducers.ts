@@ -8,13 +8,13 @@ import {
 	Field,
 	Folder,
 	Invoice,
-	Item,
+	ItemResponse,
 	NotificationPreference,
 	Observer,
 	Package,
 	PackageType,
 	Page,
-	Pagination,
+	PaginatedResponse,
 	Plan,
 	Recipient,
 	Signature,
@@ -24,40 +24,40 @@ import {
 } from '../../types'
 
 export interface AccountsState {
-	list: Pagination<Account>
-	item: Item<Account>
-	users: Pagination<User>
-	defaultAccount: Item<Account>
+	list: PaginatedResponse<Account>
+	item: ItemResponse<Account>
+	users: PaginatedResponse<User>
+	defaultAccount: ItemResponse<Account>
 	setDefaultAccount: Observer
-	createAccount: Item<Account>
+	createAccount: ItemResponse<Account>
 	deleteAccountMember: Observer
 	updateAccountMember: Observer
 	updateAccount: Observer
 	updatePhoto: Observer
-	invoices: Pagination<Invoice>
+	invoices: PaginatedResponse<Invoice>
 }
 
 export interface AccountInvitesState {
-	list: Pagination<AccountInvite>
-	getMyAccountInvites: Pagination<AccountInvite>
-	item: Item<AccountInvite>
+	list: PaginatedResponse<AccountInvite>
+	getMyAccountInvites: PaginatedResponse<AccountInvite>
+	item: ItemResponse<AccountInvite>
 	deleteAccountInvite: Observer
 	acceptAccountInvite: Observer
-	createAccountInvite: Item<AccountInvite>
+	createAccountInvite: ItemResponse<AccountInvite>
 }
 
 export interface AuthState {
-	accessToken: Item<AccessToken>
-	user: Item<User>
-	meta: Item<UserMeta>
+	accessToken: ItemResponse<AccessToken>
+	user: ItemResponse<User>
+	meta: ItemResponse<UserMeta>
 	updateUser: Observer
 	createUser: Observer
 	updatePhoto: Observer
 }
 
 export interface CardsState {
-	list: Pagination<Card>
-	item: Item<Card>
+	list: PaginatedResponse<Card>
+	item: ItemResponse<Card>
 	createCard: Observer
 	updateCard: Observer
 	deleteCard: Observer
@@ -65,38 +65,38 @@ export interface CardsState {
 }
 
 export interface ConnectedServicesState {
-	list: Pagination<ConnectedService>
-	item: Item<ConnectedService>
+	list: PaginatedResponse<ConnectedService>
+	item: ItemResponse<ConnectedService>
 	connected: Array<ConnectedService>
 	available: Array<ConnectedService>
 }
 
 export interface DocumentsState {
-	list: Pagination<Document>
+	list: PaginatedResponse<Document>
 	download: Observer
 }
 
 export interface FieldsState {
-	list: Pagination<Field>
-	item: Item<Field>
+	list: PaginatedResponse<Field>
+	item: ItemResponse<Field>
 }
 
 export interface FieldTypesState {
-	list: Pagination<Field>
+	list: PaginatedResponse<Field>
 }
 
 export interface FoldersState {
-	list: Pagination<Folder>
-	item: Item<Folder>
+	list: PaginatedResponse<Folder>
+	item: ItemResponse<Folder>
 	createFolder: Observer
 	updateFolder: Observer
 }
 
 export interface NotificationsState {
 	snackBar
-	list: Pagination<Notification>
+	list: PaginatedResponse<Notification>
 	totalUnreadNotifications: number
-	item: Item<Notification>
+	item: ItemResponse<Notification>
 	updateNotification: Observer
 	deleteNotification: Observer
 	connectToNotificationService: Observer
@@ -104,12 +104,12 @@ export interface NotificationsState {
 }
 
 export interface PackagesState {
-	list: Pagination<Package>
-	lexicon: Item<Package>
-	item: Item<Package>
-	recipients: Pagination<Recipient>
-	documents: Pagination<Document>
-	pages: Pagination<Page>
+	list: PaginatedResponse<Package>
+	lexicon: ItemResponse<Package>
+	item: ItemResponse<Package>
+	recipients: PaginatedResponse<Recipient>
+	documents: PaginatedResponse<Document>
+	pages: PaginatedResponse<Page>
 	createPackageDocument: Observer
 	deleteDocument: Observer
 	createPackage: Observer
@@ -117,31 +117,31 @@ export interface PackagesState {
 }
 
 export interface PackageTypesState {
-	list: Pagination<PackageType>
+	list: PaginatedResponse<PackageType>
 }
 
 export interface PagesState {
-	list: Pagination<Page>
+	list: PaginatedResponse<Page>
 }
 
 export interface PlansState {
-	list: Pagination<Plan>
+	list: PaginatedResponse<Plan>
 }
 
 export interface SignaturesState {
-	list: Pagination<Signature>
-	item: Item<Signature>
+	list: PaginatedResponse<Signature>
+	item: ItemResponse<Signature>
 }
 
 export interface SubscriptionsState {
-	list: Pagination<Subscription>
-	item: Item<Subscription>
+	list: PaginatedResponse<Subscription>
+	item: ItemResponse<Subscription>
 }
 
 export interface UsersState {
 	updatePassword: Observer
 	resendEmailConfirmation: Observer
-	notificationPreferences: Item<NotificationPreference>
+	notificationPreferences: ItemResponse<NotificationPreference>
 	getNotificationPreferences: Observer
 	updateNotificationPreferences: Observer
 	confirmEmail: Observer

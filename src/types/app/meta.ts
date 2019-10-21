@@ -23,13 +23,13 @@ export interface Observer {
 	error: Error
 }
 
-export interface Item<T> {
+export interface ItemResponse<T> {
 	ui: UI
 	data: T
 	error: Error
 }
 
-export interface Pagination<T> {
+export interface PaginatedResponse<T> {
 	ui: UI
 	meta: Meta
 	data: Array<T>
