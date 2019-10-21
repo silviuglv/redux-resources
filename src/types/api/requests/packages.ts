@@ -1,16 +1,30 @@
-import { PackageTypes } from '../models/types'
 import { BaseGetRequest } from './types'
+
+export interface CreatePackageDocumentRequest {
+	file
+}
 
 export interface CreatePackageRequest {
 	account_id: string
-	type_id: PackageTypes
-	name: string | undefined
+	type_id: string
+	name?: string
 }
 
+export interface GetPackageLexiconRequest {
+	account_ids?: string
+	status_ids?: string
+}
 export interface GetPackagesRequest extends BaseGetRequest {
-	ids: string | undefined
-	account_ids: string | undefined
-	package_status_ids: string | undefined
-	package_type_ids: string | undefined
-	folder_ids: string | null | undefined
+	ids?: string
+	account_ids?: string
+	package_status_ids?: string
+	package_type_ids?: string
+	folder_ids?: string | null
+	order_by?: 'id' | 'name'
+}
+
+export interface UpdatePackageRequest {
+	name?: string
+	type_id?: string
+	folder_id?: string
 }
