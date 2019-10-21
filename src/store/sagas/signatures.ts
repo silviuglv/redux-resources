@@ -24,7 +24,7 @@ function* createSignature({ data }: AnyAction) {
 	}
 }
 
-export default function* rootSaga() {
+export function* signatures() {
 	yield takeEvery(signatureActions.GET_SIGNATURES, getSignatures)
 	yield takeEvery(signatureActions.CREATE_SIGNATURE, createSignature)
 }

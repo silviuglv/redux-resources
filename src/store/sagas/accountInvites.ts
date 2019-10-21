@@ -90,7 +90,7 @@ export function* acceptAccountInvite({ invite }: AnyAction) {
 	}
 }
 
-export default function* rootSaga() {
+export function* accountInvites() {
 	yield takeEvery(accountInviteActions.GET_ACCOUNT_INVITES, getAccountInvites)
 	yield takeEvery(accountInviteActions.DELETE_ACCOUNT_INVITE, deleteAccountInvite)
 	yield takeEvery(accountInviteActions.DELETE_MY_ACCOUNT_INVITE, deleteMyAccountInvite)

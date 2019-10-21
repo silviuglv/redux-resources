@@ -27,7 +27,7 @@ const types = {
 	ACCEPT_ACCOUNT_INVITE_REJECTED: '[account_invites] ACCEPT_ACCOUNT_INVITE_REJECTED',
 }
 
-export default {
+export const accountInviteActions = {
 	...types,
 	getMyAccountInvites: () => ({
 		type: types.GET_MY_ACCOUNT_INVITES,

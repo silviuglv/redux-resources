@@ -10,7 +10,7 @@ const state: SignaturesState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const signatures = (state = initialState, action) => {
 	//  list
 	switch (action.type) {
 		case signatureActions.SIGNATURES_LOADING:

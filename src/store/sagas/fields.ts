@@ -51,7 +51,7 @@ function* deleteField({ packageId, documentId, fieldId, successCb, errorCb }: An
 	}
 }
 
-export default function* rootSaga() {
+export function* fields() {
 	yield takeEvery(fieldActions.GET_FIELDS, getFields)
 	yield takeEvery(fieldActions.CREATE_FIELD, createField)
 	yield takeEvery(fieldActions.UPDATE_FIELD, updateField)

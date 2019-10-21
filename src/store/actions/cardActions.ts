@@ -36,7 +36,7 @@ const types = {
 	SET_DEFAULT_CARD_REJECTED: '[cards] SET_DEFAULT_CARD_REJECTED',
 }
 
-export default {
+export const cardActions = {
 	...types,
 	getCards: (query) => ({
 		type: types.GET_CARDS,

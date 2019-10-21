@@ -14,7 +14,7 @@ const state: UsersState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const users = (state = initialState, action) => {
 	switch (action.type) {
 		//  updatePassword
 		case userActions.UPDATE_PASSWORD_INITIAL_STATE:

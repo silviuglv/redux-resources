@@ -24,6 +24,6 @@ function* sendFeedback({ payload, successCb, errorCb }: Props) {
 	}
 }
 
-export default function* rootSaga() {
+export function* feedback() {
 	yield takeEvery<any>(feedbackActions.SEND_FEEDBACK, sendFeedback)
 }

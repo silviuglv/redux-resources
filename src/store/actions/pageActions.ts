@@ -8,7 +8,7 @@ const types = {
 	SET_PAGE_IMAGE: '[pages] SET_DOCUMENT_PAGE_IMAGE_URL',
 }
 
-export default {
+export const pageActions = {
 	...types,
 	getPages: (packageId, documentId, successCb, errorCb) => ({
 		type: types.GET_PAGES,

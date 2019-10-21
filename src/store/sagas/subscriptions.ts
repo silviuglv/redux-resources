@@ -61,7 +61,7 @@ function* deleteSubscription({ subscription, successCb, errorCb }: AnyAction) {
 	}
 }
 
-export default function* rootSaga() {
+export function* subscriptions() {
 	yield takeEvery(subscriptionActions.GET_SUBSCRIPTIONS, getSubscriptions)
 	yield takeEvery(subscriptionActions.CREATE_SUBSCRIPTION, createSubscription)
 	yield takeEvery(subscriptionActions.UPDATE_SUBSCRIPTION, updateSubscription)

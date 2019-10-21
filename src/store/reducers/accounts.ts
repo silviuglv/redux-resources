@@ -19,7 +19,7 @@ const state: AccountsState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const accounts = (state = initialState, action) => {
 	switch (action.type) {
 		//  item
 		case accountActions.SHOW_ACCOUNT_INITIAL_STATE:

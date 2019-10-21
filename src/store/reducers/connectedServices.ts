@@ -12,7 +12,7 @@ const state: ConnectedServicesState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const connectedServices = (state = initialState, action) => {
 	switch (action.type) {
 		//  list
 		case connectedServiceActions.SET_CONNECTED_SERVICES_INITIAL_STATE:

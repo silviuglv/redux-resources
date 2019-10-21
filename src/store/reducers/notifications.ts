@@ -24,7 +24,7 @@ const state: NotificationsState = {
 
 const initialState = fromJS(state)
 
-export default function(state = initialState, action) {
+export const notifications = function(state = initialState, action) {
 	switch (action.type) {
 		//  list
 		case notificationActions.GET_NOTIFICATIONS_INITIAL_STATE:

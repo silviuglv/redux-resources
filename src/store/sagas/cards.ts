@@ -97,7 +97,7 @@ function* updateCard({ id, card, successCb, errorCb }: AnyAction) {
 	}
 }
 
-export default function* rootSaga() {
+export function* cards() {
 	yield takeEvery(cardActions.GET_CARDS, getCards)
 	yield takeEvery(cardActions.CREATE_CARD, createCard)
 	yield takeEvery(cardActions.SET_DEFAULT_CARD, setDefaultCard)

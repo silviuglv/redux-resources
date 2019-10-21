@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from '../config'
 
-export default {
+export const pageApi = {
 	getPages: (packageId, documentId) => {
 		return axios({
 			url: `${config.apiBase}/packages/${packageId}/documents/${documentId}/pages?per_page=1000`,

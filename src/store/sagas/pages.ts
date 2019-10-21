@@ -26,7 +26,7 @@ export function* getPageImage({ pageId, image_url, successCb, errorCb }: AnyActi
 	}
 }
 
-export default function* rootSaga() {
+export function* pages() {
 	yield takeEvery(pageActions.GET_PAGES, getPages)
 	yield takeEvery(pageActions.GET_PAGE_IMAGE, getPageImage)
 }

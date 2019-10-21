@@ -14,7 +14,7 @@ const state: AuthState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const auth = (state = initialState, action) => {
 	//  log user out
 	switch (action.type) {
 		case authActions.AUTH_USER_LOADING:

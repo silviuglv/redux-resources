@@ -18,7 +18,7 @@ const state: PackagesState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const packages = (state = initialState, action) => {
 	switch (action.type) {
 		//  list
 		case packageActions.GET_PACKAGES_INITIAL_STATE:

@@ -9,7 +9,7 @@ const state: PlansState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const plans = (state = initialState, action) => {
 	//  list
 	switch (action.type) {
 		//  list

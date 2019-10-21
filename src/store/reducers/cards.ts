@@ -14,7 +14,7 @@ const state: CardsState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const cards = (state = initialState, action) => {
 	switch (action.type) {
 		//  list
 		case cardActions.GET_CARDS_INITIAL_STATE:

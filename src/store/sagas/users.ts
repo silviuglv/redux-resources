@@ -66,7 +66,7 @@ function* confirmEmail({ token, successCb, errorCb }: AnyAction) {
 	}
 }
 
-export default function* updatePasswordSaga() {
+export function* users() {
 	yield takeEvery(userActions.UPDATE_PASSWORD, updatePassword)
 	yield takeEvery(userActions.RESEND_EMAIL_CONFIRMATION, resendEmailConfirmation)
 	yield takeEvery(userActions.GET_NOTIFICATION_PREFERENCES, getNotificationPreferences)

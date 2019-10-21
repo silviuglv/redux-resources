@@ -71,7 +71,7 @@ export function* deleteNotification() {
 	}
 }
 
-export default function* rootSaga() {
+export function* notifications() {
 	yield takeEvery(notificationActions.GET_NOTIFICATIONS, getNotifications)
 	yield takeEvery(notificationActions.GET_TOTAL_UNREAD_NOTIFICATIONS, getTotalUnreadNotifications)
 	yield takeEvery(notificationActions.UPDATE_NOTIFICATION, updateNotification)

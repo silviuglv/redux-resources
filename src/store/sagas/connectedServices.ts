@@ -65,7 +65,7 @@ export function* setConnectedServicesInitialState() {
 	yield put(connectedServiceActions.setConnectedServicesInitialState())
 }
 
-export default function* rootSaga() {
+export function* connectedServices() {
 	yield takeEvery(connectedServiceActions.GET_CONNECTED_SERVICES, getConnectedServices)
 	yield takeEvery(connectedServiceActions.SET_CONNECTED_SERVICES_INITIAL_STATE, setConnectedServicesInitialState)
 	yield takeEvery(connectedServiceActions.CREATE_CONNECTED_SERVICE, createConnectedService)

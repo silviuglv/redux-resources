@@ -282,7 +282,7 @@ function* deleteRecipient({ id, recipientId, successCb, errorCb }: AnyAction) {
 	}
 }
 
-export default function* rootSaga() {
+export function* packages() {
 	yield takeEvery(packageActions.GET_PACKAGES, getPackages)
 	yield takeEvery(packageActions.GET_PACKAGE_LEXICON, getPackageLexicon)
 	yield takeEvery(packageActions.SHOW_PACKAGE, showPackage)

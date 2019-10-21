@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from '../config'
 
-export default {
+export const subscriptionApi = {
 	getSubscriptions: (params = {}) => {
 		return axios({
 			url: `${config.apiBase}/subscriptions`,

@@ -16,7 +16,7 @@ const types = {
 	UPDATE_FOLDER_REJECTED: '[folders] UPDATE_FOLDER_REJECTED',
 }
 
-export default {
+export const folderActions = {
 	...types,
 	getFolders: (query = {}) => ({
 		type: types.GET_FOLDERS,

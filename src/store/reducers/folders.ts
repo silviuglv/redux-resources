@@ -12,7 +12,7 @@ const state: FoldersState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const folders = (state = initialState, action) => {
 	switch (action.type) {
 		//  list
 		case folderActions.GET_FOLDERS_INITIAL_STATE:

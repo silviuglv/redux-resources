@@ -17,7 +17,7 @@ export function* setPlansInitialState() {
 	yield put(planActions.setPlansInitialState())
 }
 
-export default function* rootSaga() {
+export function* plans() {
 	yield takeEvery(planActions.GET_PLANS, getPlans)
 	yield takeEvery(planActions.SET_PLANS_INITIAL_STATE, setPlansInitialState)
 }

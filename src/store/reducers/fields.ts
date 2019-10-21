@@ -10,7 +10,7 @@ const state: FieldsState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const fields = (state = initialState, action) => {
 	switch (action.type) {
 		//  list
 		case fieldActions.GET_FIELDS_LOADING:

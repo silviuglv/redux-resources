@@ -5,7 +5,7 @@ const types = {
 	SET_PACKAGE_TYPES_REJECTED: '[packageTypes] SET_PACKAGE_TYPES_REJECTED',
 }
 
-export default {
+export const packageTypeActions = {
 	...types,
 	getPackageTypes: (query = {}) => ({
 		type: types.GET_PACKAGE_TYPES,

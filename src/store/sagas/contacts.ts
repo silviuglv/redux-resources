@@ -20,6 +20,6 @@ function* searchContacts({ payload, successCb, errorCb }: Props) {
 	}
 }
 
-export default function* rootSaga() {
+export function* contacts() {
 	yield takeEvery<any>(contactActions.SEARCH_CONTACTS, searchContacts)
 }

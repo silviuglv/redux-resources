@@ -2,7 +2,7 @@ import axios from 'axios'
 import config from '../config'
 import { keysToSnakeCase } from '../utilities'
 
-export default {
+export const packageApi = {
 	getPackages: (params) => {
 		return axios({
 			url: `${config.apiBase}/packages`,

@@ -143,7 +143,7 @@ function* getInvoices({ account }: AnyAction) {
 	}
 }
 
-export default function* rootSaga() {
+export function* accounts() {
 	yield takeEvery(accountActions.LOAD_ACCOUNTS, getAccounts)
 	yield takeEvery(accountInviteActions.ACCEPT_ACCOUNT_INVITE_FULFILLED, getAccounts)
 

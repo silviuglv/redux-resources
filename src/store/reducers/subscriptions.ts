@@ -10,7 +10,7 @@ const state: SubscriptionsState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const subscriptions = (state = initialState, action) => {
 	//  list
 	switch (action.type) {
 		//  list

@@ -122,7 +122,7 @@ export function* logoutSaga() {
 	yield takeEvery(authActions.LOG_USER_OUT, logout)
 }
 
-export default function* rootSaga() {
+export function* auth() {
 	yield takeEvery(authActions.AUTH_USER_INITIAL_STATE, authUserInitialState)
 	yield takeEvery(authActions.UPDATE_AUTH_USER, update)
 	yield takeEvery(authActions.CREATE_USER, create)

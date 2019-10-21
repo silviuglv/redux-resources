@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from '../config'
 
-export default {
+export const packageTypeApi = {
 	getPackageTypes: (params) => {
 		return axios({
 			url: `${config.apiBase}/package_types`,

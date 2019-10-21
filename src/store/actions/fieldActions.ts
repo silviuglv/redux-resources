@@ -14,7 +14,7 @@ const types = {
 	SET_ITEM_REJECTED: '[fields] SET_ITEM_REJECTED',
 }
 
-export default {
+export const fieldActions = {
 	...types,
 	getFields: (packageId, query = {}, successCb, errorCb) => ({
 		type: types.GET_FIELDS,

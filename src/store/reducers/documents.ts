@@ -10,7 +10,7 @@ const state: DocumentsState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const documents = (state = initialState, action) => {
 	switch (action.type) {
 		//  list
 		case documentActions.GET_DOCUMENTS_LOADING:

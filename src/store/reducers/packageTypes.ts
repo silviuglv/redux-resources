@@ -9,7 +9,7 @@ const state: PackageTypesState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const packageTypes = (state = initialState, action) => {
 	//  list
 	switch (action.type) {
 		case packageTypeActions.PACKAGE_TYPES_LOADING:

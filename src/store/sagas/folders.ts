@@ -52,7 +52,7 @@ function* updateFolder({ id, data, successCb, errorCb }: AnyAction) {
 	}
 }
 
-export default function* rootSaga() {
+export function* folders() {
 	yield takeEvery(folderActions.GET_FOLDERS, getFolders)
 	yield takeEvery(folderActions.CREATE_FOLDER, createFolder)
 	yield takeEvery(folderActions.UPDATE_FOLDER, updateFolder)

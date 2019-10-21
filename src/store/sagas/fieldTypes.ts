@@ -13,6 +13,6 @@ export function* getFieldTypes({ query }: AnyAction) {
 	}
 }
 
-export default function* rootSaga() {
+export function* fieldTypes() {
 	yield takeEvery(fieldTypeActions.GET_FIELD_TYPES, getFieldTypes)
 }

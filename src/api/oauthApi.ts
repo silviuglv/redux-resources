@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from '../config'
 
-export default {
+export const oauthApi = {
 	createAccessToken: (user) => {
 		return axios({
 			url: `${config.apiBase}/oauth/token`,

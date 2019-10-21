@@ -9,7 +9,7 @@ const state: PagesState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const pages = (state = initialState, action) => {
 	switch (action.type) {
 		//  list
 		case pageActions.GET_PAGES_LOADING:

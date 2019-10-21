@@ -12,6 +12,6 @@ export function* getPackageTypes(query) {
 	}
 }
 
-export default function* rootSaga() {
+export function* packageTypes() {
 	yield takeEvery(packageTypeActions.GET_PACKAGE_TYPES, getPackageTypes)
 }

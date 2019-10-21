@@ -52,7 +52,7 @@ export function* downloadDocument({ document, preview }: AnyAction) {
 	}
 }
 
-export default function* rootSaga() {
+export function* documents() {
 	yield takeEvery(documentActions.GET_DOCUMENTS, getDocuments)
 	yield takeEvery(documentActions.DOWNLOAD_DOCUMENT, downloadDocument)
 }

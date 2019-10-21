@@ -5,7 +5,7 @@ const types = {
 	SEARCH_REJECTED: '[contacts] SEARCH_REJECTED',
 }
 
-export default {
+export const contactActions = {
 	...types,
 	searchContacts: (payload, successCb?, errorCb?) => ({
 		type: types.SEARCH_CONTACTS,

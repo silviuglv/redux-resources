@@ -14,7 +14,7 @@ const state: AccountInvitesState = {
 
 const initialState = fromJS(state)
 
-export default (state = initialState, action) => {
+export const accountInvites = (state = initialState, action) => {
 	switch (action.type) {
 		//  list
 		case accountInviteActions.GET_ACCOUNT_INVITES_INITIAL_STATE:
