@@ -40,7 +40,7 @@ export function* login({ user, provider = null, access_token = null, token_secre
 	}
 }
 
-export function* logout({}) {
+export function* logout({ successCb }: any) {
 	//  auth
 	window.localStorage.removeItem('accessToken')
 	yield put(authActions.createAccessTokenInitialState())
@@ -55,6 +55,7 @@ export function* logout({}) {
 	yield put(accountActions.accountsInitialState())
 	// disconnect from pusher
 	yield put(notificationActions.disconnectFromNotificationService())
+	successCb !== undefined && successCb()
 }
 
 export function* getAuthMeta() {
