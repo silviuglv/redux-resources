@@ -87,7 +87,9 @@ export function* create({ payload }: any) {
 	try {
 		yield put(authActions.createUserInitialState())
 		yield put(authActions.createUserLoading())
+
 		const { data } = yield call(userApi.createUser, payload)
+
 		yield put(authActions.createUserFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('User registered', 4000))
 	} catch (error) {
