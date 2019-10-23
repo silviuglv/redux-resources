@@ -1,16 +1,13 @@
 import axios from 'axios'
 import config from '../config'
+import { GetContactsRequest } from '../types'
 
 export const contactApi = {
-	searchContact: (data) => {
+	searchContact: (params: GetContactsRequest) => {
 		return axios({
 			url: `${config.apiBase}/contacts`,
 			method: 'GET',
-			params: {
-				first_names: data.firstName || '',
-				last_names: data.lastName || '',
-				emails: data.email || '',
-			},
+			params,
 		})
 			.then((res) => res.data)
 			.then((data) =>
