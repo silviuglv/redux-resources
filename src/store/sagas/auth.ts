@@ -4,7 +4,7 @@ import { oauthApi, userApi } from '../../api'
 import { getAccounts, getDefaultAccount } from './accounts'
 import { authUser } from '../selectors'
 
-export function* getAuthUser() {
+function* getAuthUser() {
 	try {
 		yield put(authActions.authUserLoading())
 		const { data } = yield call(userApi.me)
@@ -16,21 +16,21 @@ export function* getAuthUser() {
 	}
 }
 
-export function* authUserInitialState() {
+function* authUserInitialState() {
 	yield put(authActions.authUserData(null))
 	yield put(authActions.authUserError(null))
 	yield put(authActions.authUserNotLoaded())
 }
 
-export function* login({ user, provider = null, access_token = null, token_secret = null }: any) {
+function* login({ payload, provider = null, access_token = null, token_secret = null }: any) {
 	try {
 		yield put(authActions.createAccessTokenInitialState())
 		yield put(authActions.createAccessToken())
 		yield put(authActions.createAccessTokenLoading())
 
 		const { data } =
-			user !== undefined
-				? yield call(oauthApi.createAccessToken, user)
+			payload !== undefined
+				? yield call(oauthApi.createAccessToken, payload)
 				: yield call(oauthApi.createSocialAccessToken, provider, access_token, token_secret)
 
 		yield put(authActions.createAccessTokenFulfilled(data))
@@ -40,7 +40,7 @@ export function* login({ user, provider = null, access_token = null, token_secre
 	}
 }
 
-export function* logout({ successCb }: any) {
+function* logout({ successCb }: any) {
 	//  auth
 	window.localStorage.removeItem('accessToken')
 	yield put(authActions.createAccessTokenInitialState())
@@ -58,7 +58,7 @@ export function* logout({ successCb }: any) {
 	successCb !== undefined && successCb()
 }
 
-export function* getAuthMeta() {
+function* getAuthMeta() {
 	try {
 		const state = yield select()
 		const user = authUser(state)
@@ -71,7 +71,7 @@ export function* getAuthMeta() {
 	}
 }
 
-export function* update({ id, payload }: any) {
+function* update({ id, payload }: any) {
 	try {
 		yield put(authActions.updateAuthUserInitialState())
 		yield put(authActions.updateAuthUserLoading())
@@ -83,7 +83,7 @@ export function* update({ id, payload }: any) {
 	}
 }
 
-export function* create({ payload }: any) {
+function* create({ payload }: any) {
 	try {
 		yield put(authActions.createUserInitialState())
 		yield put(authActions.createUserLoading())

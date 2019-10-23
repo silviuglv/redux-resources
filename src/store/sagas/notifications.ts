@@ -37,7 +37,7 @@ export function* getNotifications({ payload }: any) {
 export function* getTotalUnreadNotifications() {
 	try {
 		const query = {
-			is_read: false,
+			is_read: 0,
 			per_page: 1,
 		}
 		yield put(notificationActions.getTotalUnreadNotificationsInitialState())
