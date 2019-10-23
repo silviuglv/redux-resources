@@ -83,6 +83,18 @@ export function* update({ id, payload }: any) {
 	}
 }
 
+export function* create({ payload }: any) {
+	try {
+		yield put(authActions.createUserInitialState())
+		yield put(authActions.createUserLoading())
+		const { data } = yield call(userApi.createUser, payload)
+		yield put(authActions.createUserFulfilled(data))
+		yield put(notificationActions.displaySnackbarMessage('User registered', 4000))
+	} catch (error) {
+		yield put(authActions.createUserRejected(error))
+	}
+}
+
 function* updatePhoto({ id, payload, successCb, errorCb }: any) {
 	try {
 		yield put(authActions.updateAuthPhotoInitialState())
@@ -114,6 +126,7 @@ export function* logoutSaga() {
 export function* auth() {
 	yield takeEvery(authActions.AUTH_USER_INITIAL_STATE, authUserInitialState)
 	yield takeEvery(authActions.UPDATE_AUTH_USER, update)
+	yield takeEvery(authActions.CREATE_USER, create)
 	yield takeEvery(authActions.CREATE_USER_FULFILLED, login)
 	yield takeEvery(authActions.UPDATE_AUTH_PHOTO, updatePhoto)
 }
