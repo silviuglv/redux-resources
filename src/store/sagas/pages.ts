@@ -6,8 +6,8 @@ import { AnyAction } from 'redux'
 export function* getPages({ packageId, documentId, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(pageActions.getPagesLoading())
-		const response = yield call(pageApi.getPages, packageId, documentId)
-		yield put(pageActions.getPagesFulfilled(response))
+		const { data } = yield call(pageApi.getPages, packageId, documentId)
+		yield put(pageActions.getPagesFulfilled(data))
 		successCb && successCb()
 	} catch (error) {
 		yield put(pageActions.getPagesRejected(error))
@@ -17,8 +17,8 @@ export function* getPages({ packageId, documentId, successCb, errorCb }: AnyActi
 
 export function* getPageImage({ pageId, image_url, successCb, errorCb }: AnyAction) {
 	try {
-		const response = yield call(pageApi.getPageImage, image_url)
-		yield put(pageActions.setPageImage(pageId, response))
+		const { data } = yield call(pageApi.getPageImage, image_url)
+		yield put(pageActions.setPageImage(pageId, data))
 		successCb && successCb()
 	} catch (error) {
 		yield put(pageActions.getPagesRejected(error))

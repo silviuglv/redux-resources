@@ -26,9 +26,8 @@ export const accountInvites = (state = initialState, action) => {
 				list: stateUtility.getPaginationLoading(),
 			})
 		case accountInviteActions.GET_ACCOUNT_INVITES_FULFILLED:
-			const list = action.payload.data
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(list),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case accountInviteActions.GET_ACCOUNT_INVITES_REJECTED:
 			return state.merge({
@@ -45,9 +44,8 @@ export const accountInvites = (state = initialState, action) => {
 				getMyAccountInvites: stateUtility.getPaginationLoading(),
 			})
 		case accountInviteActions.GET_MY_ACCOUNT_INVITES_FULFILLED:
-			const getMyAccountInvites = action.payload.data
 			return state.merge({
-				getMyAccountInvites: stateUtility.getPaginationFulfilled(getMyAccountInvites),
+				getMyAccountInvites: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case accountInviteActions.GET_MY_ACCOUNT_INVITES_REJECTED:
 			return state.merge({
@@ -82,10 +80,9 @@ export const accountInvites = (state = initialState, action) => {
 				acceptAccountInvite: stateUtility.getObserverLoading(),
 			})
 		case accountInviteActions.ACCEPT_ACCOUNT_INVITE_FULFILLED:
-			const acceptedAccountInvite = action.payload.data
 			return state.merge({
 				acceptAccountInvite: stateUtility.getObserverFulfilled(),
-				item: stateUtility.getItemFulfilled(acceptedAccountInvite),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case accountInviteActions.ACCEPT_ACCOUNT_INVITE_REJECTED:
 			return state.merge({
@@ -102,9 +99,8 @@ export const accountInvites = (state = initialState, action) => {
 				createAccountInvite: stateUtility.getItemLoading(),
 			})
 		case accountInviteActions.CREATE_ACCOUNT_INVITE_FULFILLED:
-			const createResponse = action.payload.data
 			return state.merge({
-				createAccountInvite: stateUtility.getItemFulfilled(createResponse),
+				createAccountInvite: stateUtility.getItemFulfilled(action.payload),
 			})
 		case accountInviteActions.CREATE_ACCOUNT_INVITE_REJECTED:
 			return state.merge({

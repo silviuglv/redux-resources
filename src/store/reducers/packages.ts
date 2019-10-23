@@ -30,9 +30,8 @@ export const packages = (state = initialState, action) => {
 				list: stateUtility.getPaginationLoading(),
 			})
 		case packageActions.GET_PACKAGES_FULFILLED:
-			const listResponse = action.payload.data
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(listResponse),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case packageActions.GET_PACKAGES_REJECTED:
 			return state.merge({
@@ -49,9 +48,8 @@ export const packages = (state = initialState, action) => {
 				lexicon: stateUtility.getItemLoading(),
 			})
 		case packageActions.GET_PACKAGE_LEXICON_FULFILLED:
-			const lexiconResponse = action.payload.data
 			return state.merge({
-				lexicon: stateUtility.getItemFulfilled(lexiconResponse),
+				lexicon: stateUtility.getItemFulfilled(action.payload),
 			})
 		case packageActions.GET_PACKAGE_LEXICON_REJECTED:
 			return state.merge({
@@ -68,10 +66,9 @@ export const packages = (state = initialState, action) => {
 				createPackage: stateUtility.getObserverLoading(),
 			})
 		case packageActions.CREATE_PACKAGE_FULFILLED:
-			const createPackageResponse = action.payload.data
 			return state.merge({
 				createPackage: stateUtility.getObserverFulfilled(),
-				item: stateUtility.getItemFulfilled(createPackageResponse),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case packageActions.CREATE_PACKAGE_REJECTED:
 			return state.merge({
@@ -88,9 +85,8 @@ export const packages = (state = initialState, action) => {
 				item: stateUtility.getItemLoading(),
 			})
 		case packageActions.SHOW_PACKAGE_FULFILLED:
-			const showPackageResponse = action.payload.data
 			return state.merge({
-				item: stateUtility.getItemFulfilled(showPackageResponse),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case packageActions.SHOW_PACKAGE_REJECTED:
 			return state.merge({
@@ -107,9 +103,8 @@ export const packages = (state = initialState, action) => {
 				item: stateUtility.getItemLoading(),
 			})
 		case packageActions.UPDATE_PACKAGE_FULFILLED:
-			const updatePackageResponse = action.payload.data
 			return state.merge({
-				item: stateUtility.getItemFulfilled(updatePackageResponse),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case packageActions.UPDATE_PACKAGE_REJECTED:
 			return state.merge({
@@ -144,9 +139,8 @@ export const packages = (state = initialState, action) => {
 				recipients: stateUtility.getPaginationLoading(),
 			})
 		case packageActions.GET_PACKAGE_RECIPIENTS_FULFILLED:
-			const getRecipientsResponse = action.payload.data
 			return state.merge({
-				recipients: stateUtility.getPaginationFulfilled(getRecipientsResponse),
+				recipients: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case packageActions.GET_PACKAGE_RECIPIENTS_REJECTED:
 			return state.merge({
@@ -182,7 +176,7 @@ export const packages = (state = initialState, action) => {
 			})
 		case packageActions.CREATE_PACKAGE_RECIPIENT_FULFILLED:
 			return state.merge({
-				recipient: stateUtility.getItemFulfilled(action.payload.data),
+				recipient: stateUtility.getItemFulfilled(action.payload),
 			})
 		case packageActions.CREATE_PACKAGE_RECIPIENT_REJECTED:
 			return state.merge({
@@ -199,9 +193,8 @@ export const packages = (state = initialState, action) => {
 				recipient: stateUtility.getItemLoading(),
 			})
 		case packageActions.UPDATE_PACKAGE_RECIPIENT_FULFILLED:
-			const updateRecipientsResponse = action.payload.data
 			return state.merge({
-				recipient: stateUtility.getItemFulfilled(updateRecipientsResponse),
+				recipient: stateUtility.getItemFulfilled(action.payload),
 			})
 		case packageActions.UPDATE_PACKAGE_RECIPIENT_REJECTED:
 			return state.merge({
@@ -218,9 +211,8 @@ export const packages = (state = initialState, action) => {
 				documents: stateUtility.getPaginationLoading(),
 			})
 		case packageActions.GET_PACKAGE_DOCUMENTS_FULFILLED:
-			const getDocumentsResponse = action.payload.data
 			return state.merge({
-				documents: stateUtility.getPaginationFulfilled(getDocumentsResponse),
+				documents: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case packageActions.GET_PACKAGE_DOCUMENTS_REJECTED:
 			return state.merge({
@@ -238,7 +230,7 @@ export const packages = (state = initialState, action) => {
 			})
 		case packageActions.GET_PAGES_FULFILLED:
 			return state.merge({
-				pages: stateUtility.getPaginationFulfilled(action.payload.data),
+				pages: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case packageActions.GET_PAGES_REJECTED:
 			return state.merge({
@@ -257,7 +249,7 @@ export const packages = (state = initialState, action) => {
 		case packageActions.CREATE_PACKAGE_DOCUMENTS_FULFILLED:
 			return state.merge({
 				createPackageDocument: stateUtility.getObserverFulfilled(),
-				documents: stateUtility.addItemToPagination(state.toJS().documents, action.payload.data, false),
+				documents: stateUtility.addItemToPagination(state.toJS().documents, action.payload, false),
 			})
 		case packageActions.CREATE_PACKAGE_DOCUMENTS_REJECTED:
 			return state.merge({
@@ -275,7 +267,7 @@ export const packages = (state = initialState, action) => {
 		case packageActions.CREATE_DOCUMENT_FROM_CONNECTED_SERVICE_FULFILLED:
 			return state.merge({
 				createPackageDocument: stateUtility.getObserverFulfilled(),
-				documents: stateUtility.addItemToPagination(state.toJS().documents, action.payload.data, false),
+				documents: stateUtility.addItemToPagination(state.toJS().documents, action.payload, false),
 			})
 		case packageActions.CREATE_DOCUMENT_FROM_CONNECTED_SERVICE_REJECTED:
 			return state.merge({

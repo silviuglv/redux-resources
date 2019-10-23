@@ -3,11 +3,11 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import { fieldTypeApi } from '../../api'
 import { AnyAction } from 'redux'
 
-export function* getFieldTypes({ query }: AnyAction) {
+export function* getFieldTypes({ payload }: AnyAction) {
 	try {
 		yield put(fieldTypeActions.setFieldTypesLoading())
-		const response = yield call(fieldTypeApi.getFieldTypes, query)
-		yield put(fieldTypeActions.setFieldTypesFulfilled(response))
+		const { data } = yield call(fieldTypeApi.getFieldTypes, payload)
+		yield put(fieldTypeActions.setFieldTypesFulfilled(data))
 	} catch (error) {
 		yield put(fieldTypeActions.setFieldTypesRejected(error))
 	}

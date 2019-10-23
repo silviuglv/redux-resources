@@ -1,3 +1,11 @@
+import {
+	Error,
+	GetNotificationsRequest,
+	Notification,
+	PaginatedApiResponse,
+	UpdateNotificationRequest,
+} from '../../types'
+
 const types = {
 	GET_NOTIFICATIONS: '[cards] GET_NOTIFICATIONS',
 	GET_NOTIFICATIONS_INITIAL_STATE: '[cards] GET_NOTIFICATIONS_INITIAL_STATE',
@@ -49,10 +57,9 @@ const types = {
 
 export const notificationActions = {
 	...types,
-	getNotifications: (query) => ({
+	getNotifications: (payload: GetNotificationsRequest) => ({
 		type: types.GET_NOTIFICATIONS,
-		payload: null,
-		query,
+		payload,
 	}),
 	getNotificationsInitialState: () => ({
 		type: types.GET_NOTIFICATIONS_INITIAL_STATE,
@@ -62,19 +69,18 @@ export const notificationActions = {
 		type: types.GET_NOTIFICATIONS_LOADING,
 		payload: null,
 	}),
-	getNotificationsFulfilled: (response) => ({
+	getNotificationsFulfilled: (payload: PaginatedApiResponse<Notification>) => ({
 		type: types.GET_NOTIFICATIONS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getNotificationsRejected: (response) => ({
+	getNotificationsRejected: (payload: Error) => ({
 		type: types.GET_NOTIFICATIONS_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	getTotalUnreadNotifications: (query) => ({
+	getTotalUnreadNotifications: () => ({
 		type: types.GET_TOTAL_UNREAD_NOTIFICATIONS,
 		payload: null,
-		query,
 	}),
 	getTotalUnreadNotificationsInitialState: () => ({
 		type: types.GET_TOTAL_UNREAD_NOTIFICATIONS_INITIAL_STATE,
@@ -84,20 +90,19 @@ export const notificationActions = {
 		type: types.GET_TOTAL_UNREAD_NOTIFICATIONS_LOADING,
 		payload: null,
 	}),
-	getTotalUnreadNotificationsFulfilled: (response) => ({
+	getTotalUnreadNotificationsFulfilled: (payload: PaginatedApiResponse<Notification>) => ({
 		type: types.GET_TOTAL_UNREAD_NOTIFICATIONS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getTotalUnreadNotificationsRejected: (response) => ({
+	getTotalUnreadNotificationsRejected: (payload: Error) => ({
 		type: types.GET_TOTAL_UNREAD_NOTIFICATIONS_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updateNotification: (id, data) => ({
+	updateNotification: (id: string, payload: UpdateNotificationRequest) => ({
 		type: types.UPDATE_NOTIFICATION,
-		payload: null,
+		payload,
 		id,
-		data,
 	}),
 	updateNotificationInitialState: () => ({
 		type: types.UPDATE_NOTIFICATION_INITIAL_STATE,
@@ -107,19 +112,18 @@ export const notificationActions = {
 		type: types.UPDATE_NOTIFICATION_LOADING,
 		payload: null,
 	}),
-	updateNotificationFulfilled: (response) => ({
+	updateNotificationFulfilled: (payload: Notification) => ({
 		type: types.UPDATE_NOTIFICATION_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updateNotificationRejected: (response) => ({
+	updateNotificationRejected: (payload: Error) => ({
 		type: types.UPDATE_NOTIFICATION_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	deleteNotification: (notification) => ({
+	deleteNotification: (payload) => ({
 		type: types.DELETE_NOTIFICATION,
-		payload: null,
-		notification,
+		payload,
 	}),
 	deleteNotificationInitialState: () => ({
 		type: types.DELETE_NOTIFICATION_INITIAL_STATE,
@@ -133,37 +137,38 @@ export const notificationActions = {
 		type: types.DELETE_NOTIFICATION_FULFILLED,
 		payload: null,
 	}),
-	deleteNotificationRejected: (response) => ({
+	deleteNotificationRejected: (payload) => ({
 		type: types.DELETE_NOTIFICATION_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	notificationReceivedEvent: (response) => ({
+	notificationReceivedEvent: (payload) => ({
 		type: types.NOTIFICATION_RECEIVED_EVENT,
-		payload: response,
+		payload,
 	}),
 
-	addNotificationToList: (response) => ({
+	addNotificationToList: (payload) => ({
 		type: types.ADD_NOTIFICATION_TO_LIST,
-		payload: response,
+		payload,
 	}),
 
 	handleSnackbarClose: () => ({
 		type: types.HANDLE_SNACKBAR_CLOSE,
 	}),
-	displaySnackbarMessage: (message, autoHideDuration = 3000) => ({
+	displaySnackbarMessage: (message: string, autoHideDuration = 3000) => ({
 		type: types.DISPLAY_SNACKBAR_MESSAGE,
+		payload: null,
 		message,
 		autoHideDuration,
 	}),
 
-	userConfirmedEmailEvent: (response) => ({
+	userConfirmedEmailEvent: (payload) => ({
 		type: types.USER_CONFIRMED_EMAIL_EVENT,
-		payload: response,
+		payload,
 	}),
-	userUpdatedEmailEvent: (response) => ({
+	userUpdatedEmailEvent: (payload) => ({
 		type: types.USER_UPDATED_EMAIL_EVENT,
-		payload: response,
+		payload,
 	}),
 
 	subscribeToUserEvents: () => ({
@@ -182,9 +187,9 @@ export const notificationActions = {
 		type: types.SUBSCRIBE_TO_USER_EVENTS_FULFILLED,
 		payload: null,
 	}),
-	subscribeToUserEventsRejected: (response) => ({
+	subscribeToUserEventsRejected: (payload: Error) => ({
 		type: types.SUBSCRIBE_TO_USER_EVENTS_REJECTED,
-		payload: response,
+		payload,
 	}),
 
 	connectToNotificationService: () => ({
@@ -203,9 +208,9 @@ export const notificationActions = {
 		type: types.CONNECT_TO_NOTIFICATION_SERVICE_FULFILLED,
 		payload: null,
 	}),
-	connectToNotificationServiceRejected: (response) => ({
+	connectToNotificationServiceRejected: (payload: Error) => ({
 		type: types.CONNECT_TO_NOTIFICATION_SERVICE_REJECTED,
-		payload: response,
+		payload,
 	}),
 
 	disconnectFromNotificationService: () => ({

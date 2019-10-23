@@ -1,5 +1,6 @@
 import axios from 'axios'
 import config from '../config'
+import { ProviderTypes } from '../types'
 
 export const documentApi = {
 	getDocuments: (params = {}) => {
@@ -9,7 +10,7 @@ export const documentApi = {
 			params,
 		})
 	},
-	downloadDocument: (id, provider) => {
+	downloadDocument: (id: string, provider: ProviderTypes) => {
 		return axios({
 			url: `${config.apiBase}/documents/${id}`,
 			method: 'GET',

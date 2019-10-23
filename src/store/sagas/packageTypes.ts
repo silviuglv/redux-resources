@@ -2,11 +2,11 @@ import { packageTypeActions } from '../actions'
 import { put, takeEvery, call } from 'redux-saga/effects'
 import { packageTypeApi } from '../../api'
 
-export function* getPackageTypes(query) {
+export function* getPackageTypes(payload) {
 	try {
 		yield put(packageTypeActions.setPackageTypesLoading())
-		const response = yield call(packageTypeApi.getPackageTypes, query)
-		yield put(packageTypeActions.setPackageTypesFulfilled(response))
+		const { data } = yield call(packageTypeApi.getPackageTypes, payload)
+		yield put(packageTypeActions.setPackageTypesFulfilled(data))
 	} catch (error) {
 		yield put(packageTypeActions.setPackageTypesRejected(error))
 	}

@@ -66,10 +66,9 @@ export const auth = (state = initialState, action) => {
 				accessToken: stateUtility.getItemLoading(),
 			})
 		case authActions.CREATE_AUTH_ACCESS_TOKEN_FULFILLED:
-			const access_token = action.payload.data.access_token
-			window.localStorage.setItem('accessToken', access_token)
+			window.localStorage.setItem('accessToken', action.payload.access_token)
 			return state.merge({
-				accessToken: stateUtility.getItemFulfilled(access_token),
+				accessToken: stateUtility.getItemFulfilled(action.payload.access_token),
 			})
 		case authActions.CREATE_AUTH_ACCESS_TOKEN_REJECTED:
 			return state.merge({
@@ -86,10 +85,9 @@ export const auth = (state = initialState, action) => {
 				meta: stateUtility.getItemLoading(),
 			})
 		case authActions.LOAD_AUTH_USER_META_FULFILLED:
-			const userMeta = action.payload.data
-			window.localStorage.setItem('userMeta', JSON.stringify(userMeta))
+			window.localStorage.setItem('userMeta', JSON.stringify(action.payload))
 			return state.merge({
-				meta: stateUtility.getItemFulfilled(userMeta),
+				meta: stateUtility.getItemFulfilled(action.payload),
 			})
 		case authActions.LOAD_AUTH_USER_META_REJECTED:
 			return state.merge({
@@ -106,11 +104,10 @@ export const auth = (state = initialState, action) => {
 				updateUser: stateUtility.getObserverLoading(),
 			})
 		case authActions.UPDATE_AUTH_USER_FULFILLED:
-			const updateUserResponse = action.payload.data
-			window.localStorage.setItem('authUser', JSON.stringify(updateUserResponse))
+			window.localStorage.setItem('authUser', JSON.stringify(action.payload))
 			return state.merge({
 				updateUser: stateUtility.getObserverFulfilled(),
-				user: stateUtility.getItemFulfilled(updateUserResponse),
+				user: stateUtility.getItemFulfilled(action.payload),
 			})
 		case authActions.UPDATE_AUTH_USER_REJECTED:
 			return state.merge({

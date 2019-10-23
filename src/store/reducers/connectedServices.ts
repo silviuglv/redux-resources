@@ -24,9 +24,8 @@ export const connectedServices = (state = initialState, action) => {
 				list: stateUtility.getPaginationLoading(),
 			})
 		case connectedServiceActions.SET_CONNECTED_SERVICES_FULFILLED:
-			const listResponse = action.payload.data
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(listResponse),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case connectedServiceActions.SET_CONNECTED_SERVICES_REJECTED:
 			return state.merge({
@@ -44,7 +43,7 @@ export const connectedServices = (state = initialState, action) => {
 			})
 		case connectedServiceActions.CREATE_CONNECTED_SERVICE_FULFILLED:
 			return state.merge({
-				item: stateUtility.getItemFulfilled(action.payload.data),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case connectedServiceActions.CREATE_CONNECTED_SERVICE_REJECTED:
 			return state.merge({
@@ -58,7 +57,7 @@ export const connectedServices = (state = initialState, action) => {
 			})
 		case connectedServiceActions.UPDATE_CONNECTED_SERVICE_FULFILLED:
 			return state.merge({
-				item: stateUtility.getItemFulfilled(action.payload.data),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case connectedServiceActions.UPDATE_CONNECTED_SERVICE_REJECTED:
 			return state.merge({

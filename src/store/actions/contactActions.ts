@@ -1,3 +1,5 @@
+import { Error, GetContactsRequest, NormalizedContact, PaginatedApiResponse } from '../../types'
+
 const types = {
 	SEARCH_CONTACTS: '[contacts] SEARCH_CONTACTS',
 	SEARCH_LOADING: '[contacts] SEARCH_LOADING',
@@ -7,7 +9,7 @@ const types = {
 
 export const contactActions = {
 	...types,
-	searchContacts: (payload, successCb?, errorCb?) => ({
+	searchContacts: (payload: GetContactsRequest, successCb?, errorCb?) => ({
 		type: types.SEARCH_CONTACTS,
 		payload,
 		successCb,
@@ -17,12 +19,12 @@ export const contactActions = {
 		type: types.SEARCH_LOADING,
 		payload: null,
 	}),
-	setSearchContactsFulfilled: (response) => ({
+	setSearchContactsFulfilled: (payload: PaginatedApiResponse<NormalizedContact>) => ({
 		type: types.SEARCH_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setSearchContactsRejected: (response) => ({
+	setSearchContactsRejected: (payload: Error) => ({
 		type: types.SEARCH_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

@@ -4,12 +4,12 @@ import { accountInviteApi } from '../../api'
 import { authUser } from '../selectors'
 import { AnyAction } from 'redux'
 
-export function* getAccountInvites({ query }: any) {
+export function* getAccountInvites({ payload }: any) {
 	try {
 		yield put(accountInviteActions.accountInvitesInitialState())
 		yield put(accountInviteActions.accountInvitesLoading())
-		const response = yield call(accountInviteApi.getAccountInvites, query)
-		yield put(accountInviteActions.accountInvitesFulfilled(response))
+		const { data } = yield call(accountInviteApi.getAccountInvites, payload)
+		yield put(accountInviteActions.accountInvitesFulfilled(data))
 	} catch (error) {
 		yield put(accountInviteActions.accountInvitesRejected(error))
 	}
@@ -22,25 +22,26 @@ export function* myAccountInvites() {
 	try {
 		yield put(accountInviteActions.getMyAccountInvitesInitialState())
 		yield put(accountInviteActions.getMyAccountInvitesLoading())
-		const response = yield call(accountInviteApi.getAccountInvites, {
+		const params = {
 			emails: user.data.email,
 			status: 'pending',
-		})
-		yield put(accountInviteActions.getMyAccountInvitesFulfilled(response))
+		}
+		const { data } = yield call(accountInviteApi.getAccountInvites, params)
+		yield put(accountInviteActions.getMyAccountInvitesFulfilled(data))
 	} catch (error) {
 		yield put(accountInviteActions.getMyAccountInvitesRejected(error))
 	}
 }
 
-export function* deleteAccountInvite({ invite, successCb, errorCb }: AnyAction) {
+export function* deleteAccountInvite({ payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(accountInviteActions.deleteAccountInviteInitialState())
 		yield put(accountInviteActions.deleteAccountInviteLoading())
-		const response = yield call(accountInviteApi.deleteAccountInvite, invite.id)
-		yield put(accountInviteActions.deleteAccountInviteFulfilled(response))
+		const { data } = yield call(accountInviteApi.deleteAccountInvite, payload.id)
+		yield put(accountInviteActions.deleteAccountInviteFulfilled(data))
 		successCb && successCb()
 		yield call(getAccountInvites, {
-			query: { account_ids: invite.account.id, status: 'pending' },
+			query: { account_ids: payload.account.id, status: 'pending' },
 		})
 		yield put(notificationActions.displaySnackbarMessage('Account Invitation Deleted!', 2000))
 	} catch (error) {
@@ -49,11 +50,11 @@ export function* deleteAccountInvite({ invite, successCb, errorCb }: AnyAction) 
 	}
 }
 
-export function* deleteMyAccountInvite({ invite }: AnyAction) {
+export function* deleteMyAccountInvite({ payload }: AnyAction) {
 	try {
 		yield put(accountInviteActions.deleteAccountInviteLoading())
-		const response = yield call(accountInviteApi.deleteAccountInvite, invite.id)
-		yield put(accountInviteActions.deleteAccountInviteFulfilled(response))
+		const { data } = yield call(accountInviteApi.deleteAccountInvite, payload.id)
+		yield put(accountInviteActions.deleteAccountInviteFulfilled(data))
 		yield call(myAccountInvites)
 		yield put(notificationActions.displaySnackbarMessage('Account Invitation Deleted!', 2000))
 	} catch (error) {
@@ -61,14 +62,14 @@ export function* deleteMyAccountInvite({ invite }: AnyAction) {
 	}
 }
 
-export function* createAccountInvite({ invite, successCb, errorCb }: AnyAction) {
+export function* createAccountInvite({ payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(accountInviteActions.createAccountInviteInitialState())
 		yield put(accountInviteActions.createAccountInviteLoading())
-		const response = yield call(accountInviteApi.create, invite)
-		yield put(accountInviteActions.createAccountInviteFulfilled(response))
+		const { data } = yield call(accountInviteApi.create, payload)
+		yield put(accountInviteActions.createAccountInviteFulfilled(data))
 		yield call(getAccountInvites, {
-			query: { account_ids: invite.account_id, status: 'pending' },
+			query: { account_ids: payload.account_id, status: 'pending' },
 		})
 		successCb && successCb()
 	} catch (error) {
@@ -77,12 +78,12 @@ export function* createAccountInvite({ invite, successCb, errorCb }: AnyAction) 
 	}
 }
 
-export function* acceptAccountInvite({ invite }: AnyAction) {
+export function* acceptAccountInvite({ payload }: AnyAction) {
 	try {
 		yield put(accountInviteActions.acceptAccountInviteInitialState())
 		yield put(accountInviteActions.acceptAccountInviteLoading())
-		const response = yield call(accountInviteApi.accept, invite.id)
-		yield put(accountInviteActions.acceptAccountInviteFulfilled(response))
+		const { data } = yield call(accountInviteApi.accept, payload.id)
+		yield put(accountInviteActions.acceptAccountInviteFulfilled(data))
 		yield call(myAccountInvites)
 		yield put(notificationActions.displaySnackbarMessage('Account Invitation Accepted!', 2000))
 	} catch (error) {

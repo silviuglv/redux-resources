@@ -31,9 +31,8 @@ export const accounts = (state = initialState, action) => {
 				item: stateUtility.getItemLoading(),
 			})
 		case accountActions.SHOW_ACCOUNT_FULFILLED:
-			const item = action.payload.data
 			return state.merge({
-				item: stateUtility.getItemFulfilled(item),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case accountActions.SHOW_ACCOUNT_REJECTED:
 			return state.merge({
@@ -50,9 +49,8 @@ export const accounts = (state = initialState, action) => {
 				users: stateUtility.getPaginationLoading(),
 			})
 		case accountActions.LOAD_ACCOUNT_USERS_FULFILLED:
-			const accountUsers = action.payload.data
 			return state.merge({
-				users: stateUtility.getPaginationFulfilled(accountUsers),
+				users: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case accountActions.LOAD_ACCOUNT_USERS_REJECTED:
 			return state.merge({
@@ -69,10 +67,9 @@ export const accounts = (state = initialState, action) => {
 				list: stateUtility.getPaginationLoading(),
 			})
 		case accountActions.LOAD_ACCOUNTS_FULFILLED:
-			const accountList = action.payload.data
-			window.localStorage.setItem('accountList', JSON.stringify(accountList))
+			window.localStorage.setItem('accountList', JSON.stringify(action.payload))
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(accountList),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case accountActions.LOAD_ACCOUNTS_REJECTED:
 			return state.merge({
@@ -89,11 +86,9 @@ export const accounts = (state = initialState, action) => {
 				defaultAccount: stateUtility.getItemLoading(),
 			})
 		case accountActions.LOAD_DEFAULT_ACCOUNT_FULFILLED:
-			const getDefaultAccountResponse = action.payload.data
-
-			window.localStorage.setItem('defaultAccount', JSON.stringify(getDefaultAccountResponse))
+			window.localStorage.setItem('defaultAccount', JSON.stringify(action.payload))
 			return state.merge({
-				defaultAccount: stateUtility.getItemFulfilled(getDefaultAccountResponse),
+				defaultAccount: stateUtility.getItemFulfilled(action.payload),
 			})
 		case accountActions.LOAD_DEFAULT_ACCOUNT_REJECTED:
 			return state.merge({
@@ -110,11 +105,10 @@ export const accounts = (state = initialState, action) => {
 				setDefaultAccount: stateUtility.getObserverLoading(),
 			})
 		case accountActions.SET_DEFAULT_ACCOUNT_FULFILLED:
-			const setDefaultAccountResponse = action.payload.data
-			window.localStorage.setItem('defaultAccount', JSON.stringify(setDefaultAccountResponse))
+			window.localStorage.setItem('defaultAccount', JSON.stringify(action.payload))
 			return state.merge({
 				setDefaultAccount: stateUtility.getObserverFulfilled(),
-				defaultAccount: stateUtility.getItemFulfilled(setDefaultAccountResponse),
+				defaultAccount: stateUtility.getItemFulfilled(action.payload),
 			})
 		case accountActions.SET_DEFAULT_ACCOUNT_REJECTED:
 			return state.merge({
@@ -131,9 +125,8 @@ export const accounts = (state = initialState, action) => {
 				createAccount: stateUtility.getItemLoading(),
 			})
 		case accountActions.CREATE_ACCOUNT_FULFILLED:
-			const createAccountResponse = action.payload.data
 			return state.merge({
-				createAccount: stateUtility.getItemFulfilled(createAccountResponse),
+				createAccount: stateUtility.getItemFulfilled(action.payload),
 			})
 		case accountActions.CREATE_ACCOUNT_REJECTED:
 			return state.merge({
@@ -186,14 +179,13 @@ export const accounts = (state = initialState, action) => {
 				updateAccount: stateUtility.getObserverLoading(),
 			})
 		case accountActions.UPDATE_ACCOUNT_FULFILLED:
-			const updateAccountResponse = action.payload.data
 			const returnVal = {
 				updateAccount: stateUtility.getObserverFulfilled(),
-				item: stateUtility.getItemFulfilled(updateAccountResponse),
+				item: stateUtility.getItemFulfilled(action.payload),
 			} as any
-			if (updateAccountResponse.id === state.toJS().defaultAccount.data.id) {
-				window.localStorage.setItem('defaultAccount', JSON.stringify(updateAccountResponse))
-				returnVal.defaultAccount = stateUtility.getItemFulfilled(updateAccountResponse)
+			if (action.payload.id === state.toJS().defaultAccount.data.id) {
+				window.localStorage.setItem('defaultAccount', JSON.stringify(action.payload))
+				returnVal.defaultAccount = stateUtility.getItemFulfilled(action.payload)
 			}
 			return state.merge(returnVal)
 
@@ -231,7 +223,7 @@ export const accounts = (state = initialState, action) => {
 			})
 		case accountActions.GET_INVOICES_FULFILLED:
 			return state.merge({
-				invoices: stateUtility.getPaginationFulfilled(action.payload.data),
+				invoices: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case accountActions.GET_INVOICES_REJECTED:
 			return state.merge({

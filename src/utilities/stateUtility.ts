@@ -124,7 +124,7 @@ const getPaginationRejected = (error: Error): PaginatedResponse<any> => {
 			to: 0,
 		},
 		data: [],
-		error: error,
+		error,
 	}
 }
 
@@ -168,7 +168,7 @@ const getItemRejected = (error: Error, data = null): ItemResponse<any> => {
 			loading: false,
 		},
 		data: data,
-		error: error,
+		error,
 	}
 }
 
@@ -227,7 +227,7 @@ const getObserverRejected = (error: Error): Observer => {
 			loaded: true,
 			loading: false,
 		},
-		error: error,
+		error,
 	}
 }
 

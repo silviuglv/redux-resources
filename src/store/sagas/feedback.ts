@@ -11,15 +11,12 @@ interface Props {
 function* sendFeedback({ payload, successCb, errorCb }: Props) {
 	try {
 		yield put(feedbackActions.setSendFeedbackLoading())
-		const response = yield call(feedbackApi.sendFeedback, payload)
-		yield put(feedbackActions.setSendFeedbackFulfilled(response))
+		const { data } = yield call(feedbackApi.sendFeedback, payload)
+		yield put(feedbackActions.setSendFeedbackFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Feedback submitted!', 2000))
 		successCb && successCb()
 	} catch (error) {
 		yield put(feedbackActions.setSendFeedbackRejected(error))
-		// TODO: remove this line once API endpoint implemented
-		yield put(notificationActions.displaySnackbarMessage('Feedback submitted!', 2000))
-
 		errorCb && errorCb()
 	}
 }

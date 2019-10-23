@@ -22,9 +22,8 @@ export const plans = (state = initialState, action) => {
 				list: stateUtility.getPaginationLoading(),
 			})
 		case planActions.SET_PLANS_FULFILLED:
-			const listResponse = action.payload.data
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(listResponse),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case planActions.SET_PLANS_REJECTED:
 			return state.merge({

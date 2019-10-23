@@ -26,9 +26,8 @@ export const cards = (state = initialState, action) => {
 				list: stateUtility.getPaginationLoading(),
 			})
 		case cardActions.GET_CARDS_FULFILLED:
-			const list = action.payload.data
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(list),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case cardActions.GET_CARDS_REJECTED:
 			return state.merge({
@@ -45,10 +44,9 @@ export const cards = (state = initialState, action) => {
 				createCard: stateUtility.getObserverLoading(),
 			})
 		case cardActions.CREATE_CARD_FULFILLED:
-			const createCardResponse = action.payload.data
 			return state.merge({
 				createCard: stateUtility.getObserverFulfilled(),
-				item: stateUtility.getItemFulfilled(createCardResponse),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case cardActions.CREATE_CARD_REJECTED:
 			return state.merge({
@@ -65,10 +63,9 @@ export const cards = (state = initialState, action) => {
 				showCard: stateUtility.getObserverLoading(),
 			})
 		case cardActions.SHOW_CARD_FULFILLED:
-			const showCardResponse = action.payload.data
 			return state.merge({
 				showCard: stateUtility.getObserverFulfilled(),
-				item: stateUtility.getItemFulfilled(showCardResponse),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case cardActions.SHOW_CARD_REJECTED:
 			return state.merge({
@@ -85,10 +82,9 @@ export const cards = (state = initialState, action) => {
 				updateCard: stateUtility.getObserverLoading(),
 			})
 		case cardActions.UPDATE_CARD_FULFILLED:
-			const updateCardResponse = action.payload.data
 			return state.merge({
 				updateCard: stateUtility.getObserverFulfilled(),
-				item: stateUtility.getItemFulfilled(updateCardResponse),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case cardActions.UPDATE_CARD_REJECTED:
 			return state.merge({
@@ -123,10 +119,9 @@ export const cards = (state = initialState, action) => {
 				setDefaultCard: stateUtility.getObserverLoading(),
 			})
 		case cardActions.SET_DEFAULT_CARD_FULFILLED:
-			const setDefaultCardResponse = action.payload.data
 			return state.merge({
 				setDefaultCard: stateUtility.getObserverFulfilled(),
-				item: stateUtility.getItemFulfilled(setDefaultCardResponse),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case cardActions.SET_DEFAULT_CARD_REJECTED:
 			return state.merge({

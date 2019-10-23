@@ -1,3 +1,5 @@
+import { Document, Error, PaginatedApiResponse } from '../../types'
+
 const types = {
 	GET_DOCUMENTS: '[documents] GET_DOCUMENTS',
 	GET_DOCUMENTS_INITIAL_STATE: '[documents] GET_DOCUMENTS_INITIAL_STATE',
@@ -14,10 +16,9 @@ const types = {
 
 export const documentActions = {
 	...types,
-	getDocuments: (query = {}) => ({
+	getDocuments: (payload = {}) => ({
 		type: types.GET_DOCUMENTS,
-		payload: null,
-		query,
+		payload,
 	}),
 	getDocumentsInitialState: () => ({
 		type: types.GET_DOCUMENTS_INITIAL_STATE,
@@ -27,19 +28,18 @@ export const documentActions = {
 		type: types.GET_DOCUMENTS_LOADING,
 		payload: null,
 	}),
-	getDocumentsFulfilled: (response) => ({
+	getDocumentsFulfilled: (payload: PaginatedApiResponse<Document>) => ({
 		type: types.GET_DOCUMENTS_FULFILLED,
-		payload: response,
+		payload,
 	}),
 	getDocumentsRejected: (response) => ({
 		type: types.GET_DOCUMENTS_REJECTED,
 		payload: response,
 	}),
 
-	downloadDocument: (document, preview = false) => ({
+	downloadDocument: (payload: Document, preview = false) => ({
 		type: types.DOWNLOAD_DOCUMENT,
-		payload: null,
-		document,
+		payload,
 		preview,
 	}),
 	downloadDocumentInitialState: () => ({
@@ -50,12 +50,12 @@ export const documentActions = {
 		type: types.DOWNLOAD_DOCUMENT_LOADING,
 		payload: null,
 	}),
-	downloadDocumentFulfilled: (response?) => ({
+	downloadDocumentFulfilled: (payload?) => ({
 		type: types.DOWNLOAD_DOCUMENT_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	downloadDocumentRejected: (response) => ({
+	downloadDocumentRejected: (payload: Error) => ({
 		type: types.DOWNLOAD_DOCUMENT_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

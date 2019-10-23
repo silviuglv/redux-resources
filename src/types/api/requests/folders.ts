@@ -10,7 +10,7 @@ export interface GetFoldersRequest extends BaseGetRequest {
 	ids?: string
 	parent_folder_ids?: string | null
 	account_ids?: string
-	order_by: 'id' | 'name'
+	order_by?: 'id' | 'name'
 }
 
 export interface UpdateFolderRequest {

@@ -1,8 +1,14 @@
 import axios from 'axios'
 import config from '../config'
+import {
+	CreateUserRequest,
+	UpdateNotificationPreferencesRequest,
+	UpdatePasswordRequest,
+	UpdateUserRequest,
+} from '../types'
 
 export const userApi = {
-	createUser: (data) => {
+	createUser: (data: CreateUserRequest) => {
 		return axios({
 			url: `${config.apiBase}/users`,
 			method: 'POST',
@@ -15,20 +21,20 @@ export const userApi = {
 			method: 'GET',
 		})
 	},
-	getUserMeta: (userId) => {
+	getUserMeta: (userId: string) => {
 		return axios({
 			url: `${config.apiBase}/users/${userId}/meta`,
 			method: 'GET',
 		})
 	},
-	updateUser: (id, data) => {
+	updateUser: (id: string, data: UpdateUserRequest) => {
 		return axios({
 			url: `${config.apiBase}/users/${id}`,
 			method: 'PUT',
 			data,
 		})
 	},
-	updateUserPassword: (id, data) => {
+	updateUserPassword: (id: string, data: UpdatePasswordRequest) => {
 		return axios({
 			url: `${config.apiBase}/users/${id}/password`,
 			method: 'PUT',
@@ -41,27 +47,27 @@ export const userApi = {
 			method: 'GET',
 		})
 	},
-	getNotificationPreferences: (id) => {
+	getNotificationPreferences: (id: string) => {
 		return axios({
 			url: `${config.apiBase}/users/${id}/notification_preferences`,
 			method: 'GET',
 		})
 	},
-	updateNotificationPreferences: (id, data) => {
+	updateNotificationPreferences: (id: string, data: UpdateNotificationPreferencesRequest) => {
 		return axios({
 			url: `${config.apiBase}/users/${id}/notification_preferences`,
 			method: 'PUT',
 			data,
 		})
 	},
-	updatePicture: (id, data) => {
+	updatePicture: (id: string, data: any) => {
 		return axios({
 			url: `${config.apiBase}/users/${id}/picture`,
 			method: 'POST',
 			data,
 		})
 	},
-	confirmEmail: (token) => {
+	confirmEmail: (token: string) => {
 		return axios({
 			url: `${config.apiBase}/users/email_confirmation/${token}`,
 			method: 'PUT',

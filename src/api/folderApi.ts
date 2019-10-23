@@ -1,28 +1,29 @@
 import axios from 'axios'
 import config from '../config'
+import { GetFoldersRequest, CreateFolderRequest, UpdateFolderRequest } from '../types'
 
 export const folderApi = {
-	getFolders: (params = {}) => {
+	getFolders: (params: GetFoldersRequest = {}) => {
 		return axios({
 			url: `${config.apiBase}/folders`,
 			method: 'GET',
 			params,
 		})
 	},
-	showFolder: (id) => {
+	showFolder: (id: string) => {
 		return axios({
 			url: `${config.apiBase}/folders/${id}`,
 			method: 'GET',
 		})
 	},
-	createFolder: (data) => {
+	createFolder: (data: CreateFolderRequest) => {
 		return axios({
 			url: `${config.apiBase}/folders`,
 			method: 'POST',
 			data,
 		})
 	},
-	updateFolder: (id, data) => {
+	updateFolder: (id: string, data: UpdateFolderRequest) => {
 		return axios({
 			url: `${config.apiBase}/folders/${id}`,
 			method: 'PUT',

@@ -23,12 +23,12 @@ function* notificationReceivedEvent({ payload }: Action) {
 	yield put(notificationActions.addNotificationToList(payload))
 }
 
-export function* getNotifications({ query }: any) {
+export function* getNotifications({ payload }: any) {
 	try {
 		yield put(notificationActions.getNotificationsInitialState())
 		yield put(notificationActions.getNotificationsLoading())
-		const response = yield call(notificationApi.getNotifications, query)
-		yield put(notificationActions.getNotificationsFulfilled(response))
+		const { data } = yield call(notificationApi.getNotifications, payload)
+		yield put(notificationActions.getNotificationsFulfilled(data))
 	} catch (error) {
 		yield put(notificationActions.getNotificationsRejected(error))
 	}
@@ -37,24 +37,24 @@ export function* getNotifications({ query }: any) {
 export function* getTotalUnreadNotifications() {
 	try {
 		const query = {
-			is_read: 0,
+			is_read: false,
 			per_page: 1,
 		}
 		yield put(notificationActions.getTotalUnreadNotificationsInitialState())
 		yield put(notificationActions.getTotalUnreadNotificationsLoading())
-		const response = yield call(notificationApi.getNotifications, query)
-		yield put(notificationActions.getTotalUnreadNotificationsFulfilled(response))
+		const { data } = yield call(notificationApi.getNotifications, query)
+		yield put(notificationActions.getTotalUnreadNotificationsFulfilled(data))
 	} catch (error) {
 		yield put(notificationActions.getTotalUnreadNotificationsRejected(error))
 	}
 }
 
-export function* updateNotification({ id, data }: any) {
+export function* updateNotification({ id, payload }: any) {
 	try {
 		yield put(notificationActions.updateNotificationInitialState())
 		yield put(notificationActions.updateNotificationLoading())
-		const response = yield call(notificationApi.update, id, data)
-		yield put(notificationActions.updateNotificationFulfilled(response))
+		const { data } = yield call(notificationApi.update, id, payload)
+		yield put(notificationActions.updateNotificationFulfilled(data))
 	} catch (error) {
 		yield put(notificationActions.updateNotificationRejected(error))
 	}

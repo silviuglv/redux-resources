@@ -1,3 +1,5 @@
+import { CreateSignatureRequest, Error, PaginatedApiResponse, Signature } from '../../types'
+
 const types = {
 	GET_SIGNATURES: '[signatures] GET_SIGNATURES',
 	SIGNATURES_LOADING: '[signatures] SIGNATURES_LOADING',
@@ -20,30 +22,29 @@ export const signatureActions = {
 		type: types.SIGNATURES_LOADING,
 		payload: null,
 	}),
-	setSignaturesFulfilled: (response) => ({
+	setSignaturesFulfilled: (payload: PaginatedApiResponse<Signature>) => ({
 		type: types.SIGNATURES_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setSignaturesRejected: (data) => ({
+	setSignaturesRejected: (payload: Error) => ({
 		type: types.SET_SIGNATURES_REJECTED,
-		payload: data,
+		payload,
 	}),
 
-	createSignature: (data) => ({
+	createSignature: (payload: CreateSignatureRequest) => ({
 		type: types.CREATE_SIGNATURE,
-		payload: null,
-		data,
+		payload,
 	}),
 	setCreateSignatureLoading: () => ({
 		type: types.CREATE_SIGNATURE_LOADING,
 		payload: null,
 	}),
-	setCreateSignatureFulfilled: (response) => ({
+	setCreateSignatureFulfilled: (payload: Signature) => ({
 		type: types.CREATE_SIGNATURE_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setCreateSignatureRejected: (data) => ({
+	setCreateSignatureRejected: (payload: Error) => ({
 		type: types.CREATE_SIGNATURE_REJECTED,
-		payload: data,
+		payload,
 	}),
 }

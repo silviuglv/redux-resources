@@ -3,28 +3,28 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import { cardApi } from '../../api'
 import { AnyAction } from 'redux'
 
-function* getCards({ query }: any) {
+function* getCards({ payload }: any) {
 	try {
 		yield put(cardActions.getCardsInitialState())
 		yield put(cardActions.getCardsLoading())
-		const getCardsResponse = yield call(cardApi.getCards, query)
-		yield put(cardActions.getCardsFulfilled(getCardsResponse))
+		const { data } = yield call(cardApi.getCards, payload)
+		yield put(cardActions.getCardsFulfilled(data))
 	} catch (error) {
 		yield put(cardActions.getCardsRejected(error))
 	}
 }
 
-function* createCard({ card, successCb, errorCb }: AnyAction) {
+function* createCard({ payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(cardActions.createCardInitialState())
 		yield put(cardActions.createCardLoading())
-		const createCardResponse = yield call(cardApi.createCard, card)
-		yield put(cardActions.createCardFulfilled(createCardResponse))
+		const { data } = yield call(cardApi.createCard, payload)
+		yield put(cardActions.createCardFulfilled(data))
 		successCb && successCb()
 		yield put(notificationActions.displaySnackbarMessage('Card created!', 2000))
 
 		const query = {
-			account_ids: card.account_id,
+			account_ids: payload.account_id,
 			order_by: 'is_default',
 			direction: 'desc',
 		}
@@ -36,16 +36,16 @@ function* createCard({ card, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* setDefaultCard({ card }: AnyAction) {
+function* setDefaultCard({ payload }: AnyAction) {
 	try {
 		yield put(cardActions.setDefaultCardInitialState())
 		yield put(cardActions.setDefaultCardLoading())
-		const setDefaultCardResponse = yield call(cardApi.setDefaultCard, card.id)
-		yield put(cardActions.setDefaultCardFulfilled(setDefaultCardResponse))
+		const { data } = yield call(cardApi.setDefaultCard, payload.id)
+		yield put(cardActions.setDefaultCardFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Card set as default!', 2000))
 
 		const query = {
-			account_ids: card.account_id,
+			account_ids: payload.account_id,
 			order_by: 'is_default',
 			direction: 'desc',
 		}
@@ -55,17 +55,17 @@ function* setDefaultCard({ card }: AnyAction) {
 	}
 }
 
-function* deleteCard({ card, successCb, errorCb }: AnyAction) {
+function* deleteCard({ payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(cardActions.deleteCardInitialState())
 		yield put(cardActions.deleteCardLoading())
-		const deleteCardResponse = yield call(cardApi.deleteCard, card.id)
-		yield put(cardActions.deleteCardFulfilled(deleteCardResponse))
+		yield call(cardApi.deleteCard, payload.id)
+		yield put(cardActions.deleteCardFulfilled())
 		successCb && successCb()
 		yield put(notificationActions.displaySnackbarMessage('Card deleted!', 2000))
 
 		const query = {
-			account_ids: card.account_id,
+			account_ids: payload.account_id,
 			order_by: 'is_default',
 			direction: 'desc',
 		}
@@ -76,17 +76,17 @@ function* deleteCard({ card, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* updateCard({ id, card, successCb, errorCb }: AnyAction) {
+function* updateCard({ id, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(cardActions.updateCardInitialState())
 		yield put(cardActions.updateCardLoading())
-		const updateCardResponse = yield call(cardApi.updateCard, id, card)
-		yield put(cardActions.updateCardFulfilled(updateCardResponse))
+		const { data } = yield call(cardApi.updateCard, id, payload)
+		yield put(cardActions.updateCardFulfilled(data))
 		successCb && successCb()
 		yield put(notificationActions.displaySnackbarMessage('Card updated!', 2000))
 
 		const query = {
-			account_ids: card.account_id,
+			account_ids: payload.account_id,
 			order_by: 'is_default',
 			direction: 'desc',
 		}

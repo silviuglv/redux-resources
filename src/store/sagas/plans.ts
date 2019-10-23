@@ -3,11 +3,11 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import { planApi } from '../../api'
 import { AnyAction } from 'redux'
 
-function* getPlans({ query }: AnyAction) {
+function* getPlans({ payload }: AnyAction) {
 	try {
 		yield put(planActions.setPlansLoading())
-		const getPlansResponse = yield call(planApi.getPlans, query)
-		yield put(planActions.setPlansFulfilled(getPlansResponse))
+		const { data } = yield call(planApi.getPlans, payload)
+		yield put(planActions.setPlansFulfilled(data))
 	} catch (error) {
 		yield put(planActions.setPlansRejected(error))
 	}

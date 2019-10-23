@@ -4,28 +4,26 @@ import { connectedServiceApi } from '../../api'
 import { AnyAction } from 'redux'
 import { parseApiResponse } from '../../utilities'
 
-function* getConnectedServices({ query = {} }: AnyAction) {
+function* getConnectedServices({ payload = {} }: AnyAction) {
 	try {
 		yield put(connectedServiceActions.setConnectedServicesLoading())
-		const getConnectedServicesResponse = yield call(connectedServiceApi.getConnectedServices, query)
-		yield put(connectedServiceActions.setConnectedServicesFulfilled(getConnectedServicesResponse))
+		const { data } = yield call(connectedServiceApi.getConnectedServices, payload)
+		yield put(connectedServiceActions.setConnectedServicesFulfilled(data))
 
-		const list = getConnectedServicesResponse.data
-		const data = parseApiResponse(list)
-
-		yield put(connectedServiceActions.setConnectedServices(data.connected))
-		yield put(connectedServiceActions.setAvailableServices(data.available))
+		const list = parseApiResponse(data)
+		yield put(connectedServiceActions.setConnectedServices(list.connected))
+		yield put(connectedServiceActions.setAvailableServices(list.available))
 	} catch (error) {
 		yield put(connectedServiceActions.setConnectedServicesRejected(error))
 	}
 }
 
-function* createConnectedService({ data, successCb, errorCb }: AnyAction) {
-	const { provider } = data
+function* createConnectedService({ payload, successCb, errorCb }: AnyAction) {
+	const { provider } = payload
 	try {
 		yield put(connectedServiceActions.createConnectedServiceLoading())
-		const getConnectedServicesResponse = yield call(connectedServiceApi.createConnectedService, data)
-		yield put(connectedServiceActions.createConnectedServiceFulfilled(getConnectedServicesResponse))
+		const { data } = yield call(connectedServiceApi.createConnectedService, payload)
+		yield put(connectedServiceActions.createConnectedServiceFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage(`${provider} account now linked!`, 2000))
 		successCb && successCb()
 	} catch (error) {
@@ -34,11 +32,11 @@ function* createConnectedService({ data, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* updateConnectedService({ id, data, successCb, errorCb }: AnyAction) {
+function* updateConnectedService({ id, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(connectedServiceActions.updateConnectedServiceLoading())
-		const getConnectedServicesResponse = yield call(connectedServiceApi.updateConnectedService, id, data)
-		yield put(connectedServiceActions.updateConnectedServiceFulfilled(getConnectedServicesResponse))
+		const { data } = yield call(connectedServiceApi.updateConnectedService, id, payload)
+		yield put(connectedServiceActions.updateConnectedServiceFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage(`Service updated!`, 2000))
 		successCb && successCb()
 	} catch (error) {
@@ -50,8 +48,8 @@ function* updateConnectedService({ id, data, successCb, errorCb }: AnyAction) {
 function* deleteConnectedService({ id, scopes = undefined, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(connectedServiceActions.deleteConnectedServiceLoading())
-		const getConnectedServicesResponse = yield call(connectedServiceApi.deleteConnectedService, id, scopes)
-		yield put(connectedServiceActions.deleteConnectedServiceFulfilled(getConnectedServicesResponse))
+		yield call(connectedServiceApi.deleteConnectedService, id, scopes)
+		yield put(connectedServiceActions.deleteConnectedServiceFulfilled())
 		yield put(notificationActions.displaySnackbarMessage(`Service deleted!`, 2000))
 
 		successCb && successCb()

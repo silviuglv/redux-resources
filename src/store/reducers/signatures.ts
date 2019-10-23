@@ -19,7 +19,7 @@ export const signatures = (state = initialState, action) => {
 			})
 		case signatureActions.SIGNATURES_FULFILLED:
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(action.payload.data),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case signatureActions.SET_SIGNATURES_REJECTED:
 			return state.merge({
@@ -33,7 +33,7 @@ export const signatures = (state = initialState, action) => {
 			})
 		case signatureActions.CREATE_SIGNATURE_FULFILLED:
 			return state.merge({
-				item: stateUtility.getItemFulfilled(action.payload.data),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case signatureActions.CREATE_SIGNATURE_REJECTED:
 			return state.merge({

@@ -1,3 +1,5 @@
+import { Error, GetPackageTypesRequest, PackageType, PaginatedApiResponse } from '../../types'
+
 const types = {
 	GET_PACKAGE_TYPES: '[packageTypes] GET_PACKAGE_TYPES',
 	PACKAGE_TYPES_LOADING: '[packageTypes] PACKAGE_TYPES_LOADING',
@@ -7,20 +9,20 @@ const types = {
 
 export const packageTypeActions = {
 	...types,
-	getPackageTypes: (query = {}) => ({
+	getPackageTypes: (payload: GetPackageTypesRequest = {}) => ({
 		type: types.GET_PACKAGE_TYPES,
-		payload: query,
+		payload,
 	}),
 	setPackageTypesLoading: () => ({
 		type: types.PACKAGE_TYPES_LOADING,
 		payload: null,
 	}),
-	setPackageTypesFulfilled: (response) => ({
+	setPackageTypesFulfilled: (payload: PaginatedApiResponse<PackageType>) => ({
 		type: types.PACKAGE_TYPES_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setPackageTypesRejected: (data) => ({
+	setPackageTypesRejected: (payload: Error) => ({
 		type: types.SET_PACKAGE_TYPES_REJECTED,
-		payload: data,
+		payload,
 	}),
 }

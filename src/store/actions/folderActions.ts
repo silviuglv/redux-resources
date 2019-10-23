@@ -1,3 +1,12 @@
+import {
+	CreateFolderRequest,
+	Error,
+	Folder,
+	GetFoldersRequest,
+	PaginatedApiResponse,
+	UpdateFolderRequest,
+} from '../../types'
+
 const types = {
 	GET_FOLDERS: '[folders] GET_FOLDERS',
 	GET_FOLDERS_INITIAL_STATE: '[folders] GET_FOLDERS_INITIAL_STATE',
@@ -18,10 +27,9 @@ const types = {
 
 export const folderActions = {
 	...types,
-	getFolders: (query = {}) => ({
+	getFolders: (payload: GetFoldersRequest = {}) => ({
 		type: types.GET_FOLDERS,
-		payload: null,
-		query,
+		payload,
 	}),
 	getFoldersInitialState: () => ({
 		type: types.GET_FOLDERS_INITIAL_STATE,
@@ -31,19 +39,18 @@ export const folderActions = {
 		type: types.GET_FOLDERS_LOADING,
 		payload: null,
 	}),
-	getFoldersFulfilled: (response) => ({
+	getFoldersFulfilled: (payload: PaginatedApiResponse<Folder>) => ({
 		type: types.GET_FOLDERS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getFoldersRejected: (response) => ({
+	getFoldersRejected: (payload: Error) => ({
 		type: types.GET_FOLDERS_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	createFolder: (data, successCb, errorCb) => ({
+	createFolder: (payload: CreateFolderRequest, successCb, errorCb) => ({
 		type: types.CREATE_FOLDER,
-		payload: null,
-		data,
+		payload,
 		successCb,
 		errorCb,
 	}),
@@ -55,20 +62,19 @@ export const folderActions = {
 		type: types.CREATE_FOLDER_LOADING,
 		payload: null,
 	}),
-	createFolderFulfilled: (response) => ({
+	createFolderFulfilled: (payload: Folder) => ({
 		type: types.CREATE_FOLDER_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	createFolderRejected: (response) => ({
+	createFolderRejected: (payload: Error) => ({
 		type: types.CREATE_FOLDER_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updateFolder: (id, data) => ({
+	updateFolder: (id: string, payload: UpdateFolderRequest) => ({
 		type: types.UPDATE_FOLDER,
-		payload: null,
+		payload,
 		id,
-		data,
 	}),
 	updateFolderInitialState: () => ({
 		type: types.UPDATE_FOLDER_INITIAL_STATE,
@@ -78,12 +84,12 @@ export const folderActions = {
 		type: types.UPDATE_FOLDER_LOADING,
 		payload: null,
 	}),
-	updateFolderFulfilled: (response) => ({
+	updateFolderFulfilled: (payload: Folder) => ({
 		type: types.UPDATE_FOLDER_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updateFolderRejected: (response) => ({
+	updateFolderRejected: (payload: Error) => ({
 		type: types.UPDATE_FOLDER_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

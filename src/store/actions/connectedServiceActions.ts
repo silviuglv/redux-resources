@@ -1,3 +1,5 @@
+import { ConnectedService, PaginatedApiResponse } from '../../types'
+
 const types = {
 	GET_CONNECTED_SERVICES: '[connectedServices] GET_CONNECTED_SERVICES',
 	SET_CONNECTED_SERVICES_INITIAL_STATE: '[connectedServices] SET_CONNECTED_SERVICES_INITIAL_STATE',
@@ -29,10 +31,9 @@ const types = {
 
 export const connectedServiceActions = {
 	...types,
-	getConnectedServices: (query = {}) => ({
+	getConnectedServices: (payload = {}) => ({
 		type: types.GET_CONNECTED_SERVICES,
-		payload: null,
-		query,
+		payload,
 	}),
 	setConnectedServicesInitialState: () => ({
 		type: types.SET_CONNECTED_SERVICES_INITIAL_STATE,
@@ -42,19 +43,18 @@ export const connectedServiceActions = {
 		type: types.SET_CONNECTED_SERVICES_LOADING,
 		payload: null,
 	}),
-	setConnectedServicesFulfilled: (response) => ({
+	setConnectedServicesFulfilled: (payload: PaginatedApiResponse<ConnectedService>) => ({
 		type: types.SET_CONNECTED_SERVICES_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setConnectedServicesRejected: (response) => ({
+	setConnectedServicesRejected: (payload: Error) => ({
 		type: types.SET_CONNECTED_SERVICES_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	createConnectedService: (data, successCb, errorCb) => ({
+	createConnectedService: (payload, successCb, errorCb) => ({
 		type: types.CREATE_CONNECTED_SERVICE,
-		payload: null,
-		data,
+		payload,
 		successCb,
 		errorCb,
 	}),
@@ -66,20 +66,19 @@ export const connectedServiceActions = {
 		type: types.CREATE_CONNECTED_SERVICE_LOADING,
 		payload: null,
 	}),
-	createConnectedServiceFulfilled: (response) => ({
+	createConnectedServiceFulfilled: (payload: ConnectedService) => ({
 		type: types.CREATE_CONNECTED_SERVICE_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	createConnectedServiceRejected: (response) => ({
+	createConnectedServiceRejected: (payload: Error) => ({
 		type: types.CREATE_CONNECTED_SERVICE_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updateConnectedService: (id, data, successCb, errorCb) => ({
+	updateConnectedService: (id: string, payload, successCb, errorCb) => ({
 		type: types.UPDATE_CONNECTED_SERVICE,
-		payload: null,
+		payload,
 		id,
-		data,
 		successCb,
 		errorCb,
 	}),
@@ -91,16 +90,16 @@ export const connectedServiceActions = {
 		type: types.UPDATE_CONNECTED_SERVICE_LOADING,
 		payload: null,
 	}),
-	updateConnectedServiceFulfilled: (response) => ({
+	updateConnectedServiceFulfilled: (payload: ConnectedService) => ({
 		type: types.UPDATE_CONNECTED_SERVICE_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updateConnectedServiceRejected: (response) => ({
+	updateConnectedServiceRejected: (payload: Error) => ({
 		type: types.UPDATE_CONNECTED_SERVICE_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	deleteConnectedService: (id, scopes = undefined, successCb, errorCb) => ({
+	deleteConnectedService: (id: string, scopes = undefined, successCb, errorCb) => ({
 		type: types.DELETE_CONNECTED_SERVICE,
 		payload: null,
 		id,
@@ -116,20 +115,20 @@ export const connectedServiceActions = {
 		type: types.DELETE_CONNECTED_SERVICE_LOADING,
 		payload: null,
 	}),
-	deleteConnectedServiceFulfilled: (response) => ({
+	deleteConnectedServiceFulfilled: () => ({
 		type: types.DELETE_CONNECTED_SERVICE_FULFILLED,
-		payload: response,
+		payload: null,
 	}),
-	deleteConnectedServiceRejected: (response) => ({
+	deleteConnectedServiceRejected: (payload: Error) => ({
 		type: types.DELETE_CONNECTED_SERVICE_REJECTED,
-		payload: response,
+		payload,
 	}),
-	setConnectedServices: (list) => ({
+	setConnectedServices: (payload: Array<ConnectedService>) => ({
 		type: types.SET_CONNECTED_SERVICES,
-		payload: list,
+		payload,
 	}),
-	setAvailableServices: (list) => ({
+	setAvailableServices: (payload: Array<ConnectedService>) => ({
 		type: types.SET_AVAILABLE_SERVICES,
-		payload: list,
+		payload,
 	}),
 }

@@ -1,3 +1,15 @@
+import {
+	Account,
+	Error,
+	UpdateAccountRequest,
+	PaginatedApiResponse,
+	User,
+	GetAccountUsersRequest,
+	GetAccountsRequest,
+	CreateAccountRequest,
+	Invoice,
+} from '../../types'
+
 const types = {
 	SHOW_ACCOUNT: '[accounts] SHOW_ACCOUNT',
 	SHOW_ACCOUNT_INITIAL_STATE: '[accounts] SHOW_ACCOUNT_INITIAL_STATE',
@@ -68,7 +80,7 @@ const types = {
 
 export const accountActions = {
 	...types,
-	showAccount: (id) => ({
+	showAccount: (id: string) => ({
 		type: types.SHOW_ACCOUNT,
 		payload: null,
 		id,
@@ -81,20 +93,19 @@ export const accountActions = {
 		type: types.SHOW_ACCOUNT_LOADING,
 		payload: null,
 	}),
-	showAccountFulfilled: (response) => ({
+	showAccountFulfilled: (payload: Account) => ({
 		type: types.SHOW_ACCOUNT_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	showAccountRejected: (response) => ({
+	showAccountRejected: (payload: Error) => ({
 		type: types.SHOW_ACCOUNT_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updateAccount: (account, data, successCb, errorCb) => ({
+	updateAccount: (account: Account, payload: UpdateAccountRequest, successCb?, errorCb?) => ({
 		type: types.UPDATE_ACCOUNT,
-		payload: null,
+		payload,
 		account,
-		data,
 		successCb,
 		errorCb,
 	}),
@@ -106,18 +117,18 @@ export const accountActions = {
 		type: types.UPDATE_ACCOUNT_LOADING,
 		payload: null,
 	}),
-	updateAccountFulfilled: (response) => ({
+	updateAccountFulfilled: (payload: Account) => ({
 		type: types.UPDATE_ACCOUNT_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updateAccountRejected: (response) => ({
+	updateAccountRejected: (payload: Error) => ({
 		type: types.UPDATE_ACCOUNT_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	accountUsers: (id) => ({
+	accountUsers: (id: string, payload: GetAccountUsersRequest = {}) => ({
 		type: types.LOAD_ACCOUNT_USERS,
-		payload: null,
+		payload,
 		id,
 	}),
 	accountUsersInitialState: () => ({
@@ -128,18 +139,18 @@ export const accountActions = {
 		type: types.LOAD_ACCOUNT_USERS_LOADING,
 		payload: null,
 	}),
-	accountUsersFulfilled: (response) => ({
+	accountUsersFulfilled: (payload: PaginatedApiResponse<User>) => ({
 		type: types.LOAD_ACCOUNT_USERS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	accountUsersRejected: (response) => ({
+	accountUsersRejected: (payload: Error) => ({
 		type: types.LOAD_ACCOUNT_USERS_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	accounts: () => ({
+	accounts: (payload: GetAccountsRequest = {}) => ({
 		type: types.LOAD_ACCOUNTS,
-		payload: null,
+		payload,
 	}),
 	accountsInitialState: () => ({
 		type: types.LOAD_ACCOUNTS_INITIAL_STATE,
@@ -149,13 +160,13 @@ export const accountActions = {
 		type: types.LOAD_ACCOUNTS_LOADING,
 		payload: null,
 	}),
-	accountsFulfilled: (response) => ({
+	accountsFulfilled: (payload: PaginatedApiResponse<User>) => ({
 		type: types.LOAD_ACCOUNTS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	accountsRejected: (response) => ({
+	accountsRejected: (payload: Error) => ({
 		type: types.LOAD_ACCOUNTS_REJECTED,
-		payload: response,
+		payload,
 	}),
 
 	getDefaultAccount: () => ({
@@ -170,16 +181,16 @@ export const accountActions = {
 		type: types.LOAD_DEFAULT_ACCOUNT_LOADING,
 		payload: null,
 	}),
-	getDefaultAccountFulfilled: (response) => ({
+	getDefaultAccountFulfilled: (payload: Account) => ({
 		type: types.LOAD_DEFAULT_ACCOUNT_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getDefaultAccountRejected: (response) => ({
+	getDefaultAccountRejected: (payload: Error) => ({
 		type: types.LOAD_DEFAULT_ACCOUNT_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	setDefaultAccount: (id) => ({
+	setDefaultAccount: (id: string) => ({
 		type: types.SET_DEFAULT_ACCOUNT,
 		payload: null,
 		id,
@@ -192,19 +203,18 @@ export const accountActions = {
 		type: types.SET_DEFAULT_ACCOUNT_LOADING,
 		payload: null,
 	}),
-	setDefaultAccountFulfilled: (response) => ({
+	setDefaultAccountFulfilled: (payload: Account) => ({
 		type: types.SET_DEFAULT_ACCOUNT_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setDefaultAccountRejected: (response) => ({
+	setDefaultAccountRejected: (payload: Error) => ({
 		type: types.SET_DEFAULT_ACCOUNT_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	createAccount: (account, successCb, errorCb) => ({
+	createAccount: (payload: CreateAccountRequest, successCb, errorCb) => ({
 		type: types.CREATE_ACCOUNT,
-		payload: null,
-		account,
+		payload,
 		successCb,
 		errorCb,
 	}),
@@ -216,16 +226,16 @@ export const accountActions = {
 		type: types.CREATE_ACCOUNT_LOADING,
 		payload: null,
 	}),
-	createAccountFulfilled: (response) => ({
+	createAccountFulfilled: (payload: Account) => ({
 		type: types.CREATE_ACCOUNT_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	createAccountRejected: (response) => ({
+	createAccountRejected: (payload: Error) => ({
 		type: types.CREATE_ACCOUNT_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	deleteAccountMember: (account, member, successCb, errorCb) => ({
+	deleteAccountMember: (account: Account, member: User, successCb, errorCb) => ({
 		type: types.DELETE_ACCOUNT_MEMBER,
 		payload: null,
 		account,
@@ -241,21 +251,20 @@ export const accountActions = {
 		type: types.DELETE_ACCOUNT_MEMBER_LOADING,
 		payload: null,
 	}),
-	deleteAccountMemberFulfilled: (response) => ({
+	deleteAccountMemberFulfilled: () => ({
 		type: types.DELETE_ACCOUNT_MEMBER_FULFILLED,
-		payload: response,
+		payload: null,
 	}),
-	deleteAccountMemberRejected: (response) => ({
+	deleteAccountMemberRejected: (payload: Error) => ({
 		type: types.DELETE_ACCOUNT_MEMBER_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updateAccountMember: (account, member, data, successCb, errorCb) => ({
+	updateAccountMember: (account: Account, member: User, payload, successCb, errorCb) => ({
 		type: types.UPDATE_ACCOUNT_MEMBER,
-		payload: null,
+		payload,
 		account,
 		member,
-		data,
 		successCb,
 		errorCb,
 	}),
@@ -267,18 +276,18 @@ export const accountActions = {
 		type: types.UPDATE_ACCOUNT_MEMBER_LOADING,
 		payload: null,
 	}),
-	updateAccountMemberFulfilled: (response) => ({
+	updateAccountMemberFulfilled: (payload: User) => ({
 		type: types.UPDATE_ACCOUNT_MEMBER_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updateAccountMemberRejected: (response) => ({
+	updateAccountMemberRejected: (payload: Error) => ({
 		type: types.UPDATE_ACCOUNT_MEMBER_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updateAccountPhoto: (id, data, successCb, errorCb) => ({
+	updateAccountPhoto: (id: string, payload, successCb, errorCb) => ({
 		type: types.UPDATE_ACCOUNT_PHOTO,
-		payload: data,
+		payload,
 		id,
 		successCb,
 		errorCb,
@@ -291,16 +300,16 @@ export const accountActions = {
 		type: types.UPDATE_ACCOUNT_PHOTO_LOADING,
 		payload: null,
 	}),
-	updateAccountPhotoFulfilled: (response) => ({
+	updateAccountPhotoFulfilled: (payload) => ({
 		type: types.UPDATE_ACCOUNT_PHOTO_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updateAccountPhotoRejected: (response) => ({
+	updateAccountPhotoRejected: (payload: Error) => ({
 		type: types.UPDATE_ACCOUNT_PHOTO_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	getInvoices: (account) => ({
+	getInvoices: (account: Account) => ({
 		type: types.GET_INVOICES,
 		payload: null,
 		account,
@@ -313,12 +322,12 @@ export const accountActions = {
 		type: types.GET_INVOICES_LOADING,
 		payload: null,
 	}),
-	getInvoicesFulfilled: (response) => ({
+	getInvoicesFulfilled: (payload: PaginatedApiResponse<Invoice>) => ({
 		type: types.GET_INVOICES_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getInvoicesRejected: (response) => ({
+	getInvoicesRejected: (payload: Error) => ({
 		type: types.GET_INVOICES_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

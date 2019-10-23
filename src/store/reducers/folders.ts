@@ -24,9 +24,8 @@ export const folders = (state = initialState, action) => {
 				list: stateUtility.getPaginationLoading(),
 			})
 		case folderActions.GET_FOLDERS_FULFILLED:
-			const list = action.payload.data
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(list),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case folderActions.GET_FOLDERS_REJECTED:
 			return state.merge({
@@ -43,10 +42,9 @@ export const folders = (state = initialState, action) => {
 				createFolder: stateUtility.getObserverLoading(),
 			})
 		case folderActions.CREATE_FOLDER_FULFILLED:
-			const createCardResponse = action.payload.data
 			return state.merge({
 				createFolder: stateUtility.getObserverFulfilled(),
-				item: stateUtility.getItemFulfilled(createCardResponse),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case folderActions.CREATE_FOLDER_REJECTED:
 			return state.merge({
@@ -63,10 +61,9 @@ export const folders = (state = initialState, action) => {
 				updateFolder: stateUtility.getObserverLoading(),
 			})
 		case folderActions.UPDATE_FOLDER_FULFILLED:
-			const updateFolderResponse = action.payload.data
 			return state.merge({
 				updateFolder: stateUtility.getObserverFulfilled(),
-				item: stateUtility.getItemFulfilled(updateFolderResponse),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case folderActions.UPDATE_FOLDER_REJECTED:
 			return state.merge({

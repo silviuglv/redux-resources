@@ -3,26 +3,26 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import { subscriptionApi } from '../../api'
 import { AnyAction } from 'redux'
 
-function* getSubscriptions({ query }: AnyAction) {
+function* getSubscriptions({ payload }: AnyAction) {
 	try {
 		yield put(subscriptionActions.setSubscriptionsLoading())
-		const getSubscriptionsResponse = yield call(subscriptionApi.getSubscriptions, query)
-		yield put(subscriptionActions.setSubscriptionsFulfilled(getSubscriptionsResponse))
+		const { data } = yield call(subscriptionApi.getSubscriptions, payload)
+		yield put(subscriptionActions.setSubscriptionsFulfilled(data))
 	} catch (error) {
 		yield put(subscriptionActions.setSubscriptionsRejected(error))
 	}
 }
 
 function* createSubscription({ account, plan, coupon, successCb, errorCb }: AnyAction) {
-	const data = {
+	const payload = {
 		account_id: account.id,
 		plan_id: plan.id,
 		coupon,
 	}
 	try {
 		yield put(subscriptionActions.setCreateSubscriptionLoading())
-		const response = yield call(subscriptionApi.createSubscription, data)
-		yield put(subscriptionActions.setCreateSubscriptionFulfilled(response))
+		const { data } = yield call(subscriptionApi.createSubscription, payload)
+		yield put(subscriptionActions.setCreateSubscriptionFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Subscription created!', 2000))
 		successCb && successCb()
 	} catch (error) {
@@ -32,14 +32,14 @@ function* createSubscription({ account, plan, coupon, successCb, errorCb }: AnyA
 }
 
 function* updateSubscription({ subscription, plan, coupon = null, successCb, errorCb }: AnyAction) {
-	const data = {
+	const payload = {
 		plan_id: plan.id,
 		coupon,
 	}
 	try {
 		yield put(subscriptionActions.setUpdateSubscriptionLoading())
-		const response = yield call(subscriptionApi.updateSubscription, subscription.id, data)
-		yield put(subscriptionActions.setUpdateSubscriptionFulfilled(response))
+		const { data } = yield call(subscriptionApi.updateSubscription, subscription.id, payload)
+		yield put(subscriptionActions.setUpdateSubscriptionFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Subscription updated!', 2000))
 		successCb && successCb()
 	} catch (error) {
@@ -51,8 +51,8 @@ function* updateSubscription({ subscription, plan, coupon = null, successCb, err
 function* deleteSubscription({ subscription, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(subscriptionActions.setDeleteSubscriptionLoading())
-		const response = yield call(subscriptionApi.deleteSubscription, subscription.id)
-		yield put(subscriptionActions.setDeleteSubscriptionFulfilled(response))
+		const { data } = yield call(subscriptionApi.deleteSubscription, subscription.id)
+		yield put(subscriptionActions.setDeleteSubscriptionFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Subscription deleted', 2000))
 		successCb && successCb()
 	} catch (error) {

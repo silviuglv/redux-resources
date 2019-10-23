@@ -7,8 +7,8 @@ function* updatePassword({ id, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(userActions.updatePasswordInitialState())
 		yield put(userActions.updatePasswordLoading())
-		const accountsResponse = yield call(userApi.updateUserPassword, id, payload)
-		yield put(userActions.updatePasswordFulfilled(accountsResponse))
+		const { data } = yield call(userApi.updateUserPassword, id, payload)
+		yield put(userActions.updatePasswordFulfilled(data))
 		successCb && successCb()
 	} catch (error) {
 		yield put(userActions.updatePasswordRejected(error))
@@ -20,8 +20,8 @@ function* resendEmailConfirmation() {
 	try {
 		yield put(userActions.resendEmailConfirmationInitialState())
 		yield put(userActions.resendEmailConfirmationLoading())
-		const accountsResponse = yield call(userApi.resendEmailConfirmation)
-		yield put(userActions.resendEmailConfirmationFulfilled(accountsResponse))
+		const { data } = yield call(userApi.resendEmailConfirmation)
+		yield put(userActions.resendEmailConfirmationFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Confirmation email resent', 2000))
 	} catch (error) {
 		yield put(userActions.resendEmailConfirmationRejected(error))
@@ -32,8 +32,8 @@ function* getNotificationPreferences({ id }: AnyAction) {
 	try {
 		yield put(userActions.getNotificationPreferencesInitialState())
 		yield put(userActions.getNotificationPreferencesLoading())
-		const notificationPreferences = yield call(userApi.getNotificationPreferences, id)
-		yield put(userActions.getNotificationPreferencesFulfilled(notificationPreferences))
+		const { data } = yield call(userApi.getNotificationPreferences, id)
+		yield put(userActions.getNotificationPreferencesFulfilled(data))
 	} catch (error) {
 		yield put(userActions.getNotificationPreferencesRejected(error))
 	}
@@ -43,8 +43,8 @@ function* updateNotificationPreferences({ id, payload }: AnyAction) {
 	try {
 		yield put(userActions.updateNotificationPreferencesInitialState())
 		yield put(userActions.updateNotificationPreferencesLoading())
-		const notificationPreferences = yield call(userApi.updateNotificationPreferences, id, payload)
-		yield put(userActions.updateNotificationPreferencesFulfilled(notificationPreferences))
+		const { data } = yield call(userApi.updateNotificationPreferences, id, payload)
+		yield put(userActions.updateNotificationPreferencesFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Notification preferences updated!', 2000))
 	} catch (error) {
 		yield put(userActions.updateNotificationPreferencesRejected(error))
@@ -55,9 +55,9 @@ function* confirmEmail({ token, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(userActions.confirmEmailInitialState())
 		yield put(userActions.confirmEmailLoading())
-		const userMeta = yield call(userApi.confirmEmail, token)
+		const { data } = yield call(userApi.confirmEmail, token)
 		yield put(userActions.confirmEmailFulfilled())
-		yield put(authActions.authMetaFulfilled(userMeta))
+		yield put(authActions.authMetaFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Email Confirmed!', 2000))
 		successCb && successCb()
 	} catch (error) {

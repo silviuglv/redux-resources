@@ -19,9 +19,8 @@ export const subscriptions = (state = initialState, action) => {
 				list: stateUtility.getPaginationLoading(),
 			})
 		case subscriptionActions.SET_SUBSCRIPTIONS_FULFILLED:
-			const listResponse = action.payload.data
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(listResponse),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case subscriptionActions.SET_SUBSCRIPTIONS_REJECTED:
 			return state.merge({
@@ -35,7 +34,7 @@ export const subscriptions = (state = initialState, action) => {
 			})
 		case subscriptionActions.SET_CREATE_SUBSCRIPTION_FULFILLED:
 			return state.merge({
-				item: stateUtility.getItemFulfilled(action.payload.data),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case subscriptionActions.SET_CREATE_SUBSCRIPTION_REJECTED:
 			return state.merge({
@@ -49,7 +48,7 @@ export const subscriptions = (state = initialState, action) => {
 			})
 		case subscriptionActions.SET_UPDATE_SUBSCRIPTION_FULFILLED:
 			return state.merge({
-				item: stateUtility.getItemFulfilled(action.payload.data),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case subscriptionActions.SET_UPDATE_SUBSCRIPTION_REJECTED:
 			return state.merge({

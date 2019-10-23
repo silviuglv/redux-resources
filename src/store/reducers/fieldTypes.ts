@@ -18,7 +18,7 @@ export const fieldTypes = (state = initialState, action) => {
 			})
 		case fieldTypeActions.FIELD_TYPES_FULFILLED:
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(action.payload.data),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case fieldTypeActions.SET_FIELD_TYPES_REJECTED:
 			return state.merge({

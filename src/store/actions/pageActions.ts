@@ -1,3 +1,5 @@
+import { Error, Page, PaginatedApiResponse } from '../../types'
+
 const types = {
 	GET_PAGES: '[pages] GET_PAGES',
 	GET_PAGES_INITIAL_STATE: '[pages] GET_PAGES_INITIAL_STATE',
@@ -10,7 +12,7 @@ const types = {
 
 export const pageActions = {
 	...types,
-	getPages: (packageId, documentId, successCb, errorCb) => ({
+	getPages: (packageId: string, documentId: string, successCb, errorCb) => ({
 		type: types.GET_PAGES,
 		payload: null,
 		packageId,
@@ -26,15 +28,15 @@ export const pageActions = {
 		type: types.GET_PAGES_LOADING,
 		payload: null,
 	}),
-	getPagesFulfilled: (response) => ({
+	getPagesFulfilled: (payload: PaginatedApiResponse<Page>) => ({
 		type: types.GET_PAGES_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getPagesRejected: (response) => ({
+	getPagesRejected: (payload: Error) => ({
 		type: types.GET_PAGES_REJECTED,
-		payload: response,
+		payload,
 	}),
-	getPageImage: (pageId, image_url, successCb, errorCb) => ({
+	getPageImage: (pageId: string, image_url: string, successCb, errorCb) => ({
 		type: types.GET_PAGE_IMAGE,
 		payload: null,
 		pageId,
@@ -42,10 +44,9 @@ export const pageActions = {
 		successCb,
 		errorCb,
 	}),
-	setPageImage: (pageId, image) => ({
+	setPageImage: (pageId: string, payload) => ({
 		type: types.SET_PAGE_IMAGE,
-		payload: null,
+		payload,
 		pageId,
-		image,
 	}),
 }

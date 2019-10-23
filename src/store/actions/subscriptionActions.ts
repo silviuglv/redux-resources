@@ -1,3 +1,5 @@
+import { Account, Error, GetSubscriptionsRequest, PaginatedApiResponse, Plan, Subscription } from '../../types'
+
 const types = {
 	GET_SUBSCRIPTIONS: '[subscriptions] GET_SUBSCRIPTIONS',
 	SET_SUBSCRIPTIONS_LOADING: '[subscriptions] SET_SUBSCRIPTIONS_LOADING',
@@ -22,25 +24,24 @@ const types = {
 
 export const subscriptionActions = {
 	...types,
-	getSubscriptions: (query = {}) => ({
+	getSubscriptions: (payload: GetSubscriptionsRequest = {}) => ({
 		type: types.GET_SUBSCRIPTIONS,
-		payload: null,
-		query,
+		payload,
 	}),
 	setSubscriptionsLoading: () => ({
 		type: types.SET_SUBSCRIPTIONS_LOADING,
 		payload: null,
 	}),
-	setSubscriptionsFulfilled: (response) => ({
+	setSubscriptionsFulfilled: (payload: PaginatedApiResponse<Subscription>) => ({
 		type: types.SET_SUBSCRIPTIONS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setSubscriptionsRejected: (response) => ({
+	setSubscriptionsRejected: (payload: Error) => ({
 		type: types.SET_SUBSCRIPTIONS_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	createSubscription: (account, plan, coupon = null, successCb, errorCb) => ({
+	createSubscription: (account: Account, plan: Plan, coupon: string = null, successCb, errorCb) => ({
 		type: types.CREATE_SUBSCRIPTION,
 		payload: null,
 		account,
@@ -53,16 +54,16 @@ export const subscriptionActions = {
 		type: types.SET_CREATE_SUBSCRIPTION_LOADING,
 		payload: null,
 	}),
-	setCreateSubscriptionFulfilled: (response) => ({
+	setCreateSubscriptionFulfilled: (payload: Subscription) => ({
 		type: types.SET_CREATE_SUBSCRIPTION_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setCreateSubscriptionRejected: (response) => ({
+	setCreateSubscriptionRejected: (payload: Error) => ({
 		type: types.SET_CREATE_SUBSCRIPTION_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updateSubscription: (subscription, plan, coupon = null, successCb, errorCb) => ({
+	updateSubscription: (subscription: Subscription, plan: Plan, coupon: string = null, successCb, errorCb) => ({
 		type: types.UPDATE_SUBSCRIPTION,
 		payload: null,
 		subscription,
@@ -75,16 +76,16 @@ export const subscriptionActions = {
 		type: types.SET_UPDATE_SUBSCRIPTION_LOADING,
 		payload: null,
 	}),
-	setUpdateSubscriptionFulfilled: (response) => ({
+	setUpdateSubscriptionFulfilled: (payload: Subscription) => ({
 		type: types.SET_UPDATE_SUBSCRIPTION_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setUpdateSubscriptionRejected: (response) => ({
+	setUpdateSubscriptionRejected: (payload: Error) => ({
 		type: types.SET_UPDATE_SUBSCRIPTION_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	deleteSubscription: (subscription, successCb, errorCb) => ({
+	deleteSubscription: (subscription: Subscription, successCb, errorCb) => ({
 		type: types.DELETE_SUBSCRIPTION,
 		payload: null,
 		subscription,
@@ -95,12 +96,12 @@ export const subscriptionActions = {
 		type: types.SET_DELETE_SUBSCRIPTION_LOADING,
 		payload: null,
 	}),
-	setDeleteSubscriptionFulfilled: (response) => ({
+	setDeleteSubscriptionFulfilled: (payload) => ({
 		type: types.SET_DELETE_SUBSCRIPTION_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setDeleteSubscriptionRejected: (response) => ({
+	setDeleteSubscriptionRejected: (payload: Error) => ({
 		type: types.SET_DELETE_SUBSCRIPTION_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

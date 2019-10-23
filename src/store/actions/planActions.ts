@@ -1,3 +1,5 @@
+import { Error, GetPlansRequest, PaginatedApiResponse, Plan } from '../../types'
+
 const types = {
 	GET_PLANS: '[plans] GET_PLANS',
 	SET_PLANS_INITIAL_STATE: '[plans] SET_PLANS_INITIAL_STATE',
@@ -8,10 +10,9 @@ const types = {
 
 export const planActions = {
 	...types,
-	getPlans: (query = {}) => ({
+	getPlans: (payload: GetPlansRequest = {}) => ({
 		type: types.GET_PLANS,
-		payload: null,
-		query,
+		payload,
 	}),
 	setPlansInitialState: () => ({
 		type: types.SET_PLANS_INITIAL_STATE,
@@ -21,12 +22,12 @@ export const planActions = {
 		type: types.SET_PLANS_LOADING,
 		payload: null,
 	}),
-	setPlansFulfilled: (response) => ({
+	setPlansFulfilled: (payload: PaginatedApiResponse<Plan>) => ({
 		type: types.SET_PLANS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setPlansRejected: (response) => ({
+	setPlansRejected: (payload: Error) => ({
 		type: types.SET_PLANS_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

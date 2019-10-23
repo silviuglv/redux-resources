@@ -19,7 +19,7 @@ export const fields = (state = initialState, action) => {
 			})
 		case fieldActions.GET_FIELDS_FULFILLED:
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(action.payload.data),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case fieldActions.GET_FIELDS_REJECTED:
 			return state.merge({
@@ -33,7 +33,7 @@ export const fields = (state = initialState, action) => {
 			})
 		case fieldActions.SET_ITEM_FULFILLED:
 			return state.merge({
-				item: stateUtility.getItemFulfilled(action.payload.data),
+				item: stateUtility.getItemFulfilled(action.payload),
 			})
 		case fieldActions.SET_ITEM_REJECTED:
 			return state.merge({

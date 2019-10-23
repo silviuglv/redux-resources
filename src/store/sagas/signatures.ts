@@ -6,18 +6,18 @@ import { AnyAction } from 'redux'
 function* getSignatures() {
 	try {
 		yield put(signatureActions.setSignaturesLoading())
-		const response = yield call(signatureApi.getSignatures)
-		yield put(signatureActions.setSignaturesFulfilled(response))
+		const { data } = yield call(signatureApi.getSignatures)
+		yield put(signatureActions.setSignaturesFulfilled(data))
 	} catch (error) {
 		yield put(signatureActions.setSignaturesRejected(error))
 	}
 }
 
-function* createSignature({ data }: AnyAction) {
+function* createSignature({ payload }: AnyAction) {
 	try {
 		yield put(signatureActions.setCreateSignatureLoading())
-		const response = yield call(signatureApi.createSignature, data)
-		yield put(signatureActions.setCreateSignatureFulfilled(response))
+		const { data } = yield call(signatureApi.createSignature, payload)
+		yield put(signatureActions.setCreateSignatureFulfilled(data))
 		yield call(getSignatures)
 	} catch (error) {
 		yield put(signatureActions.setCreateSignatureRejected(error))

@@ -1,3 +1,12 @@
+import {
+	CreateFieldRequest,
+	Error,
+	Field,
+	GetFieldsRequest,
+	PaginatedApiResponse,
+	UpdateFieldRequest,
+} from '../../types'
+
 const types = {
 	GET_FIELDS: '[fields] GET_FIELDS',
 	GET_FIELDS_INITIAL_STATE: '[fields] GET_FIELDS_INITIAL_STATE',
@@ -16,11 +25,10 @@ const types = {
 
 export const fieldActions = {
 	...types,
-	getFields: (packageId, query = {}, successCb, errorCb) => ({
+	getFields: (packageId: string, payload: GetFieldsRequest = {}, successCb, errorCb) => ({
 		type: types.GET_FIELDS,
-		payload: null,
+		payload,
 		packageId,
-		query,
 		successCb,
 		errorCb,
 	}),
@@ -32,35 +40,40 @@ export const fieldActions = {
 		type: types.GET_FIELDS_LOADING,
 		payload: null,
 	}),
-	getFieldsFulfilled: (response) => ({
+	getFieldsFulfilled: (payload: PaginatedApiResponse<Field>) => ({
 		type: types.GET_FIELDS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getFieldsRejected: (response) => ({
+	getFieldsRejected: (payload: Error) => ({
 		type: types.GET_FIELDS_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	createField: (packageId, documentId, data, successCb, errorCb) => ({
+	createField: (packageId: string, documentId: string, payload: CreateFieldRequest, successCb, errorCb) => ({
 		type: types.CREATE_FIELD,
-		payload: null,
+		payload,
 		packageId,
 		documentId,
-		data,
 		successCb,
 		errorCb,
 	}),
-	updateField: (packageId, documentId, fieldId, data, successCb, errorCb) => ({
+	updateField: (
+		packageId: string,
+		documentId: string,
+		fieldId: string,
+		payload: UpdateFieldRequest,
+		successCb,
+		errorCb
+	) => ({
 		type: types.UPDATE_FIELD,
-		payload: null,
+		payload,
 		packageId,
 		documentId,
 		fieldId,
-		data,
 		successCb,
 		errorCb,
 	}),
-	deleteField: (packageId, documentId, fieldId, successCb, errorCb) => ({
+	deleteField: (packageId: string, documentId: string, fieldId: string, successCb, errorCb) => ({
 		type: types.DELETE_FIELD,
 		payload: null,
 		packageId,
@@ -74,12 +87,12 @@ export const fieldActions = {
 		type: types.SET_ITEM_LOADING,
 		payload: null,
 	}),
-	setItemFulfilled: (response) => ({
+	setItemFulfilled: (payload: Field) => ({
 		type: types.SET_ITEM_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setItemRejected: (response) => ({
+	setItemRejected: (payload: Error) => ({
 		type: types.SET_ITEM_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

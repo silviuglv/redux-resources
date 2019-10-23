@@ -1,3 +1,20 @@
+import {
+	CreatePackageDocumentRequest,
+	CreatePackageRequest,
+	CreateRecipientRequest,
+	Document,
+	Error,
+	GetPackageLexiconRequest,
+	GetPackagesRequest,
+	Package,
+	Page,
+	PaginatedApiResponse,
+	Recipient,
+	UpdateDocumentRequest,
+	UpdatePackageRequest,
+	UpdateRecipientRequest,
+} from '../../types'
+
 const types = {
 	GET_PACKAGES: '[packages] GET_PACKAGES',
 	GET_PACKAGES_INITIAL_STATE: '[packages] GET_PACKAGES_INITIAL_STATE',
@@ -116,10 +133,9 @@ const types = {
 
 export const packageActions = {
 	...types,
-	getPackages: (query = {}, successCb?, errorCb?) => ({
+	getPackages: (payload: GetPackagesRequest = {}, successCb?, errorCb?) => ({
 		type: types.GET_PACKAGES,
-		payload: null,
-		query,
+		payload,
 		successCb,
 		errorCb,
 	}),
@@ -131,19 +147,18 @@ export const packageActions = {
 		type: types.GET_PACKAGES_LOADING,
 		payload: null,
 	}),
-	getPackagesFulfilled: (response) => ({
+	getPackagesFulfilled: (payload: PaginatedApiResponse<Package>) => ({
 		type: types.GET_PACKAGES_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getPackagesRejected: (response) => ({
+	getPackagesRejected: (payload: Error) => ({
 		type: types.GET_PACKAGES_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	getPackageLexicon: (query = {}, successCb?, errorCb?) => ({
+	getPackageLexicon: (payload: GetPackageLexiconRequest = {}, successCb?, errorCb?) => ({
 		type: types.GET_PACKAGE_LEXICON,
-		payload: null,
-		query,
+		payload,
 		successCb,
 		errorCb,
 	}),
@@ -155,19 +170,18 @@ export const packageActions = {
 		type: types.GET_PACKAGE_LEXICON_LOADING,
 		payload: null,
 	}),
-	getPackageLexiconFulfilled: (response) => ({
+	getPackageLexiconFulfilled: (payload) => ({
 		type: types.GET_PACKAGE_LEXICON_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getPackageLexiconRejected: (response) => ({
+	getPackageLexiconRejected: (payload: Error) => ({
 		type: types.GET_PACKAGE_LEXICON_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	createPackage: (data, successCb?, errorCb?) => ({
+	createPackage: (payload: CreatePackageRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_PACKAGE,
-		payload: null,
-		data,
+		payload,
 		successCb,
 		errorCb,
 	}),
@@ -179,16 +193,16 @@ export const packageActions = {
 		type: types.CREATE_PACKAGE_LOADING,
 		payload: null,
 	}),
-	createPackageFulfilled: (response) => ({
+	createPackageFulfilled: (payload: Package) => ({
 		type: types.CREATE_PACKAGE_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	createPackageRejected: (response) => ({
+	createPackageRejected: (payload: Error) => ({
 		type: types.CREATE_PACKAGE_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	showPackage: (id, successCb?, errorCb?) => ({
+	showPackage: (id: string, successCb?, errorCb?) => ({
 		type: types.SHOW_PACKAGE,
 		payload: null,
 		id,
@@ -203,20 +217,19 @@ export const packageActions = {
 		type: types.SHOW_PACKAGE_LOADING,
 		payload: null,
 	}),
-	showPackageFulfilled: (response) => ({
+	showPackageFulfilled: (payload: Package) => ({
 		type: types.SHOW_PACKAGE_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	showPackageRejected: (response) => ({
+	showPackageRejected: (payload: Error) => ({
 		type: types.SHOW_PACKAGE_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updatePackage: (id, data, successCb?, errorCb?) => ({
+	updatePackage: (id: string, payload: UpdatePackageRequest, successCb?, errorCb?) => ({
 		type: types.UPDATE_PACKAGE,
-		payload: null,
+		payload,
 		id,
-		data,
 		successCb,
 		errorCb,
 	}),
@@ -228,16 +241,16 @@ export const packageActions = {
 		type: types.UPDATE_PACKAGE_LOADING,
 		payload: null,
 	}),
-	updatePackageFulfilled: (response) => ({
+	updatePackageFulfilled: (payload: Package) => ({
 		type: types.UPDATE_PACKAGE_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updatePackageRejected: (response) => ({
+	updatePackageRejected: (payload: Error) => ({
 		type: types.UPDATE_PACKAGE_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	deletePackage: (id, successCb?, errorCb?) => ({
+	deletePackage: (id: string, successCb?, errorCb?) => ({
 		type: types.DELETE_PACKAGE,
 		payload: null,
 		id,
@@ -252,20 +265,19 @@ export const packageActions = {
 		type: types.DELETE_PACKAGE_LOADING,
 		payload: null,
 	}),
-	deletePackageFulfilled: (response) => ({
+	deletePackageFulfilled: () => ({
 		type: types.DELETE_PACKAGE_FULFILLED,
-		payload: response,
+		payload: null,
 	}),
-	deletePackageRejected: (response) => ({
+	deletePackageRejected: (payload: Error) => ({
 		type: types.DELETE_PACKAGE_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	getPackageRecipients: (id, query = {}, successCb?, errorCb?) => ({
+	getPackageRecipients: (id: string, payload = {}, successCb?, errorCb?) => ({
 		type: types.GET_PACKAGE_RECIPIENTS,
-		payload: null,
+		payload,
 		id,
-		query,
 		successCb,
 		errorCb,
 	}),
@@ -277,20 +289,19 @@ export const packageActions = {
 		type: types.GET_PACKAGE_RECIPIENTS_LOADING,
 		payload: null,
 	}),
-	getPackageRecipientsFulfilled: (response) => ({
+	getPackageRecipientsFulfilled: (payload: PaginatedApiResponse<Recipient>) => ({
 		type: types.GET_PACKAGE_RECIPIENTS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getPackageRecipientsRejected: (response) => ({
+	getPackageRecipientsRejected: (payload: Error) => ({
 		type: types.GET_PACKAGE_RECIPIENTS_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	createPackageRecipient: (id, data, successCb?, errorCb?) => ({
+	createPackageRecipient: (id: string, payload: CreateRecipientRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_PACKAGE_RECIPIENT,
-		payload: null,
+		payload,
 		id,
-		data,
 		successCb,
 		errorCb,
 	}),
@@ -302,21 +313,20 @@ export const packageActions = {
 		type: types.CREATE_PACKAGE_RECIPIENT_LOADING,
 		payload: null,
 	}),
-	createPackageRecipientFulfilled: (response) => ({
+	createPackageRecipientFulfilled: (payload: Recipient) => ({
 		type: types.CREATE_PACKAGE_RECIPIENT_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	createPackageRecipientRejected: (response) => ({
+	createPackageRecipientRejected: (payload: Error) => ({
 		type: types.CREATE_PACKAGE_RECIPIENT_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updatePackageRecipient: (id, recipientId, data, successCb?, errorCb?) => ({
+	updatePackageRecipient: (id: string, recipientId: string, payload: UpdateRecipientRequest, successCb?, errorCb?) => ({
 		type: types.UPDATE_PACKAGE_RECIPIENT,
-		payload: null,
+		payload,
 		id,
 		recipientId,
-		data,
 		successCb,
 		errorCb,
 	}),
@@ -328,16 +338,16 @@ export const packageActions = {
 		type: types.UPDATE_PACKAGE_RECIPIENT_LOADING,
 		payload: null,
 	}),
-	updatePackageRecipientFulfilled: (response) => ({
+	updatePackageRecipientFulfilled: (payload: Recipient) => ({
 		type: types.UPDATE_PACKAGE_RECIPIENT_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updatePackageRecipientRejected: (response) => ({
+	updatePackageRecipientRejected: (payload: Error) => ({
 		type: types.UPDATE_PACKAGE_RECIPIENT_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	deletePackageRecipient: (id, recipientId, successCb?, errorCb?) => ({
+	deletePackageRecipient: (id: string, recipientId: string, successCb?, errorCb?) => ({
 		type: types.DELETE_PACKAGE_RECIPIENT,
 		payload: null,
 		id,
@@ -357,16 +367,15 @@ export const packageActions = {
 		type: types.DELETE_PACKAGE_RECIPIENT_FULFILLED,
 		payload: response,
 	}),
-	deletePackageRecipientRejected: (response) => ({
+	deletePackageRecipientRejected: (payload: Error) => ({
 		type: types.DELETE_PACKAGE_RECIPIENT_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	getPackageDocuments: (id, query = {}, successCb?, errorCb?) => ({
+	getPackageDocuments: (id: string, payload = {}, successCb?, errorCb?) => ({
 		type: types.GET_PACKAGE_DOCUMENTS,
-		payload: null,
+		payload,
 		id,
-		query,
 		successCb,
 		errorCb,
 	}),
@@ -378,20 +387,19 @@ export const packageActions = {
 		type: types.GET_PACKAGE_DOCUMENTS_LOADING,
 		payload: null,
 	}),
-	getPackageDocumentsFulfilled: (response) => ({
+	getPackageDocumentsFulfilled: (payload: PaginatedApiResponse<Document>) => ({
 		type: types.GET_PACKAGE_DOCUMENTS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getPackageDocumentsRejected: (response) => ({
+	getPackageDocumentsRejected: (payload: Error) => ({
 		type: types.GET_PACKAGE_DOCUMENTS_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	createPackageDocuments: (id, data, successCb?, errorCb?) => ({
+	createPackageDocuments: (id: string, payload: CreatePackageDocumentRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_PACKAGE_DOCUMENTS,
-		payload: null,
+		payload,
 		id,
-		data,
 		successCb,
 		errorCb,
 	}),
@@ -403,20 +411,19 @@ export const packageActions = {
 		type: types.CREATE_PACKAGE_DOCUMENTS_LOADING,
 		payload: null,
 	}),
-	createPackageDocumentsFulfilled: (response) => ({
+	createPackageDocumentsFulfilled: (payload: Document) => ({
 		type: types.CREATE_PACKAGE_DOCUMENTS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	createPackageDocumentsRejected: (response) => ({
+	createPackageDocumentsRejected: (payload: Error) => ({
 		type: types.CREATE_PACKAGE_DOCUMENTS_REJECTED,
-		payload: response,
+		payload,
 	}),
-	updateDocument: (packageId, documentId, data, successCb?, errorCb?) => ({
+	updateDocument: (packageId: string, documentId: string, payload: UpdateDocumentRequest, successCb?, errorCb?) => ({
 		type: types.UPDATE_DOCUMENT,
-		payload: null,
+		payload,
 		packageId,
 		documentId,
-		data,
 		successCb,
 		errorCb,
 	}),
@@ -429,16 +436,22 @@ export const packageActions = {
 		type: types.UPDATE_DOCUMENT_LOADING,
 		payload: null,
 	}),
-	updateDocumentFulfilled: (response) => ({
+	updateDocumentFulfilled: (payload: Document) => ({
 		type: types.UPDATE_DOCUMENT_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updateDocumentRejected: (response) => ({
+	updateDocumentRejected: (payload: Error) => ({
 		type: types.UPDATE_DOCUMENT_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	createDocumentFromSocialAccount: (id, socialAccountId, externalFileId, successCb?, errorCb?) => ({
+	createDocumentFromSocialAccount: (
+		id: string,
+		socialAccountId: string,
+		externalFileId: string | number,
+		successCb?,
+		errorCb?
+	) => ({
 		type: types.CREATE_DOCUMENT_FROM_CONNECTED_SERVICE,
 		payload: null,
 		id,
@@ -455,16 +468,16 @@ export const packageActions = {
 		type: types.CREATE_DOCUMENT_FROM_CONNECTED_SERVICE_LOADING,
 		payload: null,
 	}),
-	createDocumentFromSocialAccountFulfilled: (response) => ({
+	createDocumentFromSocialAccountFulfilled: (payload: Document) => ({
 		type: types.CREATE_DOCUMENT_FROM_CONNECTED_SERVICE_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	createDocumentFromSocialAccountRejected: (response) => ({
+	createDocumentFromSocialAccountRejected: (payload: Error) => ({
 		type: types.CREATE_DOCUMENT_FROM_CONNECTED_SERVICE_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	downloadPackageDocument: (id, documentId, successCb?, errorCb?) => ({
+	downloadPackageDocument: (id: string, documentId: string, successCb?, errorCb?) => ({
 		type: types.DOWNLOAD_PACKAGE_DOCUMENT,
 		payload: null,
 		id,
@@ -473,7 +486,7 @@ export const packageActions = {
 		errorCb,
 	}),
 
-	getPackageImageUrl: (id, image_url, successCb?, errorCb?) => ({
+	getPackageImageUrl: (id: string, image_url: string, successCb?, errorCb?) => ({
 		type: types.GET_PACKAGE_IMAGE_URL,
 		payload: null,
 		id,
@@ -482,7 +495,7 @@ export const packageActions = {
 		errorCb,
 	}),
 
-	setPackageImageUrl: (id, image_url, imageUrl = image_url) => ({
+	setPackageImageUrl: (id: string, image_url: any, imageUrl: any = image_url) => ({
 		type: types.SET_PACKAGE_IMAGE_URL,
 		payload: null,
 		id,
@@ -490,7 +503,7 @@ export const packageActions = {
 		imageUrl,
 	}),
 
-	getDocumentImageUrl: (documentId, image_url, successCb?, errorCb?) => ({
+	getDocumentImageUrl: (documentId: string, image_url: string, successCb?, errorCb?) => ({
 		type: types.GET_DOCUMENT_IMAGE_URL,
 		payload: null,
 		documentId,
@@ -499,14 +512,14 @@ export const packageActions = {
 		errorCb,
 	}),
 
-	setDocumentImageUrl: (documentId, imageUrl) => ({
+	setDocumentImageUrl: (documentId: string, imageUrl: any) => ({
 		type: types.SET_DOCUMENT_IMAGE_URL,
 		payload: null,
 		documentId,
 		imageUrl,
 	}),
 
-	getDocumentPageImageUrl: (documentId, pageId, image_url, successCb?, errorCb?) => ({
+	getDocumentPageImageUrl: (documentId: string, pageId: string, image_url: string, successCb?, errorCb?) => ({
 		type: types.GET_DOCUMENT_PAGE_IMAGE_URL,
 		payload: null,
 		documentId,
@@ -516,7 +529,7 @@ export const packageActions = {
 		errorCb,
 	}),
 
-	setDocumentPageImageUrl: (documentId, pageId, imageUrl) => ({
+	setDocumentPageImageUrl: (documentId: string, pageId: string, imageUrl: any) => ({
 		type: types.SET_DOCUMENT_PAGE_IMAGE_URL,
 		payload: null,
 		documentId,
@@ -524,7 +537,7 @@ export const packageActions = {
 		imageUrl,
 	}),
 
-	deleteDocument: (id, documentId, successCb?, errorCb?) => ({
+	deleteDocument: (id: string, documentId: string, successCb?, errorCb?) => ({
 		type: types.DELETE_DOCUMENT,
 		payload: null,
 		id,
@@ -540,20 +553,19 @@ export const packageActions = {
 		type: types.DELETE_DOCUMENT_LOADING,
 		payload: null,
 	}),
-	deleteDocumentFulfilled: (documentId) => ({
+	deleteDocumentFulfilled: (documentId: string) => ({
 		type: types.DELETE_DOCUMENT_FULFILLED,
 		payload: documentId,
 	}),
-	deleteDocumentRejected: (response) => ({
+	deleteDocumentRejected: (payload: Error) => ({
 		type: types.DELETE_DOCUMENT_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	getPages: (packageId, query = {}, successCb?, errorCb?) => ({
+	getPages: (packageId: string, payload = {}, successCb?, errorCb?) => ({
 		type: types.GET_PAGES,
-		payload: null,
+		payload,
 		packageId,
-		query,
 		successCb,
 		errorCb,
 	}),
@@ -565,16 +577,16 @@ export const packageActions = {
 		type: types.GET_PAGES_LOADING,
 		payload: null,
 	}),
-	getPagesFulfilled: (response) => ({
+	getPagesFulfilled: (payload: PaginatedApiResponse<Page>) => ({
 		type: types.GET_PAGES_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getPagesRejected: (response) => ({
+	getPagesRejected: (payload: Error) => ({
 		type: types.GET_PAGES_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	publish: (packageId, successCb?, errorCb?) => ({
+	publish: (packageId: string, successCb?, errorCb?) => ({
 		type: types.PUBLISH,
 		payload: null,
 		packageId,

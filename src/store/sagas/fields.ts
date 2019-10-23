@@ -3,11 +3,11 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import { fieldApi } from '../../api'
 import { AnyAction } from 'redux'
 
-export function* getFields({ packageId, query = {}, successCb, errorCb }: AnyAction) {
+export function* getFields({ packageId, payload = {}, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(fieldActions.getFieldsLoading())
-		const response = yield call(fieldApi.getFields, packageId, query)
-		yield put(fieldActions.getFieldsFulfilled(response))
+		const { data } = yield call(fieldApi.getFields, packageId, payload)
+		yield put(fieldActions.getFieldsFulfilled(data))
 		successCb && successCb()
 	} catch (error) {
 		yield put(fieldActions.getFieldsRejected(error))
@@ -15,11 +15,11 @@ export function* getFields({ packageId, query = {}, successCb, errorCb }: AnyAct
 	}
 }
 
-function* createField({ packageId, documentId, data, successCb, errorCb }: AnyAction) {
+function* createField({ packageId, documentId, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(fieldActions.setItemLoading())
-		const response = yield call<any>(fieldApi.createField, packageId, documentId, data)
-		yield put(fieldActions.setItemFulfilled(response))
+		const { data } = yield call<any>(fieldApi.createField, packageId, documentId, payload)
+		yield put(fieldActions.setItemFulfilled(data))
 		successCb && successCb()
 	} catch (error) {
 		yield put(fieldActions.setItemRejected(error))
@@ -27,11 +27,11 @@ function* createField({ packageId, documentId, data, successCb, errorCb }: AnyAc
 	}
 }
 
-function* updateField({ packageId, documentId, fieldId, data, successCb, errorCb }: AnyAction) {
+function* updateField({ packageId, documentId, fieldId, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(fieldActions.setItemLoading())
-		const response = yield call<any>(fieldApi.updateField, packageId, documentId, fieldId, data)
-		yield put(fieldActions.setItemFulfilled(response))
+		const { data } = yield call<any>(fieldApi.updateField, packageId, documentId, fieldId, payload)
+		yield put(fieldActions.setItemFulfilled(data))
 		successCb && successCb()
 	} catch (error) {
 		yield put(fieldActions.setItemRejected(error))

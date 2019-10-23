@@ -1,3 +1,11 @@
+import {
+	AccountInvite,
+	CreateAccountInviteRequest,
+	Error,
+	GetAccountInvitesRequest,
+	PaginatedApiResponse,
+} from '../../types'
+
 const types = {
 	GET_MY_ACCOUNT_INVITES: '[account_invites] GET_MY_ACCOUNT_INVITES',
 	GET_MY_ACCOUNT_INVITES_INITIAL_STATE: '[account_invites] GET_MY_ACCOUNT_INVITES_INITIAL_STATE',
@@ -29,9 +37,9 @@ const types = {
 
 export const accountInviteActions = {
 	...types,
-	getMyAccountInvites: () => ({
+	getMyAccountInvites: (payload: GetAccountInvitesRequest = {}) => ({
 		type: types.GET_MY_ACCOUNT_INVITES,
-		payload: null,
+		payload,
 	}),
 	getMyAccountInvitesInitialState: () => ({
 		type: types.GET_MY_ACCOUNT_INVITES_INITIAL_STATE,
@@ -41,19 +49,18 @@ export const accountInviteActions = {
 		type: types.GET_MY_ACCOUNT_INVITES_LOADING,
 		payload: null,
 	}),
-	getMyAccountInvitesFulfilled: (response) => ({
+	getMyAccountInvitesFulfilled: (payload: PaginatedApiResponse<AccountInvite>) => ({
 		type: types.GET_MY_ACCOUNT_INVITES_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getMyAccountInvitesRejected: (response) => ({
+	getMyAccountInvitesRejected: (payload: Error) => ({
 		type: types.GET_MY_ACCOUNT_INVITES_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	getAccountInvites: (query) => ({
+	getAccountInvites: (payload: GetAccountInvitesRequest = {}) => ({
 		type: types.GET_ACCOUNT_INVITES,
-		payload: null,
-		query,
+		payload,
 	}),
 	accountInvitesInitialState: () => ({
 		type: types.GET_ACCOUNT_INVITES_INITIAL_STATE,
@@ -63,25 +70,23 @@ export const accountInviteActions = {
 		type: types.GET_ACCOUNT_INVITES_LOADING,
 		payload: null,
 	}),
-	accountInvitesFulfilled: (response) => ({
+	accountInvitesFulfilled: (payload: PaginatedApiResponse<AccountInvite>) => ({
 		type: types.GET_ACCOUNT_INVITES_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	accountInvitesRejected: (response) => ({
+	accountInvitesRejected: (payload: Error) => ({
 		type: types.GET_ACCOUNT_INVITES_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	deleteMyAccountInvite: (invite) => ({
+	deleteMyAccountInvite: (payload: AccountInvite) => ({
 		type: types.DELETE_MY_ACCOUNT_INVITE,
-		payload: null,
-		invite,
+		payload,
 	}),
 
-	deleteAccountInvite: (invite, successCb, errorCb) => ({
+	deleteAccountInvite: (payload: AccountInvite, successCb, errorCb) => ({
 		type: types.DELETE_ACCOUNT_INVITE,
-		payload: null,
-		invite,
+		payload,
 		successCb,
 		errorCb,
 	}),
@@ -93,19 +98,18 @@ export const accountInviteActions = {
 		type: types.DELETE_ACCOUNT_INVITE_LOADING,
 		payload: null,
 	}),
-	deleteAccountInviteFulfilled: (response) => ({
+	deleteAccountInviteFulfilled: (payload) => ({
 		type: types.DELETE_ACCOUNT_INVITE_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	deleteAccountInviteRejected: (response) => ({
+	deleteAccountInviteRejected: (payload: Error) => ({
 		type: types.DELETE_ACCOUNT_INVITE_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	createAccountInvite: (invite, successCb, errorCb) => ({
+	createAccountInvite: (payload: CreateAccountInviteRequest, successCb, errorCb) => ({
 		type: types.CREATE_ACCOUNT_INVITE,
-		payload: null,
-		invite,
+		payload,
 		successCb,
 		errorCb,
 	}),
@@ -117,19 +121,18 @@ export const accountInviteActions = {
 		type: types.CREATE_ACCOUNT_INVITE_LOADING,
 		payload: null,
 	}),
-	createAccountInviteFulfilled: (response) => ({
+	createAccountInviteFulfilled: (payload: AccountInvite) => ({
 		type: types.CREATE_ACCOUNT_INVITE_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	createAccountInviteRejected: (response) => ({
+	createAccountInviteRejected: (payload: Error) => ({
 		type: types.CREATE_ACCOUNT_INVITE_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	acceptAccountInvite: (invite) => ({
+	acceptAccountInvite: (payload: AccountInvite) => ({
 		type: types.ACCEPT_ACCOUNT_INVITE,
-		payload: null,
-		invite,
+		payload,
 	}),
 	acceptAccountInviteInitialState: () => ({
 		type: types.ACCEPT_ACCOUNT_INVITE_INITIAL_STATE,
@@ -139,12 +142,12 @@ export const accountInviteActions = {
 		type: types.ACCEPT_ACCOUNT_INVITE_LOADING,
 		payload: null,
 	}),
-	acceptAccountInviteFulfilled: (response) => ({
+	acceptAccountInviteFulfilled: (payload: AccountInvite) => ({
 		type: types.ACCEPT_ACCOUNT_INVITE_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	acceptAccountInviteRejected: (response) => ({
+	acceptAccountInviteRejected: (payload: Error) => ({
 		type: types.ACCEPT_ACCOUNT_INVITE_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

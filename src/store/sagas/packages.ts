@@ -4,12 +4,12 @@ import { packageApi } from '../../api'
 import fileDownload from 'js-file-download'
 import { AnyAction } from 'redux'
 
-function* getPackages({ query, successCb, errorCb }: AnyAction) {
+function* getPackages({ payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.getPackagesInitialState())
 		yield put(packageActions.getPackagesLoading())
-		const getPackagesResponse = yield call(packageApi.getPackages, query)
-		yield put(packageActions.getPackagesFulfilled(getPackagesResponse))
+		const { data } = yield call(packageApi.getPackages, payload)
+		yield put(packageActions.getPackagesFulfilled(data))
 		successCb !== undefined && successCb()
 	} catch (error) {
 		yield put(packageActions.getPackagesRejected(error))
@@ -17,12 +17,12 @@ function* getPackages({ query, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* getPackageLexicon({ query, successCb, errorCb }: AnyAction) {
+function* getPackageLexicon({ payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.getPackageLexiconInitialState())
 		yield put(packageActions.getPackageLexiconLoading())
-		const getPackageLexiconResponse = yield call(packageApi.getPackageLexicon, query)
-		yield put(packageActions.getPackageLexiconFulfilled(getPackageLexiconResponse))
+		const { data } = yield call(packageApi.getPackageLexicon, payload)
+		yield put(packageActions.getPackageLexiconFulfilled(data))
 		successCb !== undefined && successCb()
 	} catch (error) {
 		yield put(packageActions.getPackageLexiconRejected(error))
@@ -34,8 +34,8 @@ function* showPackage({ id, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.showPackageInitialState())
 		yield put(packageActions.showPackageLoading())
-		const showPackageResponse = yield call(packageApi.showPackage, id)
-		yield put(packageActions.showPackageFulfilled(showPackageResponse))
+		const { data } = yield call(packageApi.showPackage, id)
+		yield put(packageActions.showPackageFulfilled(data))
 		successCb !== undefined && successCb()
 	} catch (error) {
 		yield put(packageActions.showPackageRejected(error))
@@ -57,12 +57,12 @@ function* deletePackage({ id, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* createPackage({ data, successCb, errorCb }: AnyAction) {
+function* createPackage({ payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.createPackageInitialState())
 		yield put(packageActions.createPackageLoading())
-		const createPackageResponse = yield call(packageApi.createPackage, data)
-		yield put(packageActions.createPackageFulfilled(createPackageResponse))
+		const { data } = yield call(packageApi.createPackage, payload)
+		yield put(packageActions.createPackageFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Package created', 2000))
 		successCb !== undefined && successCb()
 	} catch (error) {
@@ -71,12 +71,12 @@ function* createPackage({ data, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* updatePackage({ id, data, successCb, errorCb }: AnyAction) {
+function* updatePackage({ id, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.updatePackageInitialState())
 		yield put(packageActions.updatePackageLoading())
-		const updatePackageResponse = yield call(packageApi.updatePackage, id, data)
-		yield put(packageActions.updatePackageFulfilled(updatePackageResponse))
+		const { data } = yield call(packageApi.updatePackage, id, payload)
+		yield put(packageActions.updatePackageFulfilled(data))
 		successCb !== undefined && successCb()
 	} catch (error) {
 		yield put(packageActions.updatePackageRejected(error))
@@ -84,12 +84,12 @@ function* updatePackage({ id, data, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* getRecipients({ id, query = {}, successCb, errorCb }: AnyAction) {
+function* getRecipients({ id, payload = {}, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.getPackageRecipientsInitialState())
 		yield put(packageActions.getPackageRecipientsLoading())
-		const getPackageRecipientsResponse = yield call(packageApi.getRecipients, id, query)
-		yield put(packageActions.getPackageRecipientsFulfilled(getPackageRecipientsResponse))
+		const { data } = yield call(packageApi.getRecipients, id, payload)
+		yield put(packageActions.getPackageRecipientsFulfilled(data))
 		successCb && successCb()
 	} catch (error) {
 		yield put(packageActions.getPackageRecipientsRejected(error))
@@ -97,12 +97,12 @@ function* getRecipients({ id, query = {}, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* createRecipient({ id, data, successCb, errorCb }: AnyAction) {
+function* createRecipient({ id, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.createPackageRecipientInitialState())
 		yield put(packageActions.createPackageRecipientLoading())
-		const createPackageRecipientResponse = yield call(packageApi.createRecipient, id, data)
-		yield put(packageActions.createPackageRecipientFulfilled(createPackageRecipientResponse))
+		const { data } = yield call(packageApi.createRecipient, id, payload)
+		yield put(packageActions.createPackageRecipientFulfilled(data))
 		successCb !== undefined && successCb()
 	} catch (error) {
 		yield put(packageActions.createPackageRecipientRejected(error))
@@ -110,12 +110,12 @@ function* createRecipient({ id, data, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* updateRecipient({ id, recipientId, data, successCb, errorCb }: AnyAction) {
+function* updateRecipient({ id, recipientId, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.updatePackageRecipientInitialState())
 		yield put(packageActions.updatePackageRecipientLoading())
-		const updatePackageRecipientResponse = yield call(packageApi.updateRecipient, id, recipientId, data)
-		yield put(packageActions.updatePackageRecipientFulfilled(updatePackageRecipientResponse))
+		const { data } = yield call(packageApi.updateRecipient, id, recipientId, payload)
+		yield put(packageActions.updatePackageRecipientFulfilled(data))
 		successCb !== undefined && successCb()
 	} catch (error) {
 		yield put(packageActions.updatePackageRecipientRejected(error))
@@ -123,12 +123,12 @@ function* updateRecipient({ id, recipientId, data, successCb, errorCb }: AnyActi
 	}
 }
 
-function* getDocuments({ id, query = {}, successCb = undefined, errorCb = undefined }: AnyAction) {
+function* getDocuments({ id, payload = {}, successCb = undefined, errorCb = undefined }: AnyAction) {
 	try {
 		yield put(packageActions.getPackageDocumentsInitialState())
 		yield put(packageActions.getPackageDocumentsLoading())
-		const getPackageDocumentsResponse = yield call(packageApi.getDocuments, id, query)
-		yield put(packageActions.getPackageDocumentsFulfilled(getPackageDocumentsResponse))
+		const { data } = yield call(packageApi.getDocuments, id, payload)
+		yield put(packageActions.getPackageDocumentsFulfilled(data))
 		successCb && successCb()
 	} catch (error) {
 		yield put(packageActions.getPackageDocumentsRejected(error))
@@ -136,12 +136,12 @@ function* getDocuments({ id, query = {}, successCb = undefined, errorCb = undefi
 	}
 }
 
-function* getPages({ packageId, query = {}, successCb, errorCb }: AnyAction) {
+function* getPages({ packageId, payload = {}, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.getPagesInitialState())
 		yield put(packageActions.getPagesLoading())
-		const response = yield call(packageApi.getPages, packageId, query)
-		yield put(packageActions.getPagesFulfilled(response))
+		const { data } = yield call(packageApi.getPages, packageId, payload)
+		yield put(packageActions.getPagesFulfilled(data))
 		successCb !== undefined && successCb()
 	} catch (error) {
 		yield put(packageActions.getPagesRejected(error))
@@ -149,12 +149,12 @@ function* getPages({ packageId, query = {}, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* createDocuments({ id, data, successCb, errorCb }: AnyAction) {
+function* createDocuments({ id, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.createPackageDocumentsInitialState())
 		yield put(packageActions.createPackageDocumentsLoading())
-		const createPackageDocumentsResponse = yield call(packageApi.createDocuments, id, data)
-		yield put(packageActions.createPackageDocumentsFulfilled(createPackageDocumentsResponse))
+		const { data } = yield call(packageApi.createDocuments, id, payload)
+		yield put(packageActions.createPackageDocumentsFulfilled(data))
 		successCb !== undefined && successCb()
 	} catch (error) {
 		yield put(packageActions.createPackageDocumentsRejected(error))
@@ -162,12 +162,12 @@ function* createDocuments({ id, data, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* updateDocument({ packageId, documentId, data, successCb, errorCb }: AnyAction) {
+function* updateDocument({ packageId, documentId, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.updateDocumentInitialState())
 		yield put(packageActions.updateDocumentLoading())
-		const updatePackageRecipientResponse = yield call(packageApi.updateDocument, packageId, documentId, data)
-		yield put(packageActions.updateDocumentFulfilled(updatePackageRecipientResponse))
+		const { data } = yield call(packageApi.updateDocument, packageId, documentId, payload)
+		yield put(packageActions.updateDocumentFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Document name updated', 2000))
 		successCb !== undefined && successCb()
 	} catch (error) {
@@ -181,13 +181,8 @@ function* createDocumentFromSocialAccount({ id, socialAccountId, externalFileId,
 	try {
 		yield put(packageActions.createDocumentFromSocialAccountInitialState())
 		yield put(packageActions.createDocumentFromSocialAccountLoading())
-		const createDocumentFromSocialAccountResponse = yield call(
-			packageApi.createDocumentFromSocialAccount,
-			id,
-			socialAccountId,
-			externalFileId
-		)
-		yield put(packageActions.createDocumentFromSocialAccountFulfilled(createDocumentFromSocialAccountResponse))
+		const { data } = yield call(packageApi.createDocumentFromSocialAccount, id, socialAccountId, externalFileId)
+		yield put(packageActions.createDocumentFromSocialAccountFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Document imported!', 2000))
 		successCb !== undefined && successCb()
 	} catch (error) {
@@ -198,9 +193,9 @@ function* createDocumentFromSocialAccount({ id, socialAccountId, externalFileId,
 
 function* downloadPackageDocument({ id, documentId, successCb, errorCb }: AnyAction) {
 	try {
-		const downloadResponse = yield call(packageApi.downloadDocument, id, documentId)
-		const fileName = downloadResponse.headers['content-disposition'].replace('attachment; filename=', '')
-		fileDownload(downloadResponse.data, fileName, downloadResponse.headers['content-type'])
+		const response = yield call(packageApi.downloadDocument, id, documentId)
+		const fileName = response.headers['content-disposition'].replace('attachment; filename=', '')
+		fileDownload(response.data, fileName, response.headers['content-type'])
 		successCb !== undefined && successCb()
 	} catch (error) {
 		yield put(packageActions.deleteDocumentRejected(error))
@@ -244,7 +239,7 @@ function* getDocumentPageImageUrl({ documentId, pageId, image_url, successCb, er
 function* publish({ packageId, successCb, errorCb }: AnyAction) {
 	try {
 		//	yield put(packageActions.showPackageLoading())
-		const data = yield call(packageApi.publish, packageId)
+		const { data } = yield call(packageApi.publish, packageId)
 		yield put(packageActions.showPackageFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Package published!', 2000))
 		successCb !== undefined && successCb()

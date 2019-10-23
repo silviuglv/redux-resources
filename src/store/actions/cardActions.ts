@@ -1,3 +1,5 @@
+import { Card, CreateCardRequest, Error, GetCardsRequest, PaginatedApiResponse, UpdateCardRequest } from '../../types'
+
 const types = {
 	GET_CARDS: '[cards] GET_CARDS',
 	GET_CARDS_INITIAL_STATE: '[cards] GET_CARDS_INITIAL_STATE',
@@ -38,10 +40,9 @@ const types = {
 
 export const cardActions = {
 	...types,
-	getCards: (query) => ({
+	getCards: (payload: GetCardsRequest) => ({
 		type: types.GET_CARDS,
-		payload: null,
-		query,
+		payload,
 	}),
 	getCardsInitialState: () => ({
 		type: types.GET_CARDS_INITIAL_STATE,
@@ -51,19 +52,18 @@ export const cardActions = {
 		type: types.GET_CARDS_LOADING,
 		payload: null,
 	}),
-	getCardsFulfilled: (response) => ({
+	getCardsFulfilled: (payload: PaginatedApiResponse<Card>) => ({
 		type: types.GET_CARDS_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getCardsRejected: (response) => ({
+	getCardsRejected: (payload: Error) => ({
 		type: types.GET_CARDS_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	createCard: (card, successCb, errorCb) => ({
+	createCard: (payload: CreateCardRequest, successCb, errorCb) => ({
 		type: types.CREATE_CARD,
-		payload: null,
-		card,
+		payload,
 		successCb,
 		errorCb,
 	}),
@@ -75,16 +75,16 @@ export const cardActions = {
 		type: types.CREATE_CARD_LOADING,
 		payload: null,
 	}),
-	createCardFulfilled: (response) => ({
+	createCardFulfilled: (payload: Card) => ({
 		type: types.CREATE_CARD_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	createCardRejected: (response) => ({
+	createCardRejected: (payload: Error) => ({
 		type: types.CREATE_CARD_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	showCard: (id) => ({
+	showCard: (id: string) => ({
 		type: types.SHOW_CARD,
 		payload: null,
 		id,
@@ -97,20 +97,19 @@ export const cardActions = {
 		type: types.SHOW_CARD_LOADING,
 		payload: null,
 	}),
-	showCardFulfilled: (response) => ({
+	showCardFulfilled: (payload: Card) => ({
 		type: types.SHOW_CARD_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	showCardRejected: (response) => ({
+	showCardRejected: (payload: Error) => ({
 		type: types.SHOW_CARD_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updateCard: (id, card, successCb, errorCb) => ({
+	updateCard: (id: string, payload: UpdateCardRequest, successCb, errorCb) => ({
 		type: types.UPDATE_CARD,
-		payload: null,
+		payload,
 		id,
-		card,
 		successCb,
 		errorCb,
 	}),
@@ -122,19 +121,18 @@ export const cardActions = {
 		type: types.UPDATE_CARD_LOADING,
 		payload: null,
 	}),
-	updateCardFulfilled: (response) => ({
+	updateCardFulfilled: (payload: Card) => ({
 		type: types.UPDATE_CARD_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updateCardRejected: (response) => ({
+	updateCardRejected: (payload: Error) => ({
 		type: types.UPDATE_CARD_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	deleteCard: (card, successCb, errorCb) => ({
+	deleteCard: (payload: Card, successCb, errorCb) => ({
 		type: types.DELETE_CARD,
-		payload: null,
-		card,
+		payload,
 		successCb,
 		errorCb,
 	}),
@@ -146,19 +144,18 @@ export const cardActions = {
 		type: types.DELETE_CARD_LOADING,
 		payload: null,
 	}),
-	deleteCardFulfilled: (response) => ({
+	deleteCardFulfilled: () => ({
 		type: types.DELETE_CARD_FULFILLED,
-		payload: response,
+		payload: null,
 	}),
-	deleteCardRejected: (response) => ({
+	deleteCardRejected: (payload: Error) => ({
 		type: types.DELETE_CARD_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	setDefaultCard: (card) => ({
+	setDefaultCard: (payload: Card) => ({
 		type: types.SET_DEFAULT_CARD,
-		payload: null,
-		card,
+		payload,
 	}),
 	setDefaultCardInitialState: () => ({
 		type: types.SET_DEFAULT_CARD_INITIAL_STATE,
@@ -168,12 +165,12 @@ export const cardActions = {
 		type: types.SET_DEFAULT_CARD_LOADING,
 		payload: null,
 	}),
-	setDefaultCardFulfilled: (response) => ({
+	setDefaultCardFulfilled: (payload: Card) => ({
 		type: types.SET_DEFAULT_CARD_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setDefaultCardRejected: (response) => ({
+	setDefaultCardRejected: (payload: Error) => ({
 		type: types.SET_DEFAULT_CARD_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

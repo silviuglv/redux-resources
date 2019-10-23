@@ -7,8 +7,8 @@ import { authUser } from '../selectors'
 export function* getAuthUser() {
 	try {
 		yield put(authActions.authUserLoading())
-		const meResponse = yield call(userApi.me)
-		yield put(authActions.authUserData(meResponse.data))
+		const { data } = yield call(userApi.me)
+		yield put(authActions.authUserData(data))
 		yield put(authActions.authUserLoaded())
 	} catch (error) {
 		yield put(authActions.authUserError(error))
@@ -28,12 +28,12 @@ export function* login({ user, provider = null, access_token = null, token_secre
 		yield put(authActions.createAccessToken())
 		yield put(authActions.createAccessTokenLoading())
 
-		const userResponse =
+		const { data } =
 			user !== undefined
 				? yield call(oauthApi.createAccessToken, user)
 				: yield call(oauthApi.createSocialAccessToken, provider, access_token, token_secret)
 
-		yield put(authActions.createAccessTokenFulfilled(userResponse))
+		yield put(authActions.createAccessTokenFulfilled(data))
 	} catch (error) {
 		yield put(authActions.createAccessTokenRejected(error))
 		yield put(notificationActions.displaySnackbarMessage(error.message, 2000))
@@ -64,31 +64,31 @@ export function* getAuthMeta() {
 		const user = authUser(state)
 		yield put(authActions.authMetaInitialState())
 		yield put(authActions.authMetaLoading())
-		const meResponse = yield call(userApi.getUserMeta, user.data.id)
-		yield put(authActions.authMetaFulfilled(meResponse))
+		const { data } = yield call(userApi.getUserMeta, user.data.id)
+		yield put(authActions.authMetaFulfilled(data))
 	} catch (error) {
 		yield put(authActions.authMetaRejected(error))
 	}
 }
 
-export function* update({ id, user }: any) {
+export function* update({ id, payload }: any) {
 	try {
 		yield put(authActions.updateAuthUserInitialState())
 		yield put(authActions.updateAuthUserLoading())
-		const userResponse = yield call(userApi.updateUser, id, user)
-		yield put(authActions.updateAuthUserFulfilled(userResponse))
+		const { data } = yield call(userApi.updateUser, id, payload)
+		yield put(authActions.updateAuthUserFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Profile updated', 2000))
 	} catch (error) {
 		yield put(authActions.updateAuthUserRejected(error))
 	}
 }
 
-export function* create({ user }: any) {
+export function* create({ payload }: any) {
 	try {
 		yield put(authActions.createUserInitialState())
 		yield put(authActions.createUserLoading())
-		const userResponse = yield call(userApi.createUser, user)
-		yield put(authActions.createUserFulfilled(userResponse, user))
+		const { data } = yield call(userApi.createUser, payload)
+		yield put(authActions.createUserFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('User registered', 4000))
 	} catch (error) {
 		yield put(authActions.createUserRejected(error))
@@ -99,8 +99,8 @@ function* updatePhoto({ id, payload, successCb, errorCb }: any) {
 	try {
 		yield put(authActions.updateAuthPhotoInitialState())
 		yield put(authActions.updateAuthPhotoLoading())
-		const response = yield call(userApi.updatePicture, id, payload)
-		yield put(authActions.updateAuthPhotoFulfilled(response))
+		const { data } = yield call(userApi.updatePicture, id, payload)
+		yield put(authActions.updateAuthPhotoFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Profile photo updated!', 2000))
 		successCb !== undefined && successCb()
 	} catch (error) {

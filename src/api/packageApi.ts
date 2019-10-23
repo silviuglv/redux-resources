@@ -1,105 +1,116 @@
 import axios from 'axios'
 import config from '../config'
 import { keysToSnakeCase } from '../utilities'
+import {
+	GetPackagesRequest,
+	GetPackageLexiconRequest,
+	CreatePackageRequest,
+	UpdatePackageRequest,
+	CreateRecipientRequest,
+	UpdateRecipientRequest,
+	GetFieldsRequest,
+	CreateDocumentRequest,
+	UpdateDocumentRequest,
+} from '../types'
 
 export const packageApi = {
-	getPackages: (params) => {
+	getPackages: (params: GetPackagesRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages`,
 			method: 'GET',
 			params,
 		})
 	},
-	getPackageLexicon: (params) => {
+	getPackageLexicon: (params: GetPackageLexiconRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages/lexicon`,
 			method: 'GET',
 			params,
 		})
 	},
-	showPackage: (id) => {
+	showPackage: (id: string) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}`,
 			method: 'GET',
 		})
 	},
-	deletePackage: (id) => {
+	deletePackage: (id: string) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}`,
 			method: 'DELETE',
 		})
 	},
-	createPackage: (data) => {
+	createPackage: (data: CreatePackageRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages`,
 			method: 'POST',
 			data,
 		})
 	},
-	updatePackage: (id, data) => {
+	updatePackage: (id: string, data: UpdatePackageRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}`,
 			method: 'PUT',
 			data,
 		})
 	},
-	getRecipients: (id, params = {}) => {
+	getRecipients: (id: string, params: any = {}) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/recipients`,
 			method: 'GET',
 			params,
 		})
 	},
-	createRecipient: (id, data) => {
+	createRecipient: (id: string, data: CreateRecipientRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/recipients`,
 			method: 'POST',
 			data: keysToSnakeCase(data),
 		})
 	},
-	updateRecipient: (id, recipientId, data) => {
+	updateRecipient: (id: string, recipientId: string, data: UpdateRecipientRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/recipients/${recipientId}`,
 			method: 'PUT',
 			data: keysToSnakeCase(data),
 		})
 	},
-	getDocuments: (id, params = {}) => {
+	getDocuments: (id: string, params = {}) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/documents`,
 			method: 'GET',
 			params,
 		})
 	},
-	getPages: (packageId, params = {}) => {
+	getPages: (packageId: string, params = {}) => {
 		return axios({
 			url: `${config.apiBase}/packages/${packageId}/pages`,
 			method: 'GET',
 			params,
 		})
 	},
-	getFields: (packageId, params = {}) => {
+	getFields: (packageId: string, params: GetFieldsRequest = {}) => {
 		return axios({
 			url: `${config.apiBase}/packages/${packageId}/fields`,
 			method: 'GET',
 			params,
 		})
 	},
-	createDocuments: (id, data) => {
+	createDocuments: (id: string, data: CreateDocumentRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/documents`,
 			method: 'POST',
 			data,
 		})
 	},
-	updateDocument: (packageId, documentId, data) => {
+	updateDocument: (packageId: string, documentId: string, data: UpdateDocumentRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages/${packageId}/documents/${documentId}`,
 			method: 'PUT',
 			data,
 		})
 	},
-	createDocumentFromSocialAccount: (id, socialAccountId, externalFileId) => {
+	createDocumentFromSocialAccount: (id: string, socialAccountId: string, externalFileId: string) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/documents/connected_services/${socialAccountId}`,
 			method: 'POST',
@@ -108,7 +119,7 @@ export const packageApi = {
 			},
 		})
 	},
-	downloadDocument: (id, documentId) => {
+	downloadDocument: (id: string, documentId: string) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/documents/${documentId}`,
 			method: 'GET',
@@ -116,26 +127,26 @@ export const packageApi = {
 			responseType: 'blob',
 		})
 	},
-	getDocumentPageImageUrl: (url) => {
+	getDocumentPageImageUrl: (url: string) => {
 		return axios({
 			url,
 			method: 'GET',
 			headers: { Accept: 'image/png' },
 		})
 	},
-	deleteDocument: (id, documentId) => {
+	deleteDocument: (id: string, documentId: string) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/documents/${documentId}`,
 			method: 'DELETE',
 		})
 	},
-	deleteRecipient: (id, recipientId) => {
+	deleteRecipient: (id: string, recipientId: string) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/recipients/${recipientId}`,
 			method: 'DELETE',
 		})
 	},
-	publish: (id) => {
+	publish: (id: string) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/publish`,
 			method: 'PUT',

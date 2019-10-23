@@ -11,9 +11,9 @@ interface Props {
 function* searchContacts({ payload, successCb, errorCb }: Props) {
 	try {
 		yield put(contactActions.setSearchContactsLoading())
-		const response = yield call(contactApi.searchContact, payload)
-		yield put(contactActions.setSearchContactsFulfilled(response))
-		successCb && successCb(response)
+		const { data } = yield call(contactApi.searchContact, payload)
+		yield put(contactActions.setSearchContactsFulfilled(data))
+		successCb && successCb(data)
 	} catch (error) {
 		yield put(contactActions.setSearchContactsRejected(error))
 		errorCb && errorCb(error)

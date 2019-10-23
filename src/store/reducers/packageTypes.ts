@@ -18,7 +18,7 @@ export const packageTypes = (state = initialState, action) => {
 			})
 		case packageTypeActions.PACKAGE_TYPES_FULFILLED:
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(action.payload.data),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case packageTypeActions.SET_PACKAGE_TYPES_REJECTED:
 			return state.merge({

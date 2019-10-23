@@ -1,3 +1,5 @@
+import { CreateFeedbackRequest, Error, Feedback } from '../../types'
+
 const types = {
 	SEND_FEEDBACK: '[feedback] SEND_FEEDBACK',
 	SET_SEND_FEEDBACK_LOADING: '[feedback] SET_SEND_FEEDBACK_LOADING',
@@ -7,7 +9,7 @@ const types = {
 
 export const feedbackActions = {
 	...types,
-	sendFeedback: (payload, successCb, errorCb) => ({
+	sendFeedback: (payload: CreateFeedbackRequest, successCb, errorCb) => ({
 		type: types.SEND_FEEDBACK,
 		payload,
 		successCb,
@@ -17,12 +19,12 @@ export const feedbackActions = {
 		type: types.SET_SEND_FEEDBACK_LOADING,
 		payload: null,
 	}),
-	setSendFeedbackFulfilled: (response) => ({
+	setSendFeedbackFulfilled: (payload: Feedback) => ({
 		type: types.SET_SEND_FEEDBACK_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	setSendFeedbackRejected: (response) => ({
+	setSendFeedbackRejected: (payload: Error) => ({
 		type: types.SET_SEND_FEEDBACK_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

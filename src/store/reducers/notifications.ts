@@ -36,9 +36,8 @@ export const notifications = function(state = initialState, action) {
 				list: stateUtility.getPaginationLoading(),
 			})
 		case notificationActions.GET_NOTIFICATIONS_FULFILLED:
-			const list = action.payload.data
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(list),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case notificationActions.GET_NOTIFICATIONS_REJECTED:
 			return state.merge({
@@ -55,9 +54,8 @@ export const notifications = function(state = initialState, action) {
 				totalUnreadNotifications: 0,
 			})
 		case notificationActions.GET_TOTAL_UNREAD_NOTIFICATIONS_FULFILLED:
-			const totalUnreadNotifications = action.payload.data
 			return state.merge({
-				totalUnreadNotifications: totalUnreadNotifications.total,
+				totalUnreadNotifications: action.payload.total,
 			})
 		case notificationActions.GET_TOTAL_UNREAD_NOTIFICATIONS_REJECTED:
 			return state.merge({
@@ -73,12 +71,12 @@ export const notifications = function(state = initialState, action) {
 				updateNotification: stateUtility.getObserverLoading(),
 			})
 		case notificationActions.UPDATE_NOTIFICATION_FULFILLED:
-			const updateNotificationResponse = action.payload.data
+			const updateNotificationResponse = action.payload
 			const updatedList = state.toJS().list
 			let unreadNotifications = state.toJS().totalUnreadNotifications
-			const updatedItemIndex = updatedList.data.findIndex((item) => item.id === updateNotificationResponse.id)
+			const updatedItemIndex = updatedList.findIndex((item) => item.id === updateNotificationResponse.id)
 			if (updatedItemIndex !== -1) {
-				updatedList.data[updatedItemIndex] = updateNotificationResponse
+				updatedList[updatedItemIndex] = updateNotificationResponse
 				updateNotificationResponse.read_at === null ? unreadNotifications++ : unreadNotifications--
 			}
 			return state.merge({

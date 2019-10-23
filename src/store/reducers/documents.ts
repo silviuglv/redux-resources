@@ -19,7 +19,7 @@ export const documents = (state = initialState, action) => {
 			})
 		case documentActions.GET_DOCUMENTS_FULFILLED:
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(action.payload.data),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case documentActions.GET_DOCUMENTS_REJECTED:
 			return state.merge({

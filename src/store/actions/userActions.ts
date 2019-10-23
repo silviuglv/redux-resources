@@ -1,3 +1,5 @@
+import { Error, NotificationPreference, UpdateNotificationPreferencesRequest, UpdatePasswordRequest } from '../../types'
+
 const types = {
 	UPDATE_PASSWORD: '[users] UPDATE_PASSWORD',
 	UPDATE_PASSWORD_INITIAL_STATE: '[users] UPDATE_PASSWORD_INITIAL_STATE',
@@ -32,9 +34,9 @@ const types = {
 
 export const userActions = {
 	...types,
-	updatePassword: (id, payload, successCb, errorCb) => ({
+	updatePassword: (id: string, payload: UpdatePasswordRequest, successCb, errorCb) => ({
 		type: types.UPDATE_PASSWORD,
-		payload: payload,
+		payload,
 		id,
 		successCb,
 		errorCb,
@@ -47,16 +49,16 @@ export const userActions = {
 		type: types.UPDATE_PASSWORD_LOADING,
 		payload: null,
 	}),
-	updatePasswordFulfilled: (response) => ({
+	updatePasswordFulfilled: (payload) => ({
 		type: types.UPDATE_PASSWORD_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updatePasswordRejected: (response) => ({
+	updatePasswordRejected: (payload: Error) => ({
 		type: types.UPDATE_PASSWORD_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	confirmEmail: (token, successCb, errorCb) => ({
+	confirmEmail: (token: string, successCb, errorCb) => ({
 		type: types.CONFIRM_EMAIL,
 		payload: null,
 		token,
@@ -75,9 +77,9 @@ export const userActions = {
 		type: types.CONFIRM_EMAIL_FULFILLED,
 		payload: null,
 	}),
-	confirmEmailRejected: (response) => ({
+	confirmEmailRejected: (payload: Error) => ({
 		type: types.CONFIRM_EMAIL_REJECTED,
-		payload: response,
+		payload,
 	}),
 
 	resendEmailConfirmation: (payload) => ({
@@ -96,14 +98,14 @@ export const userActions = {
 		type: types.RESEND_EMAIL_CONFIRMATION_FULFILLED,
 		payload: response,
 	}),
-	resendEmailConfirmationRejected: (response) => ({
+	resendEmailConfirmationRejected: (payload: Error) => ({
 		type: types.RESEND_EMAIL_CONFIRMATION_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	getNotificationPreferences: (id, payload) => ({
+	getNotificationPreferences: (id: string, payload) => ({
 		type: types.GET_NOTIFICATION_PREFERENCES,
-		payload: payload,
+		payload,
 		id,
 	}),
 	getNotificationPreferencesInitialState: () => ({
@@ -114,18 +116,18 @@ export const userActions = {
 		type: types.GET_NOTIFICATION_PREFERENCES_LOADING,
 		payload: null,
 	}),
-	getNotificationPreferencesFulfilled: (response) => ({
+	getNotificationPreferencesFulfilled: (payload: NotificationPreference) => ({
 		type: types.GET_NOTIFICATION_PREFERENCES_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	getNotificationPreferencesRejected: (response) => ({
+	getNotificationPreferencesRejected: (payload: Error) => ({
 		type: types.GET_NOTIFICATION_PREFERENCES_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updateNotificationPreferences: (id, payload) => ({
+	updateNotificationPreferences: (id: string, payload: UpdateNotificationPreferencesRequest) => ({
 		type: types.UPDATE_NOTIFICATION_PREFERENCES,
-		payload: payload,
+		payload,
 		id,
 	}),
 	updateNotificationPreferencesInitialState: () => ({
@@ -136,12 +138,12 @@ export const userActions = {
 		type: types.UPDATE_NOTIFICATION_PREFERENCES_LOADING,
 		payload: null,
 	}),
-	updateNotificationPreferencesFulfilled: (response) => ({
+	updateNotificationPreferencesFulfilled: (payload: NotificationPreference) => ({
 		type: types.UPDATE_NOTIFICATION_PREFERENCES_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updateNotificationPreferencesRejected: (response) => ({
+	updateNotificationPreferencesRejected: (payload: Error) => ({
 		type: types.UPDATE_NOTIFICATION_PREFERENCES_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

@@ -1,3 +1,5 @@
+import { AccessToken, CreateUserRequest, Error, ProviderTypes, UpdateUserRequest, User, UserMeta } from '../../types'
+
 const types = {
 	LOG_USER_IN: '[auth] LOG_USER_IN',
 	LOG_USER_OUT: '[auth] LOG_USER_OUT',
@@ -60,25 +62,24 @@ export const authActions = {
 		type: types.AUTH_USER_NOT_LOADED,
 		payload: null,
 	}),
-	authUserData: (data) => ({
+	authUserData: (payload) => ({
 		type: types.AUTH_USER_DATA,
-		payload: data,
+		payload,
 	}),
-	authUserError: (response) => ({
+	authUserError: (payload: Error) => ({
 		type: types.AUTH_USER_ERROR,
-		payload: response,
+		payload,
 	}),
-	handleLogin: (user) => ({
+	handleLogin: (payload) => ({
 		type: types.LOG_USER_IN,
-		payload: null,
-		user,
+		payload,
 	}),
 	logUserOut: (successCb = undefined) => ({
 		type: types.LOG_USER_OUT,
 		payload: null,
 		successCb,
 	}),
-	createSocialAccessToken: (provider, access_token, token_secret) => ({
+	createSocialAccessToken: (provider: ProviderTypes, access_token: string, token_secret: string) => ({
 		type: types.CREATE_SOCIAL_ACCESS_TOKEN,
 		payload: null,
 		provider,
@@ -86,10 +87,9 @@ export const authActions = {
 		token_secret,
 	}),
 
-	createUser: (user) => ({
+	createUser: (payload: CreateUserRequest) => ({
 		type: types.CREATE_USER,
-		payload: null,
-		user,
+		payload,
 	}),
 	createUserInitialState: () => ({
 		type: types.CREATE_USER_INITIAL_STATE,
@@ -99,14 +99,13 @@ export const authActions = {
 		type: types.CREATE_USER_LOADING,
 		payload: null,
 	}),
-	createUserFulfilled: (response, user) => ({
+	createUserFulfilled: (payload: User) => ({
 		type: types.CREATE_USER_FULFILLED,
-		payload: response,
-		user: user,
+		payload,
 	}),
-	createUserRejected: (response) => ({
+	createUserRejected: (payload: Error) => ({
 		type: types.CREATE_USER_REJECTED,
-		payload: response,
+		payload,
 	}),
 
 	createAccessToken: () => ({
@@ -121,13 +120,13 @@ export const authActions = {
 		type: types.CREATE_AUTH_ACCESS_TOKEN_LOADING,
 		payload: null,
 	}),
-	createAccessTokenFulfilled: (response) => ({
+	createAccessTokenFulfilled: (payload: AccessToken) => ({
 		type: types.CREATE_AUTH_ACCESS_TOKEN_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	createAccessTokenRejected: (response) => ({
+	createAccessTokenRejected: (payload: Error) => ({
 		type: types.CREATE_AUTH_ACCESS_TOKEN_REJECTED,
-		payload: response,
+		payload,
 	}),
 
 	authMeta: () => ({
@@ -142,20 +141,19 @@ export const authActions = {
 		type: types.LOAD_AUTH_USER_META_LOADING,
 		payload: null,
 	}),
-	authMetaFulfilled: (response) => ({
+	authMetaFulfilled: (payload: UserMeta) => ({
 		type: types.LOAD_AUTH_USER_META_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	authMetaRejected: (response) => ({
+	authMetaRejected: (payload: Error) => ({
 		type: types.LOAD_AUTH_USER_META_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updateAuthUser: (id, user) => ({
+	updateAuthUser: (id, payload: UpdateUserRequest) => ({
 		type: types.UPDATE_AUTH_USER,
-		payload: null,
+		payload,
 		id,
-		user,
 	}),
 	updateAuthUserInitialState: () => ({
 		type: types.UPDATE_AUTH_USER_INITIAL_STATE,
@@ -165,18 +163,18 @@ export const authActions = {
 		type: types.UPDATE_AUTH_USER_LOADING,
 		payload: null,
 	}),
-	updateAuthUserFulfilled: (response) => ({
+	updateAuthUserFulfilled: (payload: User) => ({
 		type: types.UPDATE_AUTH_USER_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updateAuthUserRejected: (response) => ({
+	updateAuthUserRejected: (payload: Error) => ({
 		type: types.UPDATE_AUTH_USER_REJECTED,
-		payload: response,
+		payload,
 	}),
 
-	updateAuthPhoto: (id, data, successCb, errorCb) => ({
+	updateAuthPhoto: (id: string, payload: any, successCb, errorCb) => ({
 		type: types.UPDATE_AUTH_PHOTO,
-		payload: data,
+		payload,
 		id,
 		successCb,
 		errorCb,
@@ -189,12 +187,12 @@ export const authActions = {
 		type: types.UPDATE_AUTH_PHOTO_LOADING,
 		payload: null,
 	}),
-	updateAuthPhotoFulfilled: (response) => ({
+	updateAuthPhotoFulfilled: (payload) => ({
 		type: types.UPDATE_AUTH_PHOTO_FULFILLED,
-		payload: response,
+		payload,
 	}),
-	updateAuthPhotoRejected: (response) => ({
+	updateAuthPhotoRejected: (payload: Error) => ({
 		type: types.UPDATE_AUTH_PHOTO_REJECTED,
-		payload: response,
+		payload,
 	}),
 }

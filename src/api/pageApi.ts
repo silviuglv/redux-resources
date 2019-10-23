@@ -2,13 +2,13 @@ import axios from 'axios'
 import config from '../config'
 
 export const pageApi = {
-	getPages: (packageId, documentId) => {
+	getPages: (packageId: string, documentId: string) => {
 		return axios({
 			url: `${config.apiBase}/packages/${packageId}/documents/${documentId}/pages?per_page=1000`,
 			method: 'GET',
 		})
 	},
-	getPageImage: (url) => {
+	getPageImage: (url: string) => {
 		return axios({
 			url,
 			method: 'GET',

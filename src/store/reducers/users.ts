@@ -82,9 +82,8 @@ export const users = (state = initialState, action) => {
 				getNotificationPreferences: stateUtility.getObserverLoading(),
 			})
 		case userActions.GET_NOTIFICATION_PREFERENCES_FULFILLED:
-			const getPreferencesFulfilled = action.payload.data
 			return state.merge({
-				notificationPreferences: stateUtility.getItemFulfilled(getPreferencesFulfilled),
+				notificationPreferences: stateUtility.getItemFulfilled(action.payload),
 				getNotificationPreferences: stateUtility.getObserverFulfilled(),
 			})
 		case userActions.GET_NOTIFICATION_PREFERENCES_REJECTED:
@@ -103,9 +102,8 @@ export const users = (state = initialState, action) => {
 				updateNotificationPreferences: stateUtility.getObserverLoading(),
 			})
 		case userActions.UPDATE_NOTIFICATION_PREFERENCES_FULFILLED:
-			const updatePreferencesFulfilled = action.payload.data
 			return state.merge({
-				notificationPreferences: stateUtility.getItemFulfilled(updatePreferencesFulfilled),
+				notificationPreferences: stateUtility.getItemFulfilled(action.payload),
 				updateNotificationPreferences: stateUtility.getObserverFulfilled(),
 			})
 		case userActions.UPDATE_NOTIFICATION_PREFERENCES_REJECTED:

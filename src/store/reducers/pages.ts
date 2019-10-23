@@ -18,7 +18,7 @@ export const pages = (state = initialState, action) => {
 			})
 		case pageActions.GET_PAGES_FULFILLED:
 			return state.merge({
-				list: stateUtility.getPaginationFulfilled(action.payload.data),
+				list: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case pageActions.GET_PAGES_REJECTED:
 			return state.merge({
@@ -26,10 +26,10 @@ export const pages = (state = initialState, action) => {
 			})
 
 		case pageActions.SET_PAGE_IMAGE:
-			const { pageId, image } = action
+			const { pageId, payload } = action
 			const pages = state.toJS().list
 			const pageIndex = pages.data.findIndex((page) => page.id === pageId)
-			pages.data[pageIndex].images.push(image.data)
+			pages.data[pageIndex].images.push(payload)
 			return state.merge({
 				list: pages,
 			})
