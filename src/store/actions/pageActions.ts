@@ -12,7 +12,7 @@ const types = {
 
 export const pageActions = {
 	...types,
-	getPages: (packageId: string, documentId: string, successCb, errorCb) => ({
+	getPages: (packageId: string, documentId: string, successCb?, errorCb?) => ({
 		type: types.GET_PAGES,
 		payload: null,
 		packageId,
@@ -36,7 +36,7 @@ export const pageActions = {
 		type: types.GET_PAGES_REJECTED,
 		payload,
 	}),
-	getPageImage: (pageId: string, image_url: string, successCb, errorCb) => ({
+	getPageImage: (pageId: string, image_url: string, successCb?, errorCb?) => ({
 		type: types.GET_PAGE_IMAGE,
 		payload: null,
 		pageId,

@@ -48,7 +48,7 @@ export const folderActions = {
 		payload,
 	}),
 
-	createFolder: (payload: CreateFolderRequest, successCb, errorCb) => ({
+	createFolder: (payload: CreateFolderRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_FOLDER,
 		payload,
 		successCb,

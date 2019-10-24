@@ -84,7 +84,7 @@ export const accountInviteActions = {
 		payload,
 	}),
 
-	deleteAccountInvite: (payload: AccountInvite, successCb, errorCb) => ({
+	deleteAccountInvite: (payload: AccountInvite, successCb?, errorCb?) => ({
 		type: types.DELETE_ACCOUNT_INVITE,
 		payload,
 		successCb,
@@ -107,7 +107,7 @@ export const accountInviteActions = {
 		payload,
 	}),
 
-	createAccountInvite: (payload: CreateAccountInviteRequest, successCb, errorCb) => ({
+	createAccountInvite: (payload: CreateAccountInviteRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_ACCOUNT_INVITE,
 		payload,
 		successCb,

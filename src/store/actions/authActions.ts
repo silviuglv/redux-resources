@@ -74,7 +74,7 @@ export const authActions = {
 		type: types.LOG_USER_IN,
 		payload,
 	}),
-	logUserOut: (successCb = undefined) => ({
+	logUserOut: (successCb?) => ({
 		type: types.LOG_USER_OUT,
 		payload: null,
 		successCb,
@@ -172,7 +172,7 @@ export const authActions = {
 		payload,
 	}),
 
-	updateAuthPhoto: (id: string, payload: any, successCb, errorCb) => ({
+	updateAuthPhoto: (id: string, payload: any, successCb?, errorCb?) => ({
 		type: types.UPDATE_AUTH_PHOTO,
 		payload,
 		id,

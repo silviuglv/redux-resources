@@ -9,7 +9,7 @@ const types = {
 
 export const feedbackActions = {
 	...types,
-	sendFeedback: (payload: CreateFeedbackRequest, successCb, errorCb) => ({
+	sendFeedback: (payload: CreateFeedbackRequest, successCb?, errorCb?) => ({
 		type: types.SEND_FEEDBACK,
 		payload,
 		successCb,

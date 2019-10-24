@@ -41,7 +41,7 @@ export const subscriptionActions = {
 		payload,
 	}),
 
-	createSubscription: (account: Account, plan: Plan, coupon: string = null, successCb, errorCb) => ({
+	createSubscription: (account: Account, plan: Plan, coupon: string = null, successCb?, errorCb?) => ({
 		type: types.CREATE_SUBSCRIPTION,
 		payload: null,
 		account,
@@ -63,7 +63,7 @@ export const subscriptionActions = {
 		payload,
 	}),
 
-	updateSubscription: (subscription: Subscription, plan: Plan, coupon: string = null, successCb, errorCb) => ({
+	updateSubscription: (subscription: Subscription, plan: Plan, coupon: string = null, successCb?, errorCb?) => ({
 		type: types.UPDATE_SUBSCRIPTION,
 		payload: null,
 		subscription,
@@ -85,7 +85,7 @@ export const subscriptionActions = {
 		payload,
 	}),
 
-	deleteSubscription: (subscription: Subscription, successCb, errorCb) => ({
+	deleteSubscription: (subscription: Subscription, successCb?, errorCb?) => ({
 		type: types.DELETE_SUBSCRIPTION,
 		payload: null,
 		subscription,

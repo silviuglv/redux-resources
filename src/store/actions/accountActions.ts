@@ -212,7 +212,7 @@ export const accountActions = {
 		payload,
 	}),
 
-	createAccount: (payload: CreateAccountRequest, successCb, errorCb) => ({
+	createAccount: (payload: CreateAccountRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_ACCOUNT,
 		payload,
 		successCb,
@@ -235,7 +235,7 @@ export const accountActions = {
 		payload,
 	}),
 
-	deleteAccountMember: (account: Account, member: User, successCb, errorCb) => ({
+	deleteAccountMember: (account: Account, member: User, successCb?, errorCb?) => ({
 		type: types.DELETE_ACCOUNT_MEMBER,
 		payload: null,
 		account,
@@ -260,7 +260,7 @@ export const accountActions = {
 		payload,
 	}),
 
-	updateAccountMember: (account: Account, member: User, payload, successCb, errorCb) => ({
+	updateAccountMember: (account: Account, member: User, payload, successCb?, errorCb?) => ({
 		type: types.UPDATE_ACCOUNT_MEMBER,
 		payload,
 		account,
@@ -285,7 +285,7 @@ export const accountActions = {
 		payload,
 	}),
 
-	updateAccountPhoto: (id: string, payload, successCb, errorCb) => ({
+	updateAccountPhoto: (id: string, payload, successCb?, errorCb?) => ({
 		type: types.UPDATE_ACCOUNT_PHOTO,
 		payload,
 		id,
