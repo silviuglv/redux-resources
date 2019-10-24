@@ -17,6 +17,7 @@ export interface AccountInvite {
 	account: Account
 	created_by: User
 	joined_at: string | null
+	joined_user: User | null
 	created_at: string
 }
 
