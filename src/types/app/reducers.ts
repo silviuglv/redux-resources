@@ -40,6 +40,7 @@ export interface AccountsState {
 export interface AccountInvitesState {
 	list: PaginatedResponse<AccountInvite>
 	getMyAccountInvites: PaginatedResponse<AccountInvite>
+	showAccountInvite: ItemResponse<AccountInvite>
 	item: ItemResponse<AccountInvite>
 	deleteAccountInvite: Observer
 	acceptAccountInvite: Observer

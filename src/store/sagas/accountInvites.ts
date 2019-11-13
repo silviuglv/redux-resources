@@ -33,6 +33,17 @@ export function* myAccountInvites() {
 	}
 }
 
+export function* showAccountInvite({ payload }: any) {
+	try {
+		yield put(accountInviteActions.showAccountInviteInitialState())
+		yield put(accountInviteActions.showAccountInviteLoading())
+		const { data } = yield call(accountInviteApi.showAccountInvite, payload)
+		yield put(accountInviteActions.showAccountInviteFulfilled(data))
+	} catch (error) {
+		yield put(accountInviteActions.showAccountInviteRejected(error))
+	}
+}
+
 export function* deleteAccountInvite({ payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(accountInviteActions.deleteAccountInviteInitialState())
@@ -98,4 +109,5 @@ export function* accountInvites() {
 	yield takeEvery(accountInviteActions.CREATE_ACCOUNT_INVITE, createAccountInvite)
 	yield takeEvery(accountInviteActions.ACCEPT_ACCOUNT_INVITE, acceptAccountInvite)
 	yield takeEvery(accountInviteActions.GET_MY_ACCOUNT_INVITES, myAccountInvites)
+	yield takeEvery(accountInviteActions.SHOW_ACCOUNT_INVITE, showAccountInvite)
 }

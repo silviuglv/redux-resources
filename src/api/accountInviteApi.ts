@@ -10,6 +10,13 @@ export const accountInviteApi = {
 			params,
 		})
 	},
+	showAccountInvite: (id: string) => {
+		return axios({
+			url: `${config.apiBase}/account_invites/${id}`,
+			method: 'GET',
+			params,
+		})
+	},
 	deleteAccountInvite: (id: string) => {
 		return axios({
 			url: `${config.apiBase}/account_invites/${id}`,

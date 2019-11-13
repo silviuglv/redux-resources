@@ -17,6 +17,11 @@ const types = {
 	GET_ACCOUNT_INVITES_LOADING: '[account_invites] GET_ACCOUNT_INVITES_LOADING',
 	GET_ACCOUNT_INVITES_FULFILLED: '[account_invites] GET_ACCOUNT_INVITES_FULFILLED',
 	GET_ACCOUNT_INVITES_REJECTED: '[account_invites] GET_ACCOUNT_INVITES_REJECTED',
+	SHOW_ACCOUNT_INVITE: '[account_invites] SHOW_ACCOUNT_INVITE',
+	SHOW_ACCOUNT_INVITE_INITIAL_STATE: '[account_invites] SHOW_ACCOUNT_INVITE_INITIAL_STATE',
+	SHOW_ACCOUNT_INVITE_LOADING: '[account_invites] SHOW_ACCOUNT_INVITE_LOADING',
+	SHOW_ACCOUNT_INVITE_FULFILLED: '[account_invites] SHOW_ACCOUNT_INVITE_FULFILLED',
+	SHOW_ACCOUNT_INVITE_REJECTED: '[account_invites] SHOW_ACCOUNT_INVITE_REJECTED',
 	DELETE_MY_ACCOUNT_INVITE: '[account_invites] DELETE_MY_ACCOUNT_INVITE',
 	DELETE_ACCOUNT_INVITE: '[account_invites] DELETE_ACCOUNT_INVITE',
 	DELETE_ACCOUNT_INVITE_INITIAL_STATE: '[account_invites] DELETE_ACCOUNT_INVITE_INITIAL_STATE',
@@ -76,6 +81,27 @@ export const accountInviteActions = {
 	}),
 	accountInvitesRejected: (payload: Error) => ({
 		type: types.GET_ACCOUNT_INVITES_REJECTED,
+		payload,
+	}),
+
+	showAccountInvite: (payload: AccountInvite) => ({
+		type: types.SHOW_ACCOUNT_INVITE,
+		payload,
+	}),
+	showAccountInviteInitialState: () => ({
+		type: types.SHOW_ACCOUNT_INVITE_INITIAL_STATE,
+		payload: null,
+	}),
+	showAccountInviteLoading: () => ({
+		type: types.SHOW_ACCOUNT_INVITE_LOADING,
+		payload: null,
+	}),
+	showAccountInviteFulfilled: (payload: PaginatedApiResponse<AccountInvite>) => ({
+		type: types.SHOW_ACCOUNT_INVITE_FULFILLED,
+		payload,
+	}),
+	showAccountInviteRejected: (payload: Error) => ({
+		type: types.SHOW_ACCOUNT_INVITE_REJECTED,
 		payload,
 	}),
 
