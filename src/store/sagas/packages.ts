@@ -63,7 +63,6 @@ function* createPackage({ payload, successCb, errorCb }: AnyAction) {
 		yield put(packageActions.createPackageLoading())
 		const { data } = yield call(packageApi.createPackage, payload)
 		yield put(packageActions.createPackageFulfilled(data))
-		yield put(notificationActions.displaySnackbarMessage('Package created', 2000))
 		successCb !== undefined && successCb()
 	} catch (error) {
 		yield put(packageActions.createPackageRejected(error))
