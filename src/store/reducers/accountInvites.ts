@@ -89,6 +89,24 @@ export const accountInvites = (state = initialState, action) => {
 				acceptAccountInvite: stateUtility.getObserverRejected(action.payload),
 			})
 
+		//  showAccountInvite
+		case accountInviteActions.SHOW_ACCOUNT_INVITE_INITIAL_STATE:
+			return state.merge({
+				item: stateUtility.getItemInitialState(),
+			})
+		case accountInviteActions.SHOW_ACCOUNT_INVITE_LOADING:
+			return state.merge({
+				item: stateUtility.getItemLoading(),
+			})
+		case accountInviteActions.SHOW_ACCOUNT_INVITE_FULFILLED:
+			return state.merge({
+				item: stateUtility.getItemFulfilled(action.payload),
+			})
+		case accountInviteActions.SHOW_ACCOUNT_INVITE_REJECTED:
+			return state.merge({
+				item: stateUtility.getItemRejected(action.payload),
+			})
+
 		//  createAccountInvite
 		case accountInviteActions.CREATE_ACCOUNT_INVITE_INITIAL_STATE:
 			return state.merge({

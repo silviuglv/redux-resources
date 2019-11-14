@@ -86,7 +86,7 @@ export const accountInviteActions = {
 
 	showAccountInvite: (id: string) => ({
 		type: types.SHOW_ACCOUNT_INVITE,
-		payload,
+		id,
 	}),
 	showAccountInviteInitialState: () => ({
 		type: types.SHOW_ACCOUNT_INVITE_INITIAL_STATE,

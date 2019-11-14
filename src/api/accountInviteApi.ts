@@ -14,7 +14,6 @@ export const accountInviteApi = {
 		return axios({
 			url: `${config.apiBase}/account_invites/${id}`,
 			method: 'GET',
-			params,
 		})
 	},
 	deleteAccountInvite: (id: string) => {
