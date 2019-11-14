@@ -84,7 +84,7 @@ export const accountInviteActions = {
 		payload,
 	}),
 
-	showAccountInvite: (payload: AccountInvite) => ({
+	showAccountInvite: (id: string) => ({
 		type: types.SHOW_ACCOUNT_INVITE,
 		payload,
 	}),
