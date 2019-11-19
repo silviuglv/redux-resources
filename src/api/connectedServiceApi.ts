@@ -1,8 +1,9 @@
 import axios from 'axios'
 import config from '../config'
+import { GetConnectedServicesRequest } from '../types/api/requests'
 
 export const connectedServiceApi = {
-	getConnectedServices: (params = {}) => {
+	getConnectedServices: (params: GetConnectedServicesRequest = {}) => {
 		return axios({
 			url: `${config.apiBase}/connected_services`,
 			method: 'GET',

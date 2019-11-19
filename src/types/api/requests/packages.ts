@@ -16,6 +16,8 @@ export interface GetPackageLexiconRequest {
 }
 export interface GetPackagesRequest extends BaseGetRequest {
 	ids?: string
+	names?: string
+	names_like?: string
 	account_ids?: string
 	package_status_ids?: string
 	package_type_ids?: string

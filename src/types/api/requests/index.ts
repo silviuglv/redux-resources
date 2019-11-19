@@ -1,6 +1,7 @@
 export * from './accountInvites'
 export * from './accounts'
 export * from './cards'
+export * from './connectedServices'
 export * from './contacts'
 export * from './countries'
 export * from './documentDrafts'
