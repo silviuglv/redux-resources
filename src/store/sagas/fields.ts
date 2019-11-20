@@ -15,10 +15,11 @@ export function* getFields({ packageId, payload = {}, successCb, errorCb }: AnyA
 	}
 }
 
-function* createField({ packageId, documentId, payload, successCb, errorCb }: AnyAction) {
+function* createField({ packageId, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(fieldActions.setItemLoading())
-		const { data } = yield call<any>(fieldApi.createField, packageId, documentId, payload)
+		const { data } = yield call<any>(fieldApi.createField, packageId, payload)
+		yield put(fieldActions.addItemToList(data))
 		yield put(fieldActions.setItemFulfilled(data))
 		successCb && successCb()
 	} catch (error) {
@@ -27,10 +28,11 @@ function* createField({ packageId, documentId, payload, successCb, errorCb }: An
 	}
 }
 
-function* updateField({ packageId, documentId, fieldId, payload, successCb, errorCb }: AnyAction) {
+function* updateField({ packageId, fieldId, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(fieldActions.setItemLoading())
-		const { data } = yield call<any>(fieldApi.updateField, packageId, documentId, fieldId, payload)
+		const { data } = yield call<any>(fieldApi.updateField, packageId, fieldId, payload)
+		yield put(fieldActions.updateItemInList(data))
 		yield put(fieldActions.setItemFulfilled(data))
 		successCb && successCb()
 	} catch (error) {
@@ -39,10 +41,11 @@ function* updateField({ packageId, documentId, fieldId, payload, successCb, erro
 	}
 }
 
-function* deleteField({ packageId, documentId, fieldId, successCb, errorCb }: AnyAction) {
+function* deleteField({ packageId, fieldId, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(fieldActions.setItemLoading())
-		yield call<any>(fieldApi.deleteField, packageId, documentId, fieldId)
+		yield call<any>(fieldApi.deleteField, packageId, fieldId)
+		yield put(fieldActions.removeItemInList(fieldId))
 		yield put(fieldActions.setItemFulfilled(null))
 		successCb && successCb()
 	} catch (error) {

@@ -21,6 +21,10 @@ const types = {
 	SET_ITEM_LOADING: '[fields] SET_ITEM_LOADING',
 	SET_ITEM_FULFILLED: '[fields] SET_ITEM_FULFILLED',
 	SET_ITEM_REJECTED: '[fields] SET_ITEM_REJECTED',
+
+	ADD_ITEM_TO_LIST: '[fields] ADD_ITEM_TO_LIST',
+	UPDATE_ITEM_IN_LIST: '[fields] UPDATE_ITEM_IN_LIST',
+	REMOVE_ITEM_IN_LIST: '[fields] REMOVE_ITEM_IN_LIST',
 }
 
 export const fieldActions = {
@@ -49,35 +53,25 @@ export const fieldActions = {
 		payload,
 	}),
 
-	createField: (packageId: string, documentId: string, payload: CreateFieldRequest, successCb?, errorCb?) => ({
+	createField: (packageId: string, payload: CreateFieldRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_FIELD,
 		payload,
 		packageId,
-		documentId,
 		successCb,
 		errorCb,
 	}),
-	updateField: (
-		packageId: string,
-		documentId: string,
-		fieldId: string,
-		payload: UpdateFieldRequest,
-		successCb?,
-		errorCb?
-	) => ({
+	updateField: (packageId: string, fieldId: string, payload: UpdateFieldRequest, successCb?, errorCb?) => ({
 		type: types.UPDATE_FIELD,
 		payload,
 		packageId,
-		documentId,
 		fieldId,
 		successCb,
 		errorCb,
 	}),
-	deleteField: (packageId: string, documentId: string, fieldId: string, successCb?, errorCb?) => ({
+	deleteField: (packageId: string, fieldId: string, successCb?, errorCb?) => ({
 		type: types.DELETE_FIELD,
 		payload: null,
 		packageId,
-		documentId,
 		fieldId,
 		successCb,
 		errorCb,
@@ -94,5 +88,18 @@ export const fieldActions = {
 	setItemRejected: (payload: Error) => ({
 		type: types.SET_ITEM_REJECTED,
 		payload,
+	}),
+
+	addItemToList: (payload: Field) => ({
+		type: types.ADD_ITEM_TO_LIST,
+		payload,
+	}),
+	updateItemInList: (payload: Field) => ({
+		type: types.UPDATE_ITEM_IN_LIST,
+		payload,
+	}),
+	removeItemInList: (fieldId: string) => ({
+		type: types.REMOVE_ITEM_IN_LIST,
+		fieldId,
 	}),
 }

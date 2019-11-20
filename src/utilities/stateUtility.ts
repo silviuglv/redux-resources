@@ -109,6 +109,12 @@ const removeItemFromPagination = (list: PaginatedResponse<any>, resourceId: stri
 	}
 }
 
+const updateItemInPagination = (list: PaginatedResponse<any>, item: any): PaginatedResponse<any> => {
+	const index = list.data.findIndex((item) => item.id === item.id)
+	list.data[index] = item
+	return list
+}
+
 const getPaginationRejected = (error: Error): PaginatedResponse<any> => {
 	return {
 		ui: {
@@ -238,6 +244,7 @@ export default {
 	getPaginationFulfilled,
 	addItemToPagination,
 	removeItemFromPagination,
+	updateItemInPagination,
 	getPaginationRejected,
 
 	getStringFromLocalStorage,
