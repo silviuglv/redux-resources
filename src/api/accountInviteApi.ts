@@ -11,18 +11,11 @@ export const accountInviteApi = {
 		})
 	},
 	showAccountInvite: (id: string, accountInviteToken?: string) => {
-		const data = {
+		return axios({
 			url: `${config.apiBase}/account_invites/${id}`,
 			method: 'GET',
-		}
-		const headers = {}
-		if (accountInviteToken) {
-			headers['AccountInviteToken'] = accountInviteToken
-		}
-		return axios({
-			...data,
-			...headers,
-		} as any)
+			headers: accountInviteToken ? { AccountInviteToken: accountInviteToken } : {},
+		})
 	},
 	deleteAccountInvite: (id: string) => {
 		return axios({
