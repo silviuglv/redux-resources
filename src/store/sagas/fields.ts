@@ -21,7 +21,7 @@ function* createField({ packageId, payload, successCb, errorCb }: AnyAction) {
 		const { data } = yield call<any>(fieldApi.createField, packageId, payload)
 		yield put(fieldActions.addItemToList(data))
 		yield put(fieldActions.setItemFulfilled(data))
-		successCb && successCb()
+		successCb && successCb(data)
 	} catch (error) {
 		yield put(fieldActions.setItemRejected(error))
 		errorCb && errorCb()

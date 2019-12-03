@@ -33,11 +33,11 @@ export function* myAccountInvites() {
 	}
 }
 
-export function* showAccountInvite({ id }: any) {
+export function* showAccountInvite({ id, accountInviteToken }: any) {
 	try {
 		yield put(accountInviteActions.showAccountInviteInitialState())
 		yield put(accountInviteActions.showAccountInviteLoading())
-		const { data } = yield call(accountInviteApi.showAccountInvite, id)
+		const { data } = yield call(accountInviteApi.showAccountInvite, id, accountInviteToken)
 		yield put(accountInviteActions.showAccountInviteFulfilled(data))
 	} catch (error) {
 		yield put(accountInviteActions.showAccountInviteRejected(error))
