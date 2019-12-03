@@ -1,4 +1,13 @@
-import { AccessToken, CreateUserRequest, Error, ProviderTypes, UpdateUserRequest, User, UserMeta } from '../../types'
+import {
+	AccessToken,
+	CreateUserFromAccountInviteRequest,
+	CreateUserRequest,
+	Error,
+	ProviderTypes,
+	UpdateUserRequest,
+	User,
+	UserMeta,
+} from '../../types'
 
 const types = {
 	LOG_USER_IN: '[auth] LOG_USER_IN',
@@ -11,6 +20,12 @@ const types = {
 	CREATE_USER_LOADING: '[auth] CREATE_USER_LOADING',
 	CREATE_USER_FULFILLED: '[auth] CREATE_USER_FULFILLED',
 	CREATE_USER_REJECTED: '[auth] CREATE_USER_REJECTED',
+
+	CREATE_USER_FROM_ACCOUNT_INVITE: '[auth] CREATE_USER_FROM_ACCOUNT_INVITE',
+	CREATE_USER_FROM_ACCOUNT_INVITE_INITIAL_STATE: '[auth] CREATE_USER_FROM_ACCOUNT_INVITE_INITIAL_STATE',
+	CREATE_USER_FROM_ACCOUNT_INVITE_LOADING: '[auth] CREATE_USER_FROM_ACCOUNT_INVITE_LOADING',
+	CREATE_USER_FROM_ACCOUNT_INVITE_FULFILLED: '[auth] CREATE_USER_FROM_ACCOUNT_INVITE_FULFILLED',
+	CREATE_USER_FROM_ACCOUNT_INVITE_REJECTED: '[auth] CREATE_USER_FROM_ACCOUNT_INVITE_REJECTED',
 
 	CREATE_AUTH_ACCESS_TOKEN: '[auth] CREATE_AUTH_ACCESS_TOKEN',
 	CREATE_AUTH_ACCESS_TOKEN_INITIAL_STATE: '[auth] CREATE_AUTH_ACCESS_TOKEN_INITIAL_STATE',
@@ -105,6 +120,27 @@ export const authActions = {
 	}),
 	createUserRejected: (payload: Error) => ({
 		type: types.CREATE_USER_REJECTED,
+		payload,
+	}),
+
+	createUserFromAccountInvite: (payload: CreateUserFromAccountInviteRequest) => ({
+		type: types.CREATE_USER_FROM_ACCOUNT_INVITE,
+		payload,
+	}),
+	createUserFromAccountInviteInitialState: () => ({
+		type: types.CREATE_USER_FROM_ACCOUNT_INVITE_INITIAL_STATE,
+		payload: null,
+	}),
+	createUserFromAccountInviteLoading: () => ({
+		type: types.CREATE_USER_FROM_ACCOUNT_INVITE_LOADING,
+		payload: null,
+	}),
+	createUserFromAccountInviteFulfilled: (payload: User) => ({
+		type: types.CREATE_USER_FROM_ACCOUNT_INVITE_FULFILLED,
+		payload,
+	}),
+	createUserFromAccountInviteRejected: (payload: Error) => ({
+		type: types.CREATE_USER_FROM_ACCOUNT_INVITE_REJECTED,
 		payload,
 	}),
 

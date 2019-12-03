@@ -89,9 +89,19 @@ function* create({ payload }: any) {
 		yield put(authActions.createUserLoading())
 		const { data } = yield call(userApi.createUser, payload)
 		yield put(authActions.createUserFulfilled(data))
-		yield put(notificationActions.displaySnackbarMessage('User registered', 4000))
 	} catch (error) {
 		yield put(authActions.createUserRejected(error))
+	}
+}
+
+function* createUserFromAccountInvite({ payload }: any) {
+	try {
+		yield put(authActions.createUserFromAccountInviteInitialState())
+		yield put(authActions.createUserFromAccountInviteLoading())
+		const { data } = yield call(userApi.createUserFromAccountInvite, payload)
+		yield put(authActions.createUserFromAccountInviteFulfilled(data))
+	} catch (error) {
+		yield put(authActions.createUserFromAccountInviteRejected(error))
 	}
 }
 
@@ -128,5 +138,7 @@ export function* auth() {
 	yield takeEvery(authActions.UPDATE_AUTH_USER, update)
 	yield takeEvery(authActions.CREATE_USER, create)
 	yield takeEvery(authActions.CREATE_USER_FULFILLED, login)
+	yield takeEvery(authActions.CREATE_USER_FROM_ACCOUNT_INVITE, createUserFromAccountInvite)
+	yield takeEvery(authActions.CREATE_USER_FROM_ACCOUNT_INVITE_FULFILLED, login)
 	yield takeEvery(authActions.UPDATE_AUTH_PHOTO, updatePhoto)
 }

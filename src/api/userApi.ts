@@ -1,6 +1,7 @@
 import axios from 'axios'
 import config from '../config'
 import {
+	CreateUserFromAccountInviteRequest,
 	CreateUserRequest,
 	UpdateNotificationPreferencesRequest,
 	UpdatePasswordRequest,
@@ -11,6 +12,13 @@ export const userApi = {
 	createUser: (data: CreateUserRequest) => {
 		return axios({
 			url: `${config.apiBase}/users`,
+			method: 'POST',
+			data,
+		})
+	},
+	createUserFromAccountInvite: (data: CreateUserFromAccountInviteRequest) => {
+		return axios({
+			url: `${config.apiBase}/users/account_invite`,
 			method: 'POST',
 			data,
 		})
