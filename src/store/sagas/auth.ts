@@ -99,7 +99,7 @@ function* createUserFromAccountInvite({ payload }: any) {
 		yield put(authActions.createUserFromAccountInviteInitialState())
 		yield put(authActions.createUserFromAccountInviteLoading())
 		const { data } = yield call(userApi.createUserFromAccountInvite, payload)
-		yield put(authActions.createUserFromAccountInviteFulfilled(data))
+		yield put(authActions.createUserFromAccountInviteFulfilled(payload))
 	} catch (error) {
 		yield put(authActions.createUserFromAccountInviteRejected(error))
 	}
