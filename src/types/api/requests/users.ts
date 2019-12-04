@@ -8,6 +8,16 @@ export interface CreateUserRequest {
 	}
 }
 
+export interface CreateUserFromAccountInviteRequest {
+	first_name: string
+	last_name: string
+	email: string
+	password: string
+	password_confirmation: string
+	account_invite_id: string
+	account_invite_token: string
+}
+
 export interface GetPictureRequest {
 	width?: number
 	height?: number

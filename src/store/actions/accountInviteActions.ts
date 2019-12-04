@@ -106,9 +106,10 @@ export const accountInviteActions = {
 		payload,
 	}),
 
-	deleteMyAccountInvite: (payload: AccountInvite) => ({
+	deleteMyAccountInvite: (payload: AccountInvite, accountInviteToken?: string) => ({
 		type: types.DELETE_MY_ACCOUNT_INVITE,
 		payload,
+		accountInviteToken,
 	}),
 
 	deleteAccountInvite: (payload: AccountInvite, successCb?, errorCb?) => ({

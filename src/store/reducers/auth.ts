@@ -132,6 +132,24 @@ export const auth = (state = initialState, action) => {
 				createUser: stateUtility.getObserverRejected(action.payload),
 			})
 
+		//  createUserFromAccountInvite
+		case authActions.CREATE_USER_FROM_ACCOUNT_INVITE_INITIAL_STATE:
+			return state.merge({
+				createUser: stateUtility.getObserverInitialState(),
+			})
+		case authActions.CREATE_USER_FROM_ACCOUNT_INVITE_LOADING:
+			return state.merge({
+				createUser: stateUtility.getObserverLoading(),
+			})
+		case authActions.CREATE_USER_FROM_ACCOUNT_INVITE_FULFILLED:
+			return state.merge({
+				createUser: stateUtility.getObserverFulfilled(),
+			})
+		case authActions.CREATE_USER_FROM_ACCOUNT_INVITE_REJECTED:
+			return state.merge({
+				createUser: stateUtility.getObserverRejected(action.payload),
+			})
+
 		//  updatePhoto
 		case authActions.UPDATE_AUTH_PHOTO_INITIAL_STATE:
 			return state.merge({
