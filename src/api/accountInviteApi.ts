@@ -17,10 +17,11 @@ export const accountInviteApi = {
 			headers: accountInviteToken ? { AccountInviteToken: accountInviteToken } : {},
 		})
 	},
-	deleteAccountInvite: (id: string) => {
+	deleteAccountInvite: (id: string, accountInviteToken?: string) => {
 		return axios({
 			url: `${config.apiBase}/account_invites/${id}`,
 			method: 'DELETE',
+			headers: accountInviteToken ? { AccountInviteToken: accountInviteToken } : {},
 		})
 	},
 	create: (data: CreateAccountInviteRequest) => {

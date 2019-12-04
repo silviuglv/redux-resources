@@ -61,12 +61,11 @@ export function* deleteAccountInvite({ payload, successCb, errorCb }: AnyAction)
 	}
 }
 
-export function* deleteMyAccountInvite({ payload }: AnyAction) {
+export function* deleteMyAccountInvite({ payload, accountInviteToken }: AnyAction) {
 	try {
 		yield put(accountInviteActions.deleteAccountInviteLoading())
-		const { data } = yield call(accountInviteApi.deleteAccountInvite, payload.id)
+		const { data } = yield call(accountInviteApi.deleteAccountInvite, payload.id, accountInviteToken)
 		yield put(accountInviteActions.deleteAccountInviteFulfilled(data))
-		yield call(myAccountInvites)
 		yield put(notificationActions.displaySnackbarMessage('Account Invitation Deleted!', 2000))
 	} catch (error) {
 		yield put(accountInviteActions.deleteAccountInviteRejected(error))
