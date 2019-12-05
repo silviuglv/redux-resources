@@ -162,6 +162,13 @@ export const auth = (state = initialState, action) => {
 		case authActions.UPDATE_AUTH_PHOTO_FULFILLED:
 			return state.merge({
 				updatePhoto: stateUtility.getObserverFulfilled(),
+				user: {
+					...state.toJS().user,
+					data: {
+						...state.toJS().user.data,
+						image_url: state.toJS().user.data.image_url + '?date=' + Math.floor(Date.now()),
+					},
+				},
 			})
 		case authActions.UPDATE_AUTH_PHOTO_REJECTED:
 			return state.merge({
