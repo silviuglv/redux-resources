@@ -4,8 +4,10 @@ export interface Account {
 	id: string
 	name: string
 	owner: User
-	image_url: string | null
 	role: AccountRoles | undefined
+	image_url: string | null
+	banner_url: string | null
+	hex_background_color: string | null
 }
 
 export interface AccountInvite {
