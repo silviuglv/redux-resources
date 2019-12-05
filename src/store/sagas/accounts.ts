@@ -132,6 +132,20 @@ function* updateAccountPhoto({ id, payload, successCb, errorCb }: AnyAction) {
 	}
 }
 
+function* updateAccountBanner({ id, payload, successCb, errorCb }: AnyAction) {
+	try {
+		yield put(accountActions.updateAccountBannerInitialState())
+		yield put(accountActions.updateAccountBannerLoading())
+		const { data } = yield call(accountApi.updateBanner, id, payload)
+		yield put(accountActions.updateAccountBannerFulfilled(data))
+		yield put(notificationActions.displaySnackbarMessage('Account banner updated!', 2000))
+		successCb && successCb()
+	} catch (error) {
+		yield put(accountActions.updateAccountBannerRejected(error))
+		errorCb && errorCb()
+	}
+}
+
 function* getInvoices({ account }: AnyAction) {
 	try {
 		yield put(accountActions.getInvoicesInitialState())
@@ -156,5 +170,6 @@ export function* accounts() {
 	yield takeEvery(accountActions.UPDATE_ACCOUNT_MEMBER, updateAccountMember)
 	yield takeEvery(accountActions.UPDATE_ACCOUNT, updateAccount)
 	yield takeEvery(accountActions.UPDATE_ACCOUNT_PHOTO, updateAccountPhoto)
+	yield takeEvery(accountActions.UPDATE_ACCOUNT_BANNER, updateAccountBanner)
 	yield takeEvery(accountActions.GET_INVOICES, getInvoices)
 }

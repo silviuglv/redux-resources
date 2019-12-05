@@ -14,6 +14,7 @@ const state: AccountsState = {
 	updateAccountMember: stateUtility.getObserverInitialState(),
 	updateAccount: stateUtility.getObserverInitialState(),
 	updatePhoto: stateUtility.getObserverInitialState(),
+	updateBanner: stateUtility.getObserverInitialState(),
 	invoices: stateUtility.getPaginationInitialState(),
 }
 
@@ -210,6 +211,24 @@ export const accounts = (state = initialState, action) => {
 		case accountActions.UPDATE_ACCOUNT_PHOTO_REJECTED:
 			return state.merge({
 				updatePhoto: stateUtility.getObserverRejected(action.payload),
+			})
+
+		//  updateBanner
+		case accountActions.UPDATE_ACCOUNT_BANNER_INITIAL_STATE:
+			return state.merge({
+				updateBanner: stateUtility.getObserverInitialState(),
+			})
+		case accountActions.UPDATE_ACCOUNT_BANNER_LOADING:
+			return state.merge({
+				updateBanner: stateUtility.getObserverLoading(),
+			})
+		case accountActions.UPDATE_ACCOUNT_BANNER_FULFILLED:
+			return state.merge({
+				updateBanner: stateUtility.getObserverFulfilled(),
+			})
+		case accountActions.UPDATE_ACCOUNT_BANNER_REJECTED:
+			return state.merge({
+				updateBanner: stateUtility.getObserverRejected(action.payload),
 			})
 
 		//  invoices

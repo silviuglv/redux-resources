@@ -10,6 +10,12 @@ export interface GetAccountPictureRequest {
 	redirect?: boolean
 }
 
+export interface GetAccountBannerRequest {
+	width?: number
+	height?: number
+	redirect?: boolean
+}
+
 export interface GetAccountsRequest extends BaseGetRequest {
 	ids?: string
 	order_by?: 'id' | 'name'
@@ -21,7 +27,8 @@ export interface GetAccountUsersRequest extends BaseGetRequest {
 }
 
 export interface UpdateAccountRequest {
-	name: string
+	name?: string
+	hex_background_color?: string
 }
 
 export interface UpdateAccountUserRequest {

@@ -34,6 +34,7 @@ export interface AccountsState {
 	updateAccountMember: Observer
 	updateAccount: Observer
 	updatePhoto: Observer
+	updateBanner: Observer
 	invoices: PaginatedResponse<Invoice>
 }
 

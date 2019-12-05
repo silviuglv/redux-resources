@@ -75,6 +75,13 @@ export const accountApi = {
 			data,
 		})
 	},
+	updateBanner: (id: string, data: any) => {
+		return axios({
+			url: `${config.apiBase}/accounts/${id}/banner`,
+			method: 'POST',
+			data,
+		})
+	},
 	getInvoices: (id: string) => {
 		return axios({
 			url: `${config.apiBase}/accounts/${id}/invoices`,

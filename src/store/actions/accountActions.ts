@@ -71,6 +71,12 @@ const types = {
 	UPDATE_ACCOUNT_PHOTO_FULFILLED: '[accounts] UPDATE_ACCOUNT_PHOTO_FULFILLED',
 	UPDATE_ACCOUNT_PHOTO_REJECTED: '[accounts] UPDATE_ACCOUNT_PHOTO_REJECTED',
 
+	UPDATE_ACCOUNT_BANNER: '[accounts] UPDATE_ACCOUNT_BANNER',
+	UPDATE_ACCOUNT_BANNER_INITIAL_STATE: '[accounts] UPDATE_ACCOUNT_BANNER_INITIAL_STATE',
+	UPDATE_ACCOUNT_BANNER_LOADING: '[accounts] UPDATE_ACCOUNT_BANNER_LOADING',
+	UPDATE_ACCOUNT_BANNER_FULFILLED: '[accounts] UPDATE_ACCOUNT_BANNER_FULFILLED',
+	UPDATE_ACCOUNT_BANNER_REJECTED: '[accounts] UPDATE_ACCOUNT_BANNER_REJECTED',
+
 	GET_INVOICES: '[accounts] GET_INVOICES',
 	GET_INVOICES_INITIAL_STATE: '[accounts] GET_INVOICES_INITIAL_STATE',
 	GET_INVOICES_LOADING: '[accounts] GET_INVOICES_LOADING',
@@ -306,6 +312,30 @@ export const accountActions = {
 	}),
 	updateAccountPhotoRejected: (payload: Error) => ({
 		type: types.UPDATE_ACCOUNT_PHOTO_REJECTED,
+		payload,
+	}),
+
+	updateAccountBanner: (id: string, payload, successCb?, errorCb?) => ({
+		type: types.UPDATE_ACCOUNT_BANNER,
+		payload,
+		id,
+		successCb,
+		errorCb,
+	}),
+	updateAccountBannerInitialState: () => ({
+		type: types.UPDATE_ACCOUNT_BANNER_INITIAL_STATE,
+		payload: null,
+	}),
+	updateAccountBannerLoading: () => ({
+		type: types.UPDATE_ACCOUNT_BANNER_LOADING,
+		payload: null,
+	}),
+	updateAccountBannerFulfilled: (payload) => ({
+		type: types.UPDATE_ACCOUNT_BANNER_FULFILLED,
+		payload,
+	}),
+	updateAccountBannerRejected: (payload: Error) => ({
+		type: types.UPDATE_ACCOUNT_BANNER_REJECTED,
 		payload,
 	}),
 
