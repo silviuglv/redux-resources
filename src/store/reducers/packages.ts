@@ -14,6 +14,7 @@ const state: PackagesState = {
 	deleteDocument: stateUtility.getObserverInitialState(),
 	createPackage: stateUtility.getObserverInitialState(),
 	recipient: stateUtility.getItemInitialState(),
+	resendSignatureEmail: stateUtility.getItemInitialState(),
 }
 
 const initialState = fromJS(state)
@@ -127,6 +128,24 @@ export const packages = (state = initialState, action) => {
 		case packageActions.DELETE_PACKAGE_REJECTED:
 			return state.merge({
 				item: stateUtility.getItemRejected(action.payload),
+			})
+
+		//  resendSignatureEmail
+		case packageActions.RESEND_SIGNATURE_EMAIL_INITIAL_STATE:
+			return state.merge({
+				resendSignatureEmail: stateUtility.getItemInitialState(),
+			})
+		case packageActions.RESEND_SIGNATURE_EMAIL_LOADING:
+			return state.merge({
+				resendSignatureEmail: stateUtility.getItemLoading(),
+			})
+		case packageActions.RESEND_SIGNATURE_EMAIL_FULFILLED:
+			return state.merge({
+				resendSignatureEmail: stateUtility.getItemFulfilled(),
+			})
+		case packageActions.RESEND_SIGNATURE_EMAIL_REJECTED:
+			return state.merge({
+				resendSignatureEmail: stateUtility.getItemRejected(action.payload),
 			})
 
 		//  getRecipients

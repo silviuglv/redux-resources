@@ -161,4 +161,10 @@ export const packageApi = {
 			method: 'PUT',
 		})
 	},
+	resendSigningEmail: (id: string) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/signature_email`,
+			method: 'PUT',
+		})
+	},
 }

@@ -287,6 +287,17 @@ function* getMyRecipient({ id, recipientToken }: AnyAction) {
 	}
 }
 
+function* resendSigningEmail({ id }: AnyAction) {
+	try {
+		yield put(packageActions.resendSignatureEmailInitialState())
+		yield put(packageActions.resendSignatureEmailLoading())
+		const { data } = yield call(packageApi.resendSigningEmail, id)
+		yield put(packageActions.resendSignatureEmailFulfilled(data))
+	} catch (error) {
+		yield put(packageActions.resendSignatureEmailRejected(error))
+	}
+}
+
 export function* packages() {
 	yield takeEvery(packageActions.GET_PACKAGES, getPackages)
 	yield takeEvery(packageActions.GET_PACKAGE_LEXICON, getPackageLexicon)
@@ -310,4 +321,5 @@ export function* packages() {
 	yield takeEvery(packageActions.GET_DOCUMENT_PAGE_IMAGE_URL, getDocumentPageImageUrl)
 	yield takeEvery(packageActions.PUBLISH, publish)
 	yield takeEvery(packageActions.GET_MY_RECIPIENT, getMyRecipient)
+	yield takeEvery(packageActions.RESEND_SIGNATURE_EMAIL, resendSigningEmail)
 }

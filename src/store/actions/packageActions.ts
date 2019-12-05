@@ -52,6 +52,12 @@ const types = {
 	UPDATE_PACKAGE_FULFILLED: '[packages] UPDATE_PACKAGE_FULFILLED',
 	UPDATE_PACKAGE_REJECTED: '[packages] UPDATE_PACKAGE_REJECTED',
 
+	RESEND_SIGNATURE_EMAIL: '[packages] RESEND_SIGNATURE_EMAIL',
+	RESEND_SIGNATURE_EMAIL_INITIAL_STATE: '[packages] RESEND_SIGNATURE_EMAIL_INITIAL_STATE',
+	RESEND_SIGNATURE_EMAIL_LOADING: '[packages] RESEND_SIGNATURE_EMAIL_LOADING',
+	RESEND_SIGNATURE_EMAIL_FULFILLED: '[packages] RESEND_SIGNATURE_EMAIL_FULFILLED',
+	RESEND_SIGNATURE_EMAIL_REJECTED: '[packages] RESEND_SIGNATURE_EMAIL_REJECTED',
+
 	GET_PACKAGE_RECIPIENTS: '[packages] GET_PACKAGE_RECIPIENTS',
 	GET_PACKAGE_RECIPIENTS_INITIAL_STATE: '[packages] GET_PACKAGE_RECIPIENTS_INITIAL_STATE',
 	GET_PACKAGE_RECIPIENTS_LOADING: '[packages] GET_PACKAGE_RECIPIENTS_LOADING',
@@ -253,6 +259,27 @@ export const packageActions = {
 	}),
 	updatePackageRejected: (payload: Error) => ({
 		type: types.UPDATE_PACKAGE_REJECTED,
+		payload,
+	}),
+
+	resendSignatureEmail: (id: string) => ({
+		type: types.RESEND_SIGNATURE_EMAIL,
+		id,
+	}),
+	resendSignatureEmailInitialState: () => ({
+		type: types.RESEND_SIGNATURE_EMAIL_INITIAL_STATE,
+		payload: null,
+	}),
+	resendSignatureEmailLoading: () => ({
+		type: types.RESEND_SIGNATURE_EMAIL_LOADING,
+		payload: null,
+	}),
+	resendSignatureEmailFulfilled: (payload: Package) => ({
+		type: types.RESEND_SIGNATURE_EMAIL_FULFILLED,
+		payload,
+	}),
+	resendSignatureEmailRejected: (payload: Error) => ({
+		type: types.RESEND_SIGNATURE_EMAIL_REJECTED,
 		payload,
 	}),
 
