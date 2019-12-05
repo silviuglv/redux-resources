@@ -68,6 +68,15 @@ export const packageApi = {
 			data: keysToSnakeCase(data),
 		})
 	},
+	getMyRecipient: (id: string, recipientToken: string) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/recipients/me`,
+			method: 'GET',
+			headers: {
+				Recipient: recipientToken,
+			},
+		})
+	},
 	updateRecipient: (id: string, recipientId: string, data: UpdateRecipientRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/recipients/${recipientId}`,

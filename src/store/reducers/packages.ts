@@ -322,6 +322,24 @@ export const packages = (state = initialState, action) => {
 				documents: doccies,
 			})
 
+		//  myRecipient
+		case packageActions.GET_MY_RECIPIENT_INITIAL_STATE:
+			return state.merge({
+				recipient: stateUtility.getItemInitialState(),
+			})
+		case packageActions.GET_MY_RECIPIENT_LOADING:
+			return state.merge({
+				recipient: stateUtility.getItemLoading(),
+			})
+		case packageActions.GET_MY_RECIPIENT_FULFILLED:
+			return state.merge({
+				recipient: stateUtility.getItemFulfilled(action.payload),
+			})
+		case packageActions.GET_MY_RECIPIENT_REJECTED:
+			return state.merge({
+				recipient: stateUtility.getItemRejected(action.payload),
+			})
+
 		default:
 			return state
 	}

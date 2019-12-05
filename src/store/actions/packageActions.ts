@@ -129,6 +129,12 @@ const types = {
 	PUBLISH_LOADING: '[packages] PUBLISH_LOADING',
 	PUBLISH_FULFILLED: '[packages] PUBLISH_FULFILLED',
 	PUBLISH_REJECTED: '[packages] PUBLISH_REJECTED',
+
+	GET_MY_RECIPIENT: '[packages] GET_MY_RECIPIENT',
+	GET_MY_RECIPIENT_INITIAL_STATE: '[packages] GET_MY_RECIPIENT_INITIAL_STATE',
+	GET_MY_RECIPIENT_LOADING: '[packages] GET_MY_RECIPIENT_LOADING',
+	GET_MY_RECIPIENT_FULFILLED: '[packages] GET_MY_RECIPIENT_FULFILLED',
+	GET_MY_RECIPIENT_REJECTED: '[packages] GET_MY_RECIPIENT_REJECTED',
 }
 
 export const packageActions = {
@@ -592,5 +598,27 @@ export const packageActions = {
 		packageId,
 		successCb,
 		errorCb,
+	}),
+
+	getMyRecipient: (id: string, recipientToken: string) => ({
+		type: types.GET_MY_RECIPIENT,
+		id,
+		recipientToken,
+	}),
+	getMyRecipientInitialState: () => ({
+		type: types.GET_MY_RECIPIENT_INITIAL_STATE,
+		payload: null,
+	}),
+	getMyRecipientLoading: () => ({
+		type: types.GET_MY_RECIPIENT_LOADING,
+		payload: null,
+	}),
+	getMyRecipientFulfilled: (payload: PaginatedApiResponse<Package>) => ({
+		type: types.GET_MY_RECIPIENT_FULFILLED,
+		payload,
+	}),
+	getMyRecipientRejected: (payload: Error) => ({
+		type: types.GET_MY_RECIPIENT_REJECTED,
+		payload,
 	}),
 }

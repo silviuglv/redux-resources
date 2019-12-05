@@ -276,6 +276,17 @@ function* deleteRecipient({ id, recipientId, successCb, errorCb }: AnyAction) {
 	}
 }
 
+function* getMyRecipient({ id, recipientToken }: AnyAction) {
+	try {
+		yield put(packageActions.getMyRecipientInitialState())
+		yield put(packageActions.getMyRecipientLoading())
+		const { data } = yield call(packageApi.getMyRecipient, id, recipientToken)
+		yield put(packageActions.getMyRecipientFulfilled(data))
+	} catch (error) {
+		yield put(packageActions.getMyRecipientRejected(error))
+	}
+}
+
 export function* packages() {
 	yield takeEvery(packageActions.GET_PACKAGES, getPackages)
 	yield takeEvery(packageActions.GET_PACKAGE_LEXICON, getPackageLexicon)
@@ -298,4 +309,5 @@ export function* packages() {
 	yield takeEvery(packageActions.GET_DOCUMENT_IMAGE_URL, getDocumentImageUrl)
 	yield takeEvery(packageActions.GET_DOCUMENT_PAGE_IMAGE_URL, getDocumentPageImageUrl)
 	yield takeEvery(packageActions.PUBLISH, publish)
+	yield takeEvery(packageActions.GET_MY_RECIPIENT, getMyRecipient)
 }
