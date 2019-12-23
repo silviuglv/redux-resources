@@ -165,8 +165,9 @@ function* updateDocument({ packageId, documentId, payload, successCb, errorCb }:
 	try {
 		yield put(packageActions.updateDocumentInitialState())
 		yield put(packageActions.updateDocumentLoading())
-		const { data } = yield call(packageApi.updateDocument, packageId, documentId, payload)
-		yield put(packageActions.updateDocumentFulfilled(data))
+		yield call(packageApi.updateDocument, packageId, documentId, payload)
+		const { data } = yield call(packageApi.getDocuments, packageId)
+		yield put(packageActions.getPackageDocumentsFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Document name updated', 2000))
 		successCb !== undefined && successCb()
 	} catch (error) {
