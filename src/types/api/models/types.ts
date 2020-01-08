@@ -13,8 +13,8 @@ export type FieldTypes =
 	| 'Single Choice'
 	| 'Multiple Choice'
 	| 'Dropdown'
-	| 'Name'
-	| 'Email'
+	| 'Date Signed'
+	| 'Number'
 
 export type PackageStatusTypes = 'Draft' | 'Awaiting Signature' | 'Complete' | 'Cancelled'
 
