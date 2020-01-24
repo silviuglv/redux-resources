@@ -13,9 +13,8 @@ export interface CreateFieldRequest {
 }
 
 export interface GetFieldsRequest extends BaseGetRequest {
-	page_ids?: string
+	package_id?: string
 	recipient_ids?: string
-	order_by?: 'id'
 }
 
 export interface GetFieldTypesRequest {
@@ -30,4 +29,5 @@ export interface UpdateFieldRequest {
 	left: number
 	width: number
 	height: number
+	value: string
 }

@@ -20,7 +20,7 @@ export type PackageStatusTypes = 'Draft' | 'Awaiting Signature' | 'Complete' | '
 
 export type PackageTypes = 'Just Me' | 'Contacts' | 'Website Visitors'
 
-export type RecipientTypes = 'signer' | 'email_cc'
+export type RecipientTypes = 'signer' | 'viewer'
 
 export type ProviderTypes = 'google' | 'dropbox' | 'approveme' | 'box'
 
