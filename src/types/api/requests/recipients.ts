@@ -13,3 +13,7 @@ export interface UpdateRecipientRequest {
 	email: string
 	type: RecipientTypes
 }
+
+export interface MessageSenderRequest {
+	message: string
+}

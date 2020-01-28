@@ -148,3 +148,9 @@ export interface UsersState {
 	updateNotificationPreferences: Observer
 	confirmEmail: Observer
 }
+
+export interface RecipientsState {
+	validateRecipient: Observer
+	declineSignature: Observer
+	messageSender: Observer
+}

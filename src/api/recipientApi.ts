@@ -1,0 +1,25 @@
+import axios from 'axios'
+import config from '../config'
+import { MessageSenderRequest } from '../types'
+
+export const recipientApi = {
+	validateRecipient: (token: string) => {
+		return axios({
+			url: `${config.apiBase}/oauth/token/${token}`,
+			method: 'GET',
+		})
+	},
+	declineSignature: (package_id: string, recipient_id: string) => {
+		return axios({
+			url: `${config.apiBase}/packages/${package_id}/recipients/${recipient_id}/decline`,
+			method: 'POST',
+		})
+	},
+	messageSender: (package_id: string, recipient_id: string, data: MessageSenderRequest) => {
+		return axios({
+			url: `${config.apiBase}/packages/${package_id}/recpients/${recipient_id}/message`,
+			method: 'POST',
+			data,
+		})
+	},
+}

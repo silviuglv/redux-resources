@@ -2,6 +2,14 @@ export type FeedbackTypes = 'design-improvements' | 'feature-request' | 'bug-rep
 
 export type AccountRoles = 'full_access' | 'basic_access' | 'read_only'
 
+export type BoardroomRoles =
+	| 'designated_signer'
+	| 'designated_viewer'
+	| 'board_member'
+	| 'account_manager'
+	| 'team_member'
+	| 'team_manager'
+
 export type FieldTypes =
 	| 'Signature'
 	| 'Initials'
