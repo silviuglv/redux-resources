@@ -3,6 +3,11 @@ export interface CreateDocumentRequest {
 	file
 }
 
+export interface CreateDocumentBuildRequest {
+	name?: string
+	content: string
+}
+
 export interface UpdateDocumentRequest {
 	name: string
 }
