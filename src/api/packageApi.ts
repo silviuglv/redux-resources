@@ -10,6 +10,7 @@ import {
 	UpdateRecipientRequest,
 	GetFieldsRequest,
 	CreateDocumentRequest,
+	CreateDocumentBuildRequest,
 	UpdateDocumentRequest,
 } from '../types'
 
@@ -108,6 +109,13 @@ export const packageApi = {
 	createDocuments: (id: string, data: CreateDocumentRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/documents`,
+			method: 'POST',
+			data,
+		})
+	},
+	createDocumentsBuild: (id: string, data: CreateDocumentBuildRequest) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/documents/build`,
 			method: 'POST',
 			data,
 		})

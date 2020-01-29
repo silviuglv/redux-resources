@@ -3,7 +3,10 @@ import { BaseGetRequest } from './types'
 export interface CreatePackageDocumentRequest {
 	file
 }
-
+export interface CreatePackageDocumentBuildRequest {
+	name?: string
+	content: string
+}
 export interface CreatePackageRequest {
 	account_id: string
 	type_id: string

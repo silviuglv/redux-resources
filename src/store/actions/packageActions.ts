@@ -1,5 +1,6 @@
 import {
 	CreatePackageDocumentRequest,
+	CreatePackageDocumentBuildRequest,
 	CreatePackageRequest,
 	CreateRecipientRequest,
 	Document,
@@ -89,6 +90,7 @@ const types = {
 	GET_PACKAGE_DOCUMENTS_REJECTED: '[packages] GET_PACKAGE_DOCUMENTS_REJECTED',
 
 	CREATE_PACKAGE_DOCUMENTS: '[packages] CREATE_PACKAGE_DOCUMENTS',
+	CREATE_PACKAGE_DOCUMENTS_BUILD: '[packages] CREATE_PACKAGE_DOCUMENTS_BUILD',
 	CREATE_PACKAGE_DOCUMENTS_INITIAL_STATE: '[packages] CREATE_PACKAGE_DOCUMENTS_INITIAL_STATE',
 	CREATE_PACKAGE_DOCUMENTS_LOADING: '[packages] CREATE_PACKAGE_DOCUMENTS_LOADING',
 	CREATE_PACKAGE_DOCUMENTS_FULFILLED: '[packages] CREATE_PACKAGE_DOCUMENTS_FULFILLED',
@@ -431,6 +433,13 @@ export const packageActions = {
 
 	createPackageDocuments: (id: string, payload: CreatePackageDocumentRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_PACKAGE_DOCUMENTS,
+		payload,
+		id,
+		successCb,
+		errorCb,
+	}),
+	createPackageDocumentsBuild: (id: string, payload: CreatePackageDocumentBuildRequest, successCb?, errorCb?) => ({
+		type: types.CREATE_PACKAGE_DOCUMENTS_BUILD,
 		payload,
 		id,
 		successCb,

@@ -154,7 +154,20 @@ function* createDocuments({ id, payload, successCb, errorCb }: AnyAction) {
 		yield put(packageActions.createPackageDocumentsLoading())
 		const { data } = yield call(packageApi.createDocuments, id, payload)
 		yield put(packageActions.createPackageDocumentsFulfilled(data))
-		successCb !== undefined && successCb()
+		successCb !== undefined && successCb(data)
+	} catch (error) {
+		yield put(packageActions.createPackageDocumentsRejected(error))
+		errorCb !== undefined && errorCb()
+	}
+}
+
+function* createDocumentsBuild({ id, payload, successCb, errorCb }: AnyAction) {
+	try {
+		yield put(packageActions.createPackageDocumentsInitialState())
+		yield put(packageActions.createPackageDocumentsLoading())
+		const { data } = yield call(packageApi.createDocumentsBuild, id, payload)
+		yield put(packageActions.createPackageDocumentsFulfilled(data))
+		successCb !== undefined && successCb(data)
 	} catch (error) {
 		yield put(packageActions.createPackageDocumentsRejected(error))
 		errorCb !== undefined && errorCb()
@@ -313,6 +326,7 @@ export function* packages() {
 	yield takeEvery(packageActions.GET_PACKAGE_DOCUMENTS, getDocuments)
 	yield takeEvery(packageActions.GET_PAGES, getPages)
 	yield takeEvery(packageActions.CREATE_PACKAGE_DOCUMENTS, createDocuments)
+	yield takeEvery(packageActions.CREATE_PACKAGE_DOCUMENTS_BUILD, createDocumentsBuild)
 	yield takeEvery(packageActions.UPDATE_DOCUMENT, updateDocument)
 	yield takeEvery(packageActions.CREATE_DOCUMENT_FROM_CONNECTED_SERVICE, createDocumentFromSocialAccount)
 	yield takeEvery(packageActions.DELETE_DOCUMENT, deleteDocument)
