@@ -13,6 +13,7 @@ import {
 	Observer,
 	Package,
 	PackageType,
+	PackageStatus,
 	Page,
 	PaginatedResponse,
 	Plan,
@@ -22,7 +23,6 @@ import {
 	User,
 	UserMeta,
 } from '../../types'
-
 export interface AccountsState {
 	list: PaginatedResponse<Account>
 	item: ItemResponse<Account>
@@ -120,6 +120,10 @@ export interface PackagesState {
 
 export interface PackageTypesState {
 	list: PaginatedResponse<PackageType>
+}
+
+export interface PackageStatusesState {
+	list: PaginatedResponse<PackageStatus>
 }
 
 export interface PagesState {

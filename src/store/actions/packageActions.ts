@@ -332,7 +332,6 @@ export const packageActions = {
 		type: types.GET_PACKAGE_RECIPIENTS_REJECTED,
 		payload,
 	}),
-
 	createPackageRecipient: (id: string, payload: CreateRecipientRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_PACKAGE_RECIPIENT,
 		payload,
@@ -445,6 +444,13 @@ export const packageActions = {
 		successCb,
 		errorCb,
 	}),
+	// createPackageDocumentsRenderFields: (id: string, payload: CreatePDocumentRenderFields, successCb?, errorCb?) => ({
+	// 	type: types.CREATE_PACKAGE_DOCUMENTS_BUILD,
+	// 	payload,
+	// 	id,
+	// 	successCb,
+	// 	errorCb,
+	// }),
 	createPackageDocumentsInitialState: () => ({
 		type: types.CREATE_PACKAGE_DOCUMENTS_INITIAL_STATE,
 		payload: null,

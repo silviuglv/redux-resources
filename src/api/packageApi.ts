@@ -11,6 +11,7 @@ import {
 	GetFieldsRequest,
 	CreateDocumentRequest,
 	CreateDocumentBuildRequest,
+	CreateDocumentRenderFieldsRequest,
 	UpdateDocumentRequest,
 } from '../types'
 
@@ -116,6 +117,13 @@ export const packageApi = {
 	createDocumentsBuild: (id: string, data: CreateDocumentBuildRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/documents/build`,
+			method: 'POST',
+			data,
+		})
+	},
+	createDocumentRenderFields: (id: string, data: CreateDocumentRenderFieldsRequest) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/documents/render`,
 			method: 'POST',
 			data,
 		})
