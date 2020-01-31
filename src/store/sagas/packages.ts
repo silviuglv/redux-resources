@@ -83,45 +83,6 @@ function* updatePackage({ id, payload, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* getRecipients({ id, payload = {}, successCb, errorCb }: AnyAction) {
-	try {
-		yield put(packageActions.getPackageRecipientsInitialState())
-		yield put(packageActions.getPackageRecipientsLoading())
-		const { data } = yield call(packageApi.getRecipients, id, payload)
-		yield put(packageActions.getPackageRecipientsFulfilled(data))
-		successCb && successCb()
-	} catch (error) {
-		yield put(packageActions.getPackageRecipientsRejected(error))
-		errorCb && errorCb()
-	}
-}
-
-function* createRecipient({ id, payload, successCb, errorCb }: AnyAction) {
-	try {
-		yield put(packageActions.createPackageRecipientInitialState())
-		yield put(packageActions.createPackageRecipientLoading())
-		const { data } = yield call(packageApi.createRecipient, id, payload)
-		yield put(packageActions.createPackageRecipientFulfilled(data))
-		successCb !== undefined && successCb()
-	} catch (error) {
-		yield put(packageActions.createPackageRecipientRejected(error))
-		errorCb !== undefined && errorCb()
-	}
-}
-
-function* updateRecipient({ id, recipientId, payload, successCb, errorCb }: AnyAction) {
-	try {
-		yield put(packageActions.updatePackageRecipientInitialState())
-		yield put(packageActions.updatePackageRecipientLoading())
-		const { data } = yield call(packageApi.updateRecipient, id, recipientId, payload)
-		yield put(packageActions.updatePackageRecipientFulfilled(data))
-		successCb !== undefined && successCb()
-	} catch (error) {
-		yield put(packageActions.updatePackageRecipientRejected(error))
-		errorCb !== undefined && errorCb()
-	}
-}
-
 function* getDocuments({ id, payload = {}, successCb = undefined, errorCb = undefined }: AnyAction) {
 	try {
 		yield put(packageActions.getPackageDocumentsInitialState())
@@ -277,30 +238,6 @@ function* deleteDocument({ id, documentId, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* deleteRecipient({ id, recipientId, successCb, errorCb }: AnyAction) {
-	try {
-		yield put(packageActions.deletePackageRecipientInitialState())
-		yield put(packageActions.deletePackageRecipientLoading())
-		yield call(packageApi.deleteRecipient, id, recipientId)
-		yield put(packageActions.deletePackageRecipientFulfilled())
-		successCb !== undefined && successCb()
-	} catch (error) {
-		yield put(packageActions.deletePackageRecipientRejected(error))
-		errorCb !== undefined && errorCb()
-	}
-}
-
-function* getMyRecipient({ id, recipientToken }: AnyAction) {
-	try {
-		yield put(packageActions.getMyRecipientInitialState())
-		yield put(packageActions.getMyRecipientLoading())
-		const { data } = yield call(packageApi.getMyRecipient, id, recipientToken)
-		yield put(packageActions.getMyRecipientFulfilled(data))
-	} catch (error) {
-		yield put(packageActions.getMyRecipientRejected(error))
-	}
-}
-
 function* resendSigningEmail({ id }: AnyAction) {
 	try {
 		yield put(packageActions.resendSignatureEmailInitialState())
@@ -320,9 +257,6 @@ export function* packages() {
 	yield takeEvery(packageActions.UPDATE_PACKAGE, updatePackage)
 	yield takeEvery(packageActions.DELETE_PACKAGE, deletePackage)
 	yield takeEvery(packageActions.DOWNLOAD_PACKAGE_DOCUMENT, downloadPackageDocument)
-	yield takeEvery(packageActions.GET_PACKAGE_RECIPIENTS, getRecipients)
-	yield takeEvery(packageActions.CREATE_PACKAGE_RECIPIENT, createRecipient)
-	yield takeEvery(packageActions.UPDATE_PACKAGE_RECIPIENT, updateRecipient)
 	yield takeEvery(packageActions.GET_PACKAGE_DOCUMENTS, getDocuments)
 	yield takeEvery(packageActions.GET_PAGES, getPages)
 	yield takeEvery(packageActions.CREATE_PACKAGE_DOCUMENTS, createDocuments)
@@ -330,11 +264,9 @@ export function* packages() {
 	yield takeEvery(packageActions.UPDATE_DOCUMENT, updateDocument)
 	yield takeEvery(packageActions.CREATE_DOCUMENT_FROM_CONNECTED_SERVICE, createDocumentFromSocialAccount)
 	yield takeEvery(packageActions.DELETE_DOCUMENT, deleteDocument)
-	yield takeEvery(packageActions.DELETE_PACKAGE_RECIPIENT, deleteRecipient)
 	yield takeEvery(packageActions.GET_PACKAGE_IMAGE_URL, getPackageImageUrl)
 	yield takeEvery(packageActions.GET_DOCUMENT_IMAGE_URL, getDocumentImageUrl)
 	yield takeEvery(packageActions.GET_DOCUMENT_PAGE_IMAGE_URL, getDocumentPageImageUrl)
 	yield takeEvery(packageActions.PUBLISH, publish)
-	yield takeEvery(packageActions.GET_MY_RECIPIENT, getMyRecipient)
 	yield takeEvery(packageActions.RESEND_SIGNATURE_EMAIL, resendSigningEmail)
 }

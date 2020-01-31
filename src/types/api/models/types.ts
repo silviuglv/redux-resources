@@ -10,7 +10,7 @@ export type BoardroomRoles =
 	| 'team_member'
 	| 'team_manager'
 
-export type FieldTypes =
+/*export type FieldTypes =
 	| 'Signature'
 	| 'Initials'
 	| 'Date'
@@ -23,12 +23,12 @@ export type FieldTypes =
 	| 'Dropdown'
 	| 'Date Signed'
 	| 'Number'
-
+*/
 // export type PackageStatusTypes = 'Draft' | 'Awaiting Signature' | 'Complete' | 'Cancelled'
 
 //export type PackageTypes = 'Just Me' | 'Contacts' | 'Website Visitors'
 
-export type RecipientTypes = 'signer' | 'viewer'
+//export type RecipientTypes = 'signer' | 'viewer'
 
 export type ProviderTypes = 'google' | 'dropbox' | 'approveme' | 'box'
 

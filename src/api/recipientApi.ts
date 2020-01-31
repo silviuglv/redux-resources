@@ -1,8 +1,45 @@
 import axios from 'axios'
 import config from '../config'
-import { MessageSenderRequest } from '../types'
+import { keysToSnakeCase } from '../utilities'
+import { MessageSenderRequest, CreateRecipientRequest, UpdateRecipientRequest } from '../types'
 
 export const recipientApi = {
+	getRecipients: (id: string, params: any = {}) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/recipients`,
+			method: 'GET',
+			params,
+		})
+	},
+	createRecipient: (id: string, data: CreateRecipientRequest) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/recipients`,
+			method: 'POST',
+			data: keysToSnakeCase(data),
+		})
+	},
+	getMyRecipient: (id: string, recipientToken: string) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/recipients/me`,
+			method: 'GET',
+			headers: {
+				Recipient: recipientToken,
+			},
+		})
+	},
+	updateRecipient: (id: string, recipientId: string, data: UpdateRecipientRequest) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/recipients/${recipientId}`,
+			method: 'PUT',
+			data: keysToSnakeCase(data),
+		})
+	},
+	deleteRecipient: (id: string, recipientId: string) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/recipients/${recipientId}`,
+			method: 'DELETE',
+		})
+	},
 	validateRecipient: (token: string) => {
 		return axios({
 			url: `${config.apiBase}/oauth/token/${token}`,

@@ -154,6 +154,8 @@ export interface UsersState {
 }
 
 export interface RecipientsState {
+	recipients: PaginatedResponse<Recipient>
+	recipient: Observer
 	validateRecipient: Observer
 	declineSignature: Observer
 	messageSender: Observer

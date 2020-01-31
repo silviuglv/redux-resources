@@ -1,5 +1,4 @@
 import { User } from './cms'
-import { FieldTypes, RecipientTypes } from './types'
 
 export interface Document {
 	id: string
@@ -22,7 +21,7 @@ export interface DocumentDraft {
 
 export interface Field {
 	id: string
-	type: FieldTypes
+	type: string
 	label: string | null
 	meta
 	is_required: boolean
@@ -96,7 +95,7 @@ export interface Recipient {
 	id: string
 	first_name: string
 	last_name: string
-	type: RecipientTypes
+	type: string
 	email: string
 	send_order: number | null
 	token_expiration_date: string | null

@@ -1,6 +1,43 @@
-import { MessageSenderRequest } from '../../types'
+import {
+	PaginatedApiResponse,
+	MessageSenderRequest,
+	CreateRecipientRequest,
+	UpdateRecipientRequest,
+	Package,
+	Recipient,
+} from '../../types'
 
 const types = {
+	GET_MY_RECIPIENT: '[packages] GET_MY_RECIPIENT',
+	GET_MY_RECIPIENT_INITIAL_STATE: '[packages] GET_MY_RECIPIENT_INITIAL_STATE',
+	GET_MY_RECIPIENT_LOADING: '[packages] GET_MY_RECIPIENT_LOADING',
+	GET_MY_RECIPIENT_FULFILLED: '[packages] GET_MY_RECIPIENT_FULFILLED',
+	GET_MY_RECIPIENT_REJECTED: '[packages] GET_MY_RECIPIENT_REJECTED',
+
+	GET_PACKAGE_RECIPIENTS: '[packages] GET_PACKAGE_RECIPIENTS',
+	GET_PACKAGE_RECIPIENTS_INITIAL_STATE: '[packages] GET_PACKAGE_RECIPIENTS_INITIAL_STATE',
+	GET_PACKAGE_RECIPIENTS_LOADING: '[packages] GET_PACKAGE_RECIPIENTS_LOADING',
+	GET_PACKAGE_RECIPIENTS_FULFILLED: '[packages] GET_PACKAGE_RECIPIENTS_FULFILLED',
+	GET_PACKAGE_RECIPIENTS_REJECTED: '[packages] GET_PACKAGE_RECIPIENTS_REJECTED',
+
+	CREATE_PACKAGE_RECIPIENT: '[packages] CREATE_PACKAGE_RECIPIENT',
+	CREATE_PACKAGE_RECIPIENT_INITIAL_STATE: '[packages] CREATE_PACKAGE_RECIPIENT_INITIAL_STATE',
+	CREATE_PACKAGE_RECIPIENT_LOADING: '[packages] CREATE_PACKAGE_RECIPIENT_LOADING',
+	CREATE_PACKAGE_RECIPIENT_FULFILLED: '[packages] CREATE_PACKAGE_RECIPIENT_FULFILLED',
+	CREATE_PACKAGE_RECIPIENT_REJECTED: '[packages] CREATE_PACKAGE_RECIPIENT_REJECTED',
+
+	UPDATE_PACKAGE_RECIPIENT: '[packages] UPDATE_PACKAGE_RECIPIENT',
+	UPDATE_PACKAGE_RECIPIENT_INITIAL_STATE: '[packages] UPDATE_PACKAGE_RECIPIENT_INITIAL_STATE',
+	UPDATE_PACKAGE_RECIPIENT_LOADING: '[packages] UPDATE_PACKAGE_RECIPIENT_LOADING',
+	UPDATE_PACKAGE_RECIPIENT_FULFILLED: '[packages] UPDATE_PACKAGE_RECIPIENT_FULFILLED',
+	UPDATE_PACKAGE_RECIPIENT_REJECTED: '[packages] UPDATE_PACKAGE_RECIPIENT_REJECTED',
+
+	DELETE_PACKAGE_RECIPIENT: '[packages] DELETE_PACKAGE_RECIPIENT',
+	DELETE_PACKAGE_RECIPIENT_INITIAL_STATE: '[packages] DELETE_PACKAGE_RECIPIENT_INITIAL_STATE',
+	DELETE_PACKAGE_RECIPIENT_LOADING: '[packages] DELETE_PACKAGE_RECIPIENT_LOADING',
+	DELETE_PACKAGE_RECIPIENT_FULFILLED: '[packages] DELETE_PACKAGE_RECIPIENT_FULFILLED',
+	DELETE_PACKAGE_RECIPIENT_REJECTED: '[packages] DELETE_PACKAGE_RECIPIENT_REJECTED',
+
 	VALIDATE_RECIPIENT: '[recipients] VALIDATE_RECIPIENT',
 	VALIDATE_RECIPIENT_INITIAL_STATE: '[recipients] VALIDATE_RECIPIENT_INITIAL_STATE',
 	VALIDATE_RECIPIENT_LOADING: '[recipients] VALIDATE_RECIPIENT_LOADING',
@@ -22,6 +59,122 @@ const types = {
 
 export const recipientActions = {
 	...types,
+
+	getMyRecipient: (id: string, recipientToken: string) => ({
+		type: types.GET_MY_RECIPIENT,
+		id,
+		recipientToken,
+	}),
+	getMyRecipientInitialState: () => ({
+		type: types.GET_MY_RECIPIENT_INITIAL_STATE,
+		payload: null,
+	}),
+	getMyRecipientLoading: () => ({
+		type: types.GET_MY_RECIPIENT_LOADING,
+		payload: null,
+	}),
+	getMyRecipientFulfilled: (payload: PaginatedApiResponse<Package>) => ({
+		type: types.GET_MY_RECIPIENT_FULFILLED,
+		payload,
+	}),
+	getMyRecipientRejected: (payload: Error) => ({
+		type: types.GET_MY_RECIPIENT_REJECTED,
+		payload,
+	}),
+	createPackageRecipient: (id: string, payload: CreateRecipientRequest, successCb?, errorCb?) => ({
+		type: types.CREATE_PACKAGE_RECIPIENT,
+		payload,
+		id,
+		successCb,
+		errorCb,
+	}),
+	getPackageRecipients: (id: string, payload = {}, successCb?, errorCb?) => ({
+		type: types.GET_PACKAGE_RECIPIENTS,
+		payload,
+		id,
+		successCb,
+		errorCb,
+	}),
+	getPackageRecipientsInitialState: () => ({
+		type: types.GET_PACKAGE_RECIPIENTS_INITIAL_STATE,
+		payload: null,
+	}),
+	getPackageRecipientsLoading: () => ({
+		type: types.GET_PACKAGE_RECIPIENTS_LOADING,
+		payload: null,
+	}),
+	getPackageRecipientsFulfilled: (payload: PaginatedApiResponse<Recipient>) => ({
+		type: types.GET_PACKAGE_RECIPIENTS_FULFILLED,
+		payload,
+	}),
+	getPackageRecipientsRejected: (payload: Error) => ({
+		type: types.GET_PACKAGE_RECIPIENTS_REJECTED,
+		payload,
+	}),
+	createPackageRecipientInitialState: () => ({
+		type: types.CREATE_PACKAGE_RECIPIENT_INITIAL_STATE,
+		payload: null,
+	}),
+	createPackageRecipientLoading: () => ({
+		type: types.CREATE_PACKAGE_RECIPIENT_LOADING,
+		payload: null,
+	}),
+	createPackageRecipientFulfilled: (payload: Recipient) => ({
+		type: types.CREATE_PACKAGE_RECIPIENT_FULFILLED,
+		payload,
+	}),
+	createPackageRecipientRejected: (payload: Error) => ({
+		type: types.CREATE_PACKAGE_RECIPIENT_REJECTED,
+		payload,
+	}),
+	updatePackageRecipient: (id: string, recipientId: string, payload: UpdateRecipientRequest, successCb?, errorCb?) => ({
+		type: types.UPDATE_PACKAGE_RECIPIENT,
+		payload,
+		id,
+		recipientId,
+		successCb,
+		errorCb,
+	}),
+	updatePackageRecipientInitialState: () => ({
+		type: types.UPDATE_PACKAGE_RECIPIENT_INITIAL_STATE,
+		payload: null,
+	}),
+	updatePackageRecipientLoading: () => ({
+		type: types.UPDATE_PACKAGE_RECIPIENT_LOADING,
+		payload: null,
+	}),
+	updatePackageRecipientFulfilled: (payload: Recipient) => ({
+		type: types.UPDATE_PACKAGE_RECIPIENT_FULFILLED,
+		payload,
+	}),
+	updatePackageRecipientRejected: (payload: Error) => ({
+		type: types.UPDATE_PACKAGE_RECIPIENT_REJECTED,
+		payload,
+	}),
+	deletePackageRecipient: (id: string, recipientId: string, successCb?, errorCb?) => ({
+		type: types.DELETE_PACKAGE_RECIPIENT,
+		payload: null,
+		id,
+		recipientId,
+		successCb,
+		errorCb,
+	}),
+	deletePackageRecipientInitialState: () => ({
+		type: types.DELETE_PACKAGE_RECIPIENT_INITIAL_STATE,
+		payload: null,
+	}),
+	deletePackageRecipientLoading: () => ({
+		type: types.DELETE_PACKAGE_RECIPIENT_LOADING,
+		payload: null,
+	}),
+	deletePackageRecipientFulfilled: (response?) => ({
+		type: types.DELETE_PACKAGE_RECIPIENT_FULFILLED,
+		payload: response,
+	}),
+	deletePackageRecipientRejected: (payload: Error) => ({
+		type: types.DELETE_PACKAGE_RECIPIENT_REJECTED,
+		payload,
+	}),
 	validateRecipient: (token: string, successCb?, errorCb?) => ({
 		type: types.VALIDATE_RECIPIENT,
 		token,

@@ -147,79 +147,6 @@ export const packages = (state = initialState, action) => {
 			return state.merge({
 				resendSignatureEmail: stateUtility.getItemRejected(action.payload),
 			})
-
-		//  getRecipients
-		case packageActions.GET_PACKAGE_RECIPIENTS_INITIAL_STATE:
-			return state.merge({
-				recipients: stateUtility.getPaginationInitialState(),
-			})
-		case packageActions.GET_PACKAGE_RECIPIENTS_LOADING:
-			return state.merge({
-				recipients: stateUtility.getPaginationLoading(),
-			})
-		case packageActions.GET_PACKAGE_RECIPIENTS_FULFILLED:
-			return state.merge({
-				recipients: stateUtility.getPaginationFulfilled(action.payload),
-			})
-		case packageActions.GET_PACKAGE_RECIPIENTS_REJECTED:
-			return state.merge({
-				recipients: stateUtility.getPaginationRejected(action.payload),
-			})
-
-		//	Delete recipient
-		case packageActions.DELETE_PACKAGE_RECIPIENT_INITIAL_STATE:
-			return state.merge({
-				recipient: stateUtility.getObserverInitialState(),
-			})
-		case packageActions.DELETE_PACKAGE_RECIPIENT_LOADING:
-			return state.merge({
-				recipient: stateUtility.getObserverLoading(),
-			})
-		case packageActions.DELETE_PACKAGE_RECIPIENT_FULFILLED:
-			return state.merge({
-				recipient: stateUtility.getObserverFulfilled(),
-			})
-		case packageActions.DELETE_PACKAGE_RECIPIENT_REJECTED:
-			return state.merge({
-				recipient: stateUtility.getObserverRejected(action.payload),
-			})
-
-		//  createRecipient
-		case packageActions.CREATE_PACKAGE_RECIPIENT_INITIAL_STATE:
-			return state.merge({
-				recipient: stateUtility.getItemInitialState(),
-			})
-		case packageActions.CREATE_PACKAGE_RECIPIENT_LOADING:
-			return state.merge({
-				recipient: stateUtility.getItemLoading(),
-			})
-		case packageActions.CREATE_PACKAGE_RECIPIENT_FULFILLED:
-			return state.merge({
-				recipient: stateUtility.getItemFulfilled(action.payload),
-			})
-		case packageActions.CREATE_PACKAGE_RECIPIENT_REJECTED:
-			return state.merge({
-				recipient: stateUtility.getItemRejected(action.payload),
-			})
-
-		//  updateRecipient
-		case packageActions.UPDATE_PACKAGE_RECIPIENT_INITIAL_STATE:
-			return state.merge({
-				recipient: stateUtility.getItemInitialState(),
-			})
-		case packageActions.UPDATE_PACKAGE_RECIPIENT_LOADING:
-			return state.merge({
-				recipient: stateUtility.getItemLoading(),
-			})
-		case packageActions.UPDATE_PACKAGE_RECIPIENT_FULFILLED:
-			return state.merge({
-				recipient: stateUtility.getItemFulfilled(action.payload),
-			})
-		case packageActions.UPDATE_PACKAGE_RECIPIENT_REJECTED:
-			return state.merge({
-				recipient: stateUtility.getItemRejected(action.payload),
-			})
-
 		//  getPackageDocuments
 		case packageActions.GET_PACKAGE_DOCUMENTS_INITIAL_STATE:
 			return state.merge({
@@ -339,24 +266,6 @@ export const packages = (state = initialState, action) => {
 			doccies.data[doccyIndex].pages[paggyIndex].images = images
 			return state.merge({
 				documents: doccies,
-			})
-
-		//  myRecipient
-		case packageActions.GET_MY_RECIPIENT_INITIAL_STATE:
-			return state.merge({
-				recipient: stateUtility.getItemInitialState(),
-			})
-		case packageActions.GET_MY_RECIPIENT_LOADING:
-			return state.merge({
-				recipient: stateUtility.getItemLoading(),
-			})
-		case packageActions.GET_MY_RECIPIENT_FULFILLED:
-			return state.merge({
-				recipient: stateUtility.getItemFulfilled(action.payload),
-			})
-		case packageActions.GET_MY_RECIPIENT_REJECTED:
-			return state.merge({
-				recipient: stateUtility.getItemRejected(action.payload),
 			})
 
 		default:
