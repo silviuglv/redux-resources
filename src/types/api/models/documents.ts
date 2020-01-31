@@ -1,5 +1,5 @@
 import { User } from './cms'
-import { FieldTypes, PackageTypes, RecipientTypes } from './types'
+import { FieldTypes, RecipientTypes } from './types'
 
 export interface Document {
 	id: string
@@ -80,7 +80,7 @@ export interface PackageStatus {
 
 export interface PackageType {
 	id: string
-	name: PackageTypes
+	name: string
 }
 
 export interface Page {

@@ -33,3 +33,12 @@ export interface UpdatePackageRequest {
 	type_id?: string
 	folder_id?: string
 }
+
+export interface GetPackageStatusesRequest extends BaseGetRequest {
+	ids?: string
+	order_by?: 'id' | 'name'
+}
+
+export interface GetPackageTypesRequest extends BaseGetRequest {
+	order_by?: 'id' | 'name'
+}

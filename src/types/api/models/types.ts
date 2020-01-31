@@ -24,9 +24,9 @@ export type FieldTypes =
 	| 'Date Signed'
 	| 'Number'
 
-export type PackageStatusTypes = 'Draft' | 'Awaiting Signature' | 'Complete' | 'Cancelled'
+// export type PackageStatusTypes = 'Draft' | 'Awaiting Signature' | 'Complete' | 'Cancelled'
 
-export type PackageTypes = 'Just Me' | 'Contacts' | 'Website Visitors'
+//export type PackageTypes = 'Just Me' | 'Contacts' | 'Website Visitors'
 
 export type RecipientTypes = 'signer' | 'viewer'
 
