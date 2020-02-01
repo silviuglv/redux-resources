@@ -30,11 +30,6 @@ export type FieldTypes =
 
 //export type RecipientTypes = 'signer' | 'viewer'
 
-export interface RecipientType {
-	//	id: string
-	name: string
-}
-
 export type ProviderTypes = 'google' | 'dropbox' | 'approveme' | 'box'
 
 export type SignatureTypes = 'signature' | 'initials'

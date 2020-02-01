@@ -1,7 +1,7 @@
-export interface GetRecipientTypesRequest {
-	order_by?: 'name'
-}
 
+export interface GetRecipientTypesRequest {
+	name: string
+}
 export interface CreateRecipientRequest {
 	first_name: string
 	last_name: string

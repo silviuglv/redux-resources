@@ -1,10 +1,9 @@
-import { FieldTypes } from '../models'
 import { BaseGetRequest } from './types'
 
 export interface CreateFieldRequest {
 	page_id: string
 	recipient_id: string
-	type: FieldTypes
+	type: string
 	is_required: boolean
 	top: number
 	left: number
@@ -23,7 +22,7 @@ export interface GetFieldTypesRequest {
 
 export interface UpdateFieldRequest {
 	recipient_id: string
-	type: FieldTypes
+	type: string
 	is_required: boolean
 	top: number
 	left: number

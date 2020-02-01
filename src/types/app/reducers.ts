@@ -19,6 +19,7 @@ import {
 	PaginatedResponse,
 	Plan,
 	Recipient,
+	RecipientType,
 	Signature,
 	Subscription,
 	User,
@@ -155,10 +156,13 @@ export interface UsersState {
 }
 
 export interface RecipientsState {
+	recipients: PaginatedResponse<Recipient>
+	recipient: Observer
 	validateRecipient: Observer
 	declineSignature: Observer
 	messageSender: Observer
 }
+
 export interface RecipientTypesState {
 	list: PaginatedResponse<RecipientType>
 }
