@@ -96,7 +96,8 @@ export interface Recipient {
 	id: string
 	first_name: string
 	last_name: string
-	type: RecipientType
+	//	type: RecipientType
+	type: string
 	email: string
 	send_order: number | null
 	token_expiration_date: string | null
