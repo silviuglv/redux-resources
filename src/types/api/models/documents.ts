@@ -103,6 +103,6 @@ export interface Recipient {
 }
 
 export interface RecipientType {
-	id: string
+	//	id: string
 	name: string
 }

@@ -45,11 +45,10 @@ export const recipientApi = {
 			method: 'DELETE',
 		})
 	},
-	getRecipientTypes: (params: GetRecipientTypesRequest) => {
+	getRecipientTypes: () => {
 		return axios({
 			url: `${config.apiBase}/recipient_types`,
 			method: 'GET',
-			params,
 		})
 	},
 	validateRecipient: (token: string) => {

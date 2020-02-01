@@ -9,9 +9,8 @@ const types = {
 
 export const recipientTypeActions = {
 	...types,
-	getRecipientTypes: (payload: GetRecipientTypesRequest = {}) => ({
+	getRecipientTypes: () => ({
 		type: types.GET_RECIPIENT_TYPES,
-		payload,
 	}),
 	setRecipientTypesLoading: () => ({
 		type: types.RECIPIENT_TYPES_LOADING,
