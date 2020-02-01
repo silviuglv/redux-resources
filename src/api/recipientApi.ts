@@ -1,7 +1,12 @@
 import axios from 'axios'
 import config from '../config'
 import { keysToSnakeCase } from '../utilities'
-import { MessageSenderRequest, CreateRecipientRequest, UpdateRecipientRequest } from '../types'
+import {
+	MessageSenderRequest,
+	GetRecipientTypesRequest,
+	CreateRecipientRequest,
+	UpdateRecipientRequest,
+} from '../types'
 
 export const recipientApi = {
 	getRecipients: (id: string, params: any = {}) => {
@@ -38,6 +43,13 @@ export const recipientApi = {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/recipients/${recipientId}`,
 			method: 'DELETE',
+		})
+	},
+	getRecipientTypes: (params: GetRecipientTypesRequest) => {
+		return axios({
+			url: `${config.apiBase}/recipient_types`,
+			method: 'GET',
+			params,
 		})
 	},
 	validateRecipient: (token: string) => {

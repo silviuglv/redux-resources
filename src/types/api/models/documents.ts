@@ -101,3 +101,8 @@ export interface Recipient {
 	token_expiration_date: string | null
 	signing_completed_at: string | null
 }
+
+export interface RecipientType {
+	id: string
+	name: string
+}

@@ -1,3 +1,8 @@
+import { BaseGetRequest } from './types'
+
+export interface GetRecipientTypesRequest extends BaseGetRequest {
+	order_by?: 'id' | 'name'
+}
 export interface CreateRecipientRequest {
 	first_name: string
 	last_name: string
