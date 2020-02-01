@@ -3,69 +3,6 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import { recipientApi } from '../../api'
 import { AnyAction } from 'redux'
 
-function* getRecipients({ id, payload = {}, successCb, errorCb }: AnyAction) {
-	try {
-		yield put(recipientActions.getPackageRecipientsInitialState())
-		yield put(recipientActions.getPackageRecipientsLoading())
-		const { data } = yield call(recipientApi.getRecipients, id, payload)
-		yield put(recipientActions.getPackageRecipientsFulfilled(data))
-		successCb && successCb()
-	} catch (error) {
-		yield put(recipientActions.getPackageRecipientsRejected(error))
-		errorCb && errorCb()
-	}
-}
-
-function* createRecipient({ id, payload, successCb, errorCb }: AnyAction) {
-	try {
-		yield put(recipientActions.createPackageRecipientInitialState())
-		yield put(recipientActions.createPackageRecipientLoading())
-		const { data } = yield call(recipientApi.createRecipient, id, payload)
-		yield put(recipientActions.createPackageRecipientFulfilled(data))
-		successCb !== undefined && successCb()
-	} catch (error) {
-		yield put(recipientActions.createPackageRecipientRejected(error))
-		errorCb !== undefined && errorCb()
-	}
-}
-
-function* updateRecipient({ id, recipientId, payload, successCb, errorCb }: AnyAction) {
-	try {
-		yield put(recipientActions.updatePackageRecipientInitialState())
-		yield put(recipientActions.updatePackageRecipientLoading())
-		const { data } = yield call(recipientApi.updateRecipient, id, recipientId, payload)
-		yield put(recipientActions.updatePackageRecipientFulfilled(data))
-		successCb !== undefined && successCb()
-	} catch (error) {
-		yield put(recipientActions.updatePackageRecipientRejected(error))
-		errorCb !== undefined && errorCb()
-	}
-}
-
-function* deleteRecipient({ id, recipientId, successCb, errorCb }: AnyAction) {
-	try {
-		yield put(recipientActions.deletePackageRecipientInitialState())
-		yield put(recipientActions.deletePackageRecipientLoading())
-		yield call(recipientApi.deleteRecipient, id, recipientId)
-		yield put(recipientActions.deletePackageRecipientFulfilled())
-		successCb !== undefined && successCb()
-	} catch (error) {
-		yield put(recipientActions.deletePackageRecipientRejected(error))
-		errorCb !== undefined && errorCb()
-	}
-}
-
-function* getMyRecipient({ id, recipientToken }: AnyAction) {
-	try {
-		yield put(recipientActions.getMyRecipientInitialState())
-		yield put(recipientActions.getMyRecipientLoading())
-		const { data } = yield call(recipientApi.getMyRecipient, id, recipientToken)
-		yield put(recipientActions.getMyRecipientFulfilled(data))
-	} catch (error) {
-		yield put(recipientActions.getMyRecipientRejected(error))
-	}
-}
-
 function* validateRecipient({ token, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(recipientActions.validateRecipientInitialState())
@@ -107,9 +44,4 @@ export function* recipients() {
 	yield takeEvery(recipientActions.VALIDATE_RECIPIENT, validateRecipient)
 	yield takeEvery(recipientActions.SIGNATURE_DECLINED, declineSignature)
 	yield takeEvery(recipientActions.MESSAGE_SENDER, messageSender)
-	yield takeEvery(recipientActions.GET_PACKAGE_RECIPIENTS, getRecipients)
-	yield takeEvery(recipientActions.CREATE_PACKAGE_RECIPIENT, createRecipient)
-	yield takeEvery(recipientActions.UPDATE_PACKAGE_RECIPIENT, updateRecipient)
-	yield takeEvery(recipientActions.DELETE_PACKAGE_RECIPIENT, deleteRecipient)
-	yield takeEvery(recipientActions.GET_MY_RECIPIENT, getMyRecipient)
 }

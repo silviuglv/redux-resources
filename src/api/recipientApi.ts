@@ -1,15 +1,8 @@
 import axios from 'axios'
 import config from '../config'
-import { keysToSnakeCase } from '../utilities'
-import {
-	MessageSenderRequest,
-	GetRecipientTypesRequest,
-	CreateRecipientRequest,
-	UpdateRecipientRequest,
-} from '../types'
+import { MessageSenderRequest } from '../types'
 
 export const recipientApi = {
-  
 	getRecipientTypes: () => {
 		return axios({
 			url: `${config.apiBase}/recipient_types`,

@@ -1,4 +1,3 @@
-
 export interface GetRecipientTypesRequest {
 	name: string
 }

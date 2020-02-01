@@ -1,5 +1,6 @@
 import axios from 'axios'
 import config from '../config'
+import { keysToSnakeCase } from '../utilities'
 import {
 	GetPackagesRequest,
 	GetPackageLexiconRequest,
@@ -10,6 +11,8 @@ import {
 	CreateDocumentBuildRequest,
 	CreateDocumentRenderFieldsRequest,
 	UpdateDocumentRequest,
+	CreateRecipientRequest,
+	UpdateRecipientRequest,
 } from '../types'
 
 export const packageApi = {
@@ -142,6 +145,42 @@ export const packageApi = {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/signature_email`,
 			method: 'PUT',
+		})
+	},
+	getRecipients: (id: string, params: any = {}) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/recipients`,
+			method: 'GET',
+			params,
+		})
+	},
+	createRecipient: (id: string, data: CreateRecipientRequest) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/recipients`,
+			method: 'POST',
+			data: keysToSnakeCase(data),
+		})
+	},
+	getMyRecipient: (id: string, recipientToken: string) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/recipients/me`,
+			method: 'GET',
+			headers: {
+				Recipient: recipientToken,
+			},
+		})
+	},
+	updateRecipient: (id: string, recipientId: string, data: UpdateRecipientRequest) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/recipients/${recipientId}`,
+			method: 'PUT',
+			data: keysToSnakeCase(data),
+		})
+	},
+	deleteRecipient: (id: string, recipientId: string) => {
+		return axios({
+			url: `${config.apiBase}/packages/${id}/recipients/${recipientId}`,
+			method: 'DELETE',
 		})
 	},
 }

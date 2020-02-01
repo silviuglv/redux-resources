@@ -1,7 +1,6 @@
 import { User } from './cms'
 import { FieldTypes } from './types'
 
-
 export interface Document {
 	id: string
 	name: string

@@ -19,7 +19,6 @@ import {
 	PaginatedResponse,
 	Plan,
 	Recipient,
-	RecipientType,
 	Signature,
 	Subscription,
 	User,
