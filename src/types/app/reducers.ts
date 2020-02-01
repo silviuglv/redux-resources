@@ -13,6 +13,7 @@ import {
 	Observer,
 	Package,
 	PackageType,
+	RecipientType,
 	PackageStatus,
 	Page,
 	PaginatedResponse,
@@ -157,4 +158,7 @@ export interface RecipientsState {
 	validateRecipient: Observer
 	declineSignature: Observer
 	messageSender: Observer
+}
+export interface RecipientTypesState {
+	list: PaginatedResponse<RecipientType>
 }

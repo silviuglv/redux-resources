@@ -1,5 +1,5 @@
 import { User } from './cms'
-import { FieldTypes, RecipientTypes } from './types'
+import { FieldTypes } from './types'
 
 export interface Document {
 	id: string
@@ -96,9 +96,14 @@ export interface Recipient {
 	id: string
 	first_name: string
 	last_name: string
-	type: RecipientTypes
+	type: string
 	email: string
 	send_order: number | null
 	token_expiration_date: string | null
 	signing_completed_at: string | null
+}
+
+export interface RecipientType {
+	//	id: string
+	name: string
 }

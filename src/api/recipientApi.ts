@@ -3,6 +3,12 @@ import config from '../config'
 import { MessageSenderRequest } from '../types'
 
 export const recipientApi = {
+	getRecipientTypes: () => {
+		return axios({
+			url: `${config.apiBase}/recipient_types`,
+			method: 'GET',
+		})
+	},
 	validateRecipient: (token: string) => {
 		return axios({
 			url: `${config.apiBase}/oauth/token/${token}`,

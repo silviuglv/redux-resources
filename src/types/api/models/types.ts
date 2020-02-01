@@ -28,7 +28,12 @@ export type FieldTypes =
 
 //export type PackageTypes = 'Just Me' | 'Contacts' | 'Website Visitors'
 
-export type RecipientTypes = 'signer' | 'viewer'
+//export type RecipientTypes = 'signer' | 'viewer'
+
+export interface RecipientType {
+	//	id: string
+	name: string
+}
 
 export type ProviderTypes = 'google' | 'dropbox' | 'approveme' | 'box'
 
