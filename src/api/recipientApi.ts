@@ -9,42 +9,7 @@ import {
 } from '../types'
 
 export const recipientApi = {
-	getRecipients: (id: string, params: any = {}) => {
-		return axios({
-			url: `${config.apiBase}/packages/${id}/recipients`,
-			method: 'GET',
-			params,
-		})
-	},
-	createRecipient: (id: string, data: CreateRecipientRequest) => {
-		return axios({
-			url: `${config.apiBase}/packages/${id}/recipients`,
-			method: 'POST',
-			data: keysToSnakeCase(data),
-		})
-	},
-	getMyRecipient: (id: string, recipientToken: string) => {
-		return axios({
-			url: `${config.apiBase}/packages/${id}/recipients/me`,
-			method: 'GET',
-			headers: {
-				Recipient: recipientToken,
-			},
-		})
-	},
-	updateRecipient: (id: string, recipientId: string, data: UpdateRecipientRequest) => {
-		return axios({
-			url: `${config.apiBase}/packages/${id}/recipients/${recipientId}`,
-			method: 'PUT',
-			data: keysToSnakeCase(data),
-		})
-	},
-	deleteRecipient: (id: string, recipientId: string) => {
-		return axios({
-			url: `${config.apiBase}/packages/${id}/recipients/${recipientId}`,
-			method: 'DELETE',
-		})
-	},
+  
 	getRecipientTypes: () => {
 		return axios({
 			url: `${config.apiBase}/recipient_types`,

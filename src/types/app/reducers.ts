@@ -13,6 +13,7 @@ import {
 	Observer,
 	Package,
 	PackageType,
+	RecipientType,
 	PackageStatus,
 	Page,
 	PaginatedResponse,

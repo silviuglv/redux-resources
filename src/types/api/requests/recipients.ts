@@ -1,7 +1,6 @@
-//import { BaseGetRequest } from './types'
 
 export interface GetRecipientTypesRequest {
-	name?: string
+	name: string
 }
 export interface CreateRecipientRequest {
 	first_name: string
