@@ -11,8 +11,3 @@ export interface CreateDocumentBuildRequest {
 export interface UpdateDocumentRequest {
 	name: string
 }
-
-export interface CreateDocumentRenderFieldsRequest {
-	name?: string
-	content: string
-}

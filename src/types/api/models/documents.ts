@@ -22,7 +22,7 @@ export interface DocumentDraft {
 
 export interface Field {
 	id: string
-	type: string
+	type: FieldTypes
 	label: string | null
 	meta
 	is_required: boolean

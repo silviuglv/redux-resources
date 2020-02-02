@@ -67,6 +67,7 @@ const types = {
 
 	CREATE_PACKAGE_DOCUMENTS: '[packages] CREATE_PACKAGE_DOCUMENTS',
 	CREATE_PACKAGE_DOCUMENTS_BUILD: '[packages] CREATE_PACKAGE_DOCUMENTS_BUILD',
+	CREATE_PACKAGE_DOCUMENTS_RENDER_FIELDS: '[packages] CREATE_PACKAGE_DOCUMENTS_RENDER_FIELDS',
 	CREATE_PACKAGE_DOCUMENTS_INITIAL_STATE: '[packages] CREATE_PACKAGE_DOCUMENTS_INITIAL_STATE',
 	CREATE_PACKAGE_DOCUMENTS_LOADING: '[packages] CREATE_PACKAGE_DOCUMENTS_LOADING',
 	CREATE_PACKAGE_DOCUMENTS_FULFILLED: '[packages] CREATE_PACKAGE_DOCUMENTS_FULFILLED',
@@ -346,13 +347,12 @@ export const packageActions = {
 		successCb,
 		errorCb,
 	}),
-	// createPackageDocumentsRenderFields: (id: string, payload: CreatePDocumentRenderFields, successCb?, errorCb?) => ({
-	// 	type: types.CREATE_PACKAGE_DOCUMENTS_BUILD,
-	// 	payload,
-	// 	id,
-	// 	successCb,
-	// 	errorCb,
-	// }),
+	createPackageDocumentsRenderFields: (id: string, successCb?, errorCb?) => ({
+		type: types.CREATE_PACKAGE_DOCUMENTS_RENDER_FIELDS,
+		id,
+		successCb,
+		errorCb,
+	}),
 	createPackageDocumentsInitialState: () => ({
 		type: types.CREATE_PACKAGE_DOCUMENTS_INITIAL_STATE,
 		payload: null,

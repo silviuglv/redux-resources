@@ -9,7 +9,6 @@ import {
 	GetFieldsRequest,
 	CreateDocumentRequest,
 	CreateDocumentBuildRequest,
-	CreateDocumentRenderFieldsRequest,
 	UpdateDocumentRequest,
 	CreateRecipientRequest,
 	UpdateRecipientRequest,
@@ -91,11 +90,10 @@ export const packageApi = {
 			data,
 		})
 	},
-	createDocumentRenderFields: (id: string, data: CreateDocumentRenderFieldsRequest) => {
+	createDocumentsRenderFields: (id: string) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/documents/render`,
 			method: 'POST',
-			data,
 		})
 	},
 	updateDocument: (packageId: string, documentId: string, data: UpdateDocumentRequest) => {
