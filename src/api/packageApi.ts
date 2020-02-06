@@ -9,6 +9,7 @@ import {
 	GetFieldsRequest,
 	CreateDocumentRequest,
 	CreateDocumentBuildRequest,
+	UpdateDocumentBuildRequest,
 	UpdateDocumentRequest,
 	CreateRecipientRequest,
 	UpdateRecipientRequest,
@@ -99,6 +100,13 @@ export const packageApi = {
 	updateDocument: (packageId: string, documentId: string, data: UpdateDocumentRequest) => {
 		return axios({
 			url: `${config.apiBase}/packages/${packageId}/documents/${documentId}`,
+			method: 'PUT',
+			data,
+		})
+	},
+	updateDocumentBuild: (packageId: string, documentId: string, data: UpdateDocumentBuildRequest) => {
+		return axios({
+			url: `${config.apiBase}/packages/${packageId}/documents/${documentId}/build`,
 			method: 'PUT',
 			data,
 		})

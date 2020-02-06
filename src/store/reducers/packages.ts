@@ -238,7 +238,17 @@ export const packages = (state = initialState, action) => {
 			return state.merge({
 				deleteDocument: stateUtility.getObserverRejected(action.payload),
 			})
-
+		// Update document
+		case packageActions.UPDATE_DOCUMENT_BUILD_LOADING:
+			return state.merge({
+				createPackageDocument: stateUtility.getObserverLoading(),
+				documents: stateUtility.removeJustItemInPegination(state.toJS().documents, action.documentId),
+			})
+		case packageActions.UPDATE_DOCUMENT_BUILD_FULFILLED:
+			return state.merge({
+				createPackageDocument: stateUtility.getObserverFulfilled(),
+				documents: stateUtility.addItemToPagination(state.toJS().documents, action.payload, false),
+			})
 		case packageActions.SET_PACKAGE_IMAGE_URL:
 			const packages = state.toJS().list
 			const packageIndex = packages.data.findIndex((item) => item.id === action.id)
@@ -246,7 +256,6 @@ export const packages = (state = initialState, action) => {
 			return state.merge({
 				list: packages,
 			})
-
 		case packageActions.SET_DOCUMENT_IMAGE_URL:
 			const docs = state.toJS().documents
 			const docIndex = docs.data.findIndex((document) => document.id === action.documentId)
