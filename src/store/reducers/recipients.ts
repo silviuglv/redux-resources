@@ -6,6 +6,7 @@ import { PackagesState, RecipientsState } from '../../types'
 const state: RecipientsState = {
 	recipients: stateUtility.getPaginationInitialState(),
 	recipient: stateUtility.getItemInitialState(),
+	recipientTypes: stateUtility.getPaginationInitialState(),
 	validateRecipient: stateUtility.getObserverInitialState(),
 	declineSignature: stateUtility.getObserverInitialState(),
 	messageSender: stateUtility.getObserverInitialState(),

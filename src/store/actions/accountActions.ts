@@ -4,10 +4,16 @@ import {
 	UpdateAccountRequest,
 	PaginatedApiResponse,
 	User,
+	Customization,
 	GetAccountUsersRequest,
 	GetAccountsRequest,
 	CreateAccountRequest,
 	Invoice,
+	GetAccountCustomizationsRequest,
+	UpdateCustomizationRequest,
+	CreateCustomizationRequest,
+	GetCustomizationTypesRequest,
+	CustomizationType,
 } from '../../types'
 
 const types = {
@@ -65,12 +71,54 @@ const types = {
 	UPDATE_ACCOUNT_MEMBER_FULFILLED: '[accounts] UPDATE_ACCOUNT_MEMBER_FULFILLED',
 	UPDATE_ACCOUNT_MEMBER_REJECTED: '[accounts] UPDATE_ACCOUNT_MEMBER_REJECTED',
 
-	UPDATE_ACCOUNT_PHOTO: '[accounts] UPDATE_ACCOUNT_PHOTO',
-	UPDATE_ACCOUNT_PHOTO_INITIAL_STATE: '[accounts] UPDATE_ACCOUNT_PHOTO_INITIAL_STATE',
-	UPDATE_ACCOUNT_PHOTO_LOADING: '[accounts] UPDATE_ACCOUNT_PHOTO_LOADING',
-	UPDATE_ACCOUNT_PHOTO_FULFILLED: '[accounts] UPDATE_ACCOUNT_PHOTO_FULFILLED',
-	UPDATE_ACCOUNT_PHOTO_REJECTED: '[accounts] UPDATE_ACCOUNT_PHOTO_REJECTED',
+	//BEGIN CUSTOMIZATIONS
+	GET_CUSTOMIZATION_TYPES: '[accounts] GET_CUSTOMIZATION_TYPES',
+	SET_CUSTOMIZATION_TYPES_LOADING: '[accounts] SET_CUSTOMIZATION_TYPES_LOADING',
+	SET_CUSTOMIZATION_TYPES_FULFILLED: '[accounts] SET_CUSTOMIZATION_TYPES_FULFILLED',
+	SET_CUSTOMIZATION_TYPES_REJECTED: '[accounts] SET_CUSTOMIZATION_TYPES_REJECTED',
 
+	GET_ACCOUNT_CUSTOMIZATIONS: '[accounts] GET_ACCOUNT_CUSTOMIZATIONS',
+	GET_ACCOUNT_CUSTOMIZATIONS_INITIAL_STATE: '[accounts] GET_ACCOUNT_CUSTOMIZATIONS_INITIAL_STATE',
+	GET_ACCOUNT_CUSTOMIZATIONS_LOADING: '[accounts] GET_ACCOUNT_CUSTOMIZATIONS_LOADING',
+	GET_ACCOUNT_CUSTOMIZATIONS_FULFILLED: '[accounts] GET_ACCOUNT_CUSTOMIZATIONS_FULFILLED',
+	GET_ACCOUNT_CUSTOMIZATIONS_REJECTED: '[accounts] GET_ACCOUNT_CUSTOMIZATIONS_REJECTED',
+
+	GET_CUSTOMIZATION_BY_TYPE: '[accounts] GET_CUSTOMIZATION_BY_TYPE',
+	GET_CUSTOMIZATION_BY_TYPE_INITIAL_STATE: '[accounts] GET_CUSTOMIZATION_BY_TYPE_INITIAL_STATE',
+	GET_CUSTOMIZATION_BY_TYPE_LOADING: '[accounts] GET_CUSTOMIZATION_BY_TYPE_LOADING',
+	GET_CUSTOMIZATION_BY_TYPE_FULFILLED: '[accounts] GET_CUSTOMIZATION_BY_TYPE_FULFILLED',
+	GET_CUSTOMIZATION_BY_TYPE_REJECTED: '[accounts] GET_CUSTOMIZATION_BY_TYPE_REJECTED',
+
+	GET_CUSTOMIZATION: '[accounts] GET_CUSTOMIZATION',
+	GET_CUSTOMIZATION_INITIAL_STATE: '[accounts] GET_CUSTOMIZATION_INITIAL_STATE',
+	GET_CUSTOMIZATION_LOADING: '[accounts] GET_CUSTOMIZATION_LOADING',
+	GET_CUSTOMIZATION_FULFILLED: '[accounts] GET_CUSTOMIZATION_FULFILLED',
+	GET_CUSTOMIZATION_REJECTED: '[accounts] GET_CUSTOMIZATION_REJECTED',
+
+	UPDATE_CUSTOMIZATION: '[accounts] UPDATE_CUSTOMIZATION',
+	UPDATE_CUSTOMIZATION_INITIAL_STATE: '[accounts] UPDATE_CUSTOMIZATION_INITIAL_STATE',
+	UPDATE_CUSTOMIZATION_LOADING: '[accounts] UPDATE_CUSTOMIZATION_LOADING',
+	UPDATE_CUSTOMIZATION_FULFILLED: '[accounts] UPDATE_CUSTOMIZATION_FULFILLED',
+	UPDATE_CUSTOMIZATION_REJECTED: '[accounts] UPDATE_CUSTOMIZATION_REJECTED',
+
+	UPDATE_CUSTOMIZATION_BY_TYPE: '[accounts] UPDATE_CUSTOMIZATION_BY_TYPE',
+	UPDATE_CUSTOMIZATION_BY_TYPE_INITIAL_STATE: '[accounts] UPDATE_CUSTOMIZATION_BY_TYPE_INITIAL_STATE',
+	UPDATE_CUSTOMIZATION_BY_TYPE_LOADING: '[accounts] UPDATE_CUSTOMIZATION_BY_TYPE_LOADING',
+	UPDATE_CUSTOMIZATION_BY_TYPE_FULFILLED: '[accounts] UPDATE_CUSTOMIZATION_BY_TYPE_FULFILLED',
+	UPDATE_CUSTOMIZATION_BY_TYPE_REJECTED: '[accounts] UPDATE_CUSTOMIZATION_BY_TYPE_REJECTED',
+
+	CREATE_CUSTOMIZATION: '[accounts] CREATE_CUSTOMIZATION',
+	CREATE_CUSTOMIZATION_INITIAL_STATE: '[accounts] CREATE_CUSTOMIZATION_INITIAL_STATE',
+	CREATE_CUSTOMIZATION_LOADING: '[accounts] CREATE_CUSTOMIZATION_LOADING',
+	CREATE_CUSTOMIZATION_FULFILLED: '[accounts] CREATE_CUSTOMIZATION_FULFILLED',
+	CREATE_CUSTOMIZATION_REJECTED: '[accounts] CREATE_CUSTOMIZATION_REJECTED',
+
+	DELETE_CUSTOMIZATION: '[accounts] DELETE_CUSTOMIZATION',
+	DELETE_CUSTOMIZATION_INITIAL_STATE: '[accounts] DELETE_CUSTOMIZATION_INITIAL_STATE',
+	DELETE_CUSTOMIZATION_LOADING: '[accounts] DELETE_CUSTOMIZATION_LOADING',
+	DELETE_CUSTOMIZATION_FULFILLED: '[accounts] DELETE_CUSTOMIZATION_FULFILLED',
+	DELETE_CUSTOMIZATION_REJECTED: '[accounts] DELETE_CUSTOMIZATION_REJECTED',
+	//END CUSTOMIZATIONS
 	UPDATE_ACCOUNT_BANNER: '[accounts] UPDATE_ACCOUNT_BANNER',
 	UPDATE_ACCOUNT_BANNER_INITIAL_STATE: '[accounts] UPDATE_ACCOUNT_BANNER_INITIAL_STATE',
 	UPDATE_ACCOUNT_BANNER_LOADING: '[accounts] UPDATE_ACCOUNT_BANNER_LOADING',
@@ -291,27 +339,199 @@ export const accountActions = {
 		payload,
 	}),
 
-	updateAccountPhoto: (id: string, payload, successCb?, errorCb?) => ({
-		type: types.UPDATE_ACCOUNT_PHOTO,
+	//GET_CUSTOMIZATION_TYPES
+	getCustomizationTypes: (payload: GetCustomizationTypesRequest = {}) => ({
+		type: types.GET_CUSTOMIZATION_TYPES,
 		payload,
-		id,
+	}),
+	setCustomizationTypesLoading: () => ({
+		type: types.SET_CUSTOMIZATION_TYPES_LOADING,
+		payload: null,
+	}),
+	setCustomizationTypesFulfilled: (payload: PaginatedApiResponse<CustomizationType>) => ({
+		type: types.SET_CUSTOMIZATION_TYPES_FULFILLED,
+		payload,
+	}),
+	setCustomizationTypesRejected: (payload: Error) => ({
+		type: types.SET_CUSTOMIZATION_TYPES_REJECTED,
+		payload,
+	}),
+
+	//GET_ACCOUNT_CUSTOMIZATIONS
+	getAccountCustomizations: (account: Account, payload: GetAccountCustomizationsRequest) => ({
+		type: types.GET_ACCOUNT_CUSTOMIZATIONS,
+		account,
+		payload,
+	}),
+	getAccountCustomizationsInitialState: () => ({
+		type: types.GET_ACCOUNT_CUSTOMIZATIONS_INITIAL_STATE,
+		payload: null,
+	}),
+	getAccountCustomizationsLoading: () => ({
+		type: types.GET_ACCOUNT_CUSTOMIZATIONS_LOADING,
+		payload: null,
+	}),
+	getAccountCustomizationsFulfilled: (payload: PaginatedApiResponse<Customization>) => ({
+		type: types.GET_ACCOUNT_CUSTOMIZATIONS_FULFILLED,
+		payload,
+	}),
+	getAccountCustomizationsRejected: (payload: Error) => ({
+		type: types.GET_ACCOUNT_CUSTOMIZATIONS_REJECTED,
+		payload,
+	}),
+
+	//GET_CUSTOMIZATION_BY_TYPE
+	getCustomizationByType: (account: Account, customizationType: CustomizationType) => ({
+		type: types.GET_CUSTOMIZATION_BY_TYPE,
+		account,
+		customizationType,
+		payload: null,
+	}),
+	getCustomizationByTypeInitialState: () => ({
+		type: types.GET_CUSTOMIZATION_BY_TYPE_INITIAL_STATE,
+		payload: null,
+	}),
+	getCustomizationByTypeLoading: () => ({
+		type: types.GET_CUSTOMIZATION_BY_TYPE_LOADING,
+		payload: null,
+	}),
+	getCustomizationByTypeFulfilled: (payload: Customization) => ({
+		type: types.GET_CUSTOMIZATION_BY_TYPE_FULFILLED,
+		payload,
+	}),
+	getCustomizationByTypeRejected: (payload: Error) => ({
+		type: types.GET_CUSTOMIZATION_BY_TYPE_REJECTED,
+		payload,
+	}),
+
+	//UPDATE_CUSTOMIZATION_BY_TYPE
+	updateCustomizationByType: (
+		account: Account,
+		customizationType: CustomizationType,
+		payload: UpdateCustomizationRequest,
+		successCb?,
+		errorCb?
+	) => ({
+		type: types.UPDATE_CUSTOMIZATION_BY_TYPE,
+		account,
+		customizationType,
+		payload,
 		successCb,
 		errorCb,
 	}),
-	updateAccountPhotoInitialState: () => ({
-		type: types.UPDATE_ACCOUNT_PHOTO_INITIAL_STATE,
+	updateCustomizationByTypeInitialState: () => ({
+		type: types.UPDATE_CUSTOMIZATION_BY_TYPE_INITIAL_STATE,
 		payload: null,
 	}),
-	updateAccountPhotoLoading: () => ({
-		type: types.UPDATE_ACCOUNT_PHOTO_LOADING,
+	updateCustomizationByTypeLoading: () => ({
+		type: types.UPDATE_CUSTOMIZATION_BY_TYPE_LOADING,
 		payload: null,
 	}),
-	updateAccountPhotoFulfilled: (payload) => ({
-		type: types.UPDATE_ACCOUNT_PHOTO_FULFILLED,
+	updateCustomizationByTypeFulfilled: (payload: Customization) => ({
+		type: types.UPDATE_CUSTOMIZATION_BY_TYPE_FULFILLED,
 		payload,
 	}),
-	updateAccountPhotoRejected: (payload: Error) => ({
-		type: types.UPDATE_ACCOUNT_PHOTO_REJECTED,
+	updateCustomizationByTypeRejected: (payload: Error) => ({
+		type: types.UPDATE_CUSTOMIZATION_BY_TYPE_REJECTED,
+		payload,
+	}),
+
+	//GET_CUSTOMIZATION
+	getCustomization: (account: Account, customization: Customization) => ({
+		type: types.GET_CUSTOMIZATION,
+		account,
+		customization,
+		payload: null,
+	}),
+	getCustomizationInitialState: () => ({
+		type: types.GET_CUSTOMIZATION_INITIAL_STATE,
+		payload: null,
+	}),
+	getCustomizationLoading: () => ({
+		type: types.GET_CUSTOMIZATION_LOADING,
+		payload: null,
+	}),
+	getCustomizationFulfilled: (payload: Customization) => ({
+		type: types.GET_CUSTOMIZATION_FULFILLED,
+		payload,
+	}),
+	getCustomizationRejected: (payload: Error) => ({
+		type: types.GET_CUSTOMIZATION_REJECTED,
+		payload,
+	}),
+
+	//CREATE_CUSTOMIZATION
+	createCustomization: (account: Account, payload: CreateCustomizationRequest, successCb?, errorCb?) => ({
+		type: types.CREATE_CUSTOMIZATION,
+		account,
+		payload,
+		successCb,
+		errorCb,
+	}),
+	createCustomizationInitialState: () => ({
+		type: types.CREATE_CUSTOMIZATION_INITIAL_STATE,
+		payload: null,
+	}),
+	createCustomizationLoading: () => ({
+		type: types.CREATE_CUSTOMIZATION_LOADING,
+		payload: null,
+	}),
+	createCustomizationFulfilled: (payload: Customization) => ({
+		type: types.CREATE_CUSTOMIZATION_FULFILLED,
+		payload,
+	}),
+	createCustomizationRejected: (payload: Error) => ({
+		type: types.CREATE_CUSTOMIZATION_REJECTED,
+		payload,
+	}),
+	//UPDATE_CUSTOMIZATION
+	updateCustomization: (account: Account, customization: Customization, payload, successCb?, errorCb?) => ({
+		type: types.UPDATE_CUSTOMIZATION,
+		account,
+		customization,
+		payload,
+		successCb,
+		errorCb,
+	}),
+	updateCustomizationInitialState: () => ({
+		type: types.UPDATE_CUSTOMIZATION_INITIAL_STATE,
+		payload: null,
+	}),
+	updateCustomizationLoading: () => ({
+		type: types.UPDATE_CUSTOMIZATION_LOADING,
+		payload: null,
+	}),
+	updateCustomizationFulfilled: (payload: Customization) => ({
+		type: types.UPDATE_CUSTOMIZATION_FULFILLED,
+		payload,
+	}),
+	updateCustomizationRejected: (payload: Error) => ({
+		type: types.UPDATE_CUSTOMIZATION_REJECTED,
+		payload,
+	}),
+	//DELETE_CUSTOMIZATION
+	deleteCustomization: (account: Account, customization: Customization, successCb?, errorCb?) => ({
+		type: types.DELETE_CUSTOMIZATION,
+		account,
+		payload: null,
+		customization,
+		successCb,
+		errorCb,
+	}),
+	deleteCustomizationInitialState: () => ({
+		type: types.DELETE_CUSTOMIZATION_INITIAL_STATE,
+		payload: null,
+	}),
+	deleteCustomizationLoading: () => ({
+		type: types.DELETE_CUSTOMIZATION_LOADING,
+		payload: null,
+	}),
+	deleteCustomizationFulfilled: () => ({
+		type: types.DELETE_CUSTOMIZATION_FULFILLED,
+		payload: null,
+	}),
+	deleteCustomizationRejected: (payload: Error) => ({
+		type: types.DELETE_CUSTOMIZATION_REJECTED,
 		payload,
 	}),
 

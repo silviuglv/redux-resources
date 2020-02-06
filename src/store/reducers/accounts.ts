@@ -7,15 +7,20 @@ const state: AccountsState = {
 	list: stateUtility.getPaginationFromLocalStorage('accountList'),
 	item: stateUtility.getItemInitialState(),
 	users: stateUtility.getPaginationInitialState(),
+	accountCustomizations: stateUtility.getPaginationInitialState(),
 	defaultAccount: stateUtility.getItemFromLocalStorage('defaultAccount'),
 	setDefaultAccount: stateUtility.getObserverInitialState(),
 	createAccount: stateUtility.getItemInitialState(),
 	deleteAccountMember: stateUtility.getObserverInitialState(),
 	updateAccountMember: stateUtility.getObserverInitialState(),
 	updateAccount: stateUtility.getObserverInitialState(),
-	updatePhoto: stateUtility.getObserverInitialState(),
 	updateBanner: stateUtility.getObserverInitialState(),
 	invoices: stateUtility.getPaginationInitialState(),
+	customizationTypes: stateUtility.getPaginationInitialState(),
+	customization: stateUtility.getItemInitialState(),
+	createCustomization: stateUtility.getItemInitialState(),
+	updateCustomization: stateUtility.getItemInitialState(),
+	deleteCustomization: stateUtility.getObserverInitialState(),
 }
 
 const initialState = fromJS(state)
@@ -195,22 +200,144 @@ export const accounts = (state = initialState, action) => {
 				updateAccount: stateUtility.getObserverRejected(action.payload),
 			})
 
-		//  updatePhoto
-		case accountActions.UPDATE_ACCOUNT_PHOTO_INITIAL_STATE:
+		//  customizationTypes
+		case accountActions.SET_CUSTOMIZATION_TYPES_LOADING:
 			return state.merge({
-				updatePhoto: stateUtility.getObserverInitialState(),
+				customizationTypes: stateUtility.getPaginationLoading(),
 			})
-		case accountActions.UPDATE_ACCOUNT_PHOTO_LOADING:
+		case accountActions.SET_CUSTOMIZATION_TYPES_FULFILLED:
 			return state.merge({
-				updatePhoto: stateUtility.getObserverLoading(),
+				customizationTypes: stateUtility.getPaginationFulfilled(action.payload),
 			})
-		case accountActions.UPDATE_ACCOUNT_PHOTO_FULFILLED:
+		case accountActions.SET_CUSTOMIZATION_TYPES_REJECTED:
 			return state.merge({
-				updatePhoto: stateUtility.getObserverFulfilled(),
+				customizationTypes: stateUtility.getObserverRejected(action.payload),
 			})
-		case accountActions.UPDATE_ACCOUNT_PHOTO_REJECTED:
+
+		//customizations
+		case accountActions.GET_ACCOUNT_CUSTOMIZATIONS_INITIAL_STATE:
 			return state.merge({
-				updatePhoto: stateUtility.getObserverRejected(action.payload),
+				customizations: stateUtility.getPaginationInitialState(),
+			})
+		case accountActions.GET_ACCOUNT_CUSTOMIZATIONS_LOADING:
+			return state.merge({
+				customizations: stateUtility.getPaginationLoading(),
+			})
+		case accountActions.GET_ACCOUNT_CUSTOMIZATIONS_FULFILLED:
+			return state.merge({
+				customizations: stateUtility.getPaginationFulfilled(action.payload),
+			})
+		case accountActions.GET_ACCOUNT_CUSTOMIZATIONS_REJECTED:
+			return state.merge({
+				customizations: stateUtility.getPaginationRejected(action.payload),
+			})
+
+		// getCustomization
+		case accountActions.GET_CUSTOMIZATION_INITIAL_STATE:
+			return state.merge({
+				customization: stateUtility.getItemInitialState(),
+			})
+		case accountActions.GET_CUSTOMIZATION_LOADING:
+			return state.merge({
+				customization: stateUtility.getItemLoading(),
+			})
+		case accountActions.GET_CUSTOMIZATION_FULFILLED:
+			return state.merge({
+				customization: stateUtility.getItemFulfilled(action.payload),
+			})
+		case accountActions.GET_CUSTOMIZATION_REJECTED:
+			return state.merge({
+				customization: stateUtility.getItemRejected(action.payload),
+			})
+
+		// getCustomizationByType
+		case accountActions.GET_CUSTOMIZATION_BY_TYPE_INITIAL_STATE:
+			return state.merge({
+				customization: stateUtility.getItemInitialState(),
+			})
+		case accountActions.GET_CUSTOMIZATION_BY_TYPE_LOADING:
+			return state.merge({
+				customization: stateUtility.getItemLoading(),
+			})
+		case accountActions.GET_CUSTOMIZATION_BY_TYPE_FULFILLED:
+			return state.merge({
+				customization: stateUtility.getItemFulfilled(action.payload),
+			})
+		case accountActions.GET_CUSTOMIZATION_BY_TYPE_REJECTED:
+			return state.merge({
+				customization: stateUtility.getItemRejected(action.payload),
+			})
+
+		//	createCustomization
+		case accountActions.CREATE_CUSTOMIZATION_INITIAL_STATE:
+			return state.merge({
+				createCustomization: stateUtility.getItemInitialState(),
+			})
+		case accountActions.CREATE_CUSTOMIZATION_LOADING:
+			return state.merge({
+				createCustomization: stateUtility.getItemLoading(),
+			})
+		case accountActions.CREATE_CUSTOMIZATION_FULFILLED:
+			return state.merge({
+				createCustomization: stateUtility.getItemFulfilled(action.payload),
+			})
+		case accountActions.CREATE_CUSTOMIZATION_REJECTED:
+			return state.merge({
+				createCustomization: stateUtility.getItemRejected(action.payload),
+			})
+
+		// updateCustomization
+		case accountActions.UPDATE_CUSTOMIZATION_INITIAL_STATE:
+			return state.merge({
+				updateCustomization: stateUtility.getItemInitialState(),
+			})
+		case accountActions.UPDATE_CUSTOMIZATION_LOADING:
+			return state.merge({
+				updateCustomization: stateUtility.getItemLoading(),
+			})
+		case accountActions.UPDATE_CUSTOMIZATION_FULFILLED:
+			return state.merge({
+				updateCustomization: stateUtility.getItemFulfilled(action.payload),
+			})
+		case accountActions.UPDATE_CUSTOMIZATION_REJECTED:
+			return state.merge({
+				updateCustomization: stateUtility.getItemRejected(action.payload),
+			})
+
+		// updateCustomizationByType
+		case accountActions.UPDATE_CUSTOMIZATION_BY_TYPE_INITIAL_STATE:
+			return state.merge({
+				updateCustomization: stateUtility.getItemInitialState(),
+			})
+		case accountActions.UPDATE_CUSTOMIZATION_BY_TYPE_LOADING:
+			return state.merge({
+				updateCustomization: stateUtility.getItemLoading(),
+			})
+		case accountActions.UPDATE_CUSTOMIZATION_BY_TYPE_FULFILLED:
+			return state.merge({
+				updateCustomization: stateUtility.getItemFulfilled(action.payload),
+			})
+		case accountActions.UPDATE_CUSTOMIZATION_BY_TYPE_REJECTED:
+			return state.merge({
+				updateCustomization: stateUtility.getItemRejected(action.payload),
+			})
+
+		// deleteCustomization
+		case accountActions.DELETE_CUSTOMIZATION_INITIAL_STATE:
+			return state.merge({
+				deleteCustomization: stateUtility.getObserverInitialState(),
+			})
+		case accountActions.DELETE_CUSTOMIZATION_LOADING:
+			return state.merge({
+				deleteCustomization: stateUtility.getObserverLoading(),
+			})
+		case accountActions.DELETE_CUSTOMIZATION_FULFILLED:
+			return state.merge({
+				deleteCustomization: stateUtility.getObserverFulfilled(),
+			})
+		case accountActions.DELETE_CUSTOMIZATION_REJECTED:
+			return state.merge({
+				deleteCustomization: stateUtility.getObserverRejected(action.payload),
 			})
 
 		//  updateBanner

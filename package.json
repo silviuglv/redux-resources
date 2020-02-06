@@ -1,6 +1,6 @@
 {
 	"name": "@approveme/redux-resources",
-	"version": "2.2.23",
+	"version": "2.2.26",
 	"files": [
 		"lib/**/*"
 	],
@@ -13,7 +13,7 @@
 	"author": "@approveme",
 	"scripts": {
 		"build": "tsc",
-		"lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
+		"lint": "eslint '*/**/*.{js,ts}' --fix",
 		"postversion": "git push && git push --tags",
 		"prepare": "yarn build",
 		"prepublishOnly": "yarn run prettier && yarn run lint",

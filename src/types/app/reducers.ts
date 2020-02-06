@@ -23,22 +23,38 @@ import {
 	Subscription,
 	User,
 	UserMeta,
+	CustomizationType,
+	Customization,
 } from '../../types'
 export interface AccountsState {
 	list: PaginatedResponse<Account>
 	item: ItemResponse<Account>
 	users: PaginatedResponse<User>
 	defaultAccount: ItemResponse<Account>
+	accountCustomizations: PaginatedResponse<Customization>
+	createCustomization: Observer
+	updateCustomization: Observer
+	customization: ItemResponse<Customization>
+	deleteCustomization: Observer
+	customizationTypes: PaginatedResponse<CustomizationType>
 	setDefaultAccount: Observer
 	createAccount: ItemResponse<Account>
 	deleteAccountMember: Observer
 	updateAccountMember: Observer
 	updateAccount: Observer
-	updatePhoto: Observer
 	updateBanner: Observer
 	invoices: PaginatedResponse<Invoice>
 }
 
+export interface CustomizationsState {
+	list: PaginatedResponse<Customization>
+	item: ItemResponse<Customization>
+	customizationTypes: PaginatedResponse<CustomizationType>
+	createCustomization: Observer
+	updateCustomization: Observer
+	updateCustomizationByType: Observer
+	deleteCustomization: Observer
+}
 export interface AccountInvitesState {
 	list: PaginatedResponse<AccountInvite>
 	getMyAccountInvites: PaginatedResponse<AccountInvite>
@@ -155,6 +171,7 @@ export interface UsersState {
 }
 
 export interface RecipientsState {
+	recipientTypes: PaginatedResponse<RecipientType>
 	recipients: PaginatedResponse<Recipient>
 	recipient: Observer
 	validateRecipient: Observer
@@ -164,4 +181,8 @@ export interface RecipientsState {
 
 export interface RecipientTypesState {
 	list: PaginatedResponse<RecipientType>
+}
+
+export interface CustomizationTypesState {
+	list: PaginatedResponse<Customization>
 }

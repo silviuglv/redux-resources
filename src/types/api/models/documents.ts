@@ -96,7 +96,7 @@ export interface Recipient {
 	id: string
 	first_name: string
 	last_name: string
-	//	type: RecipientType
+	//	type: RecipientType    TODO: FIX this... needs api work first
 	type: string
 	email: string
 	send_order: number | null
@@ -107,4 +107,16 @@ export interface Recipient {
 export interface RecipientType {
 	//	id: string
 	name: string
+}
+
+export interface CustomizationType {
+	id: string
+	name?: string
+}
+
+export interface Customization {
+	customizationType?: CustomizationType
+	id?: string
+	meta?
+	file?
 }

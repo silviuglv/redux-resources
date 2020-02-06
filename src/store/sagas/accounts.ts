@@ -118,20 +118,6 @@ export function* updateAccount({ account, payload, successCb, errorCb }: AnyActi
 	}
 }
 
-function* updateAccountPhoto({ id, payload, successCb, errorCb }: AnyAction) {
-	try {
-		yield put(accountActions.updateAccountPhotoInitialState())
-		yield put(accountActions.updateAccountPhotoLoading())
-		const { data } = yield call(accountApi.updatePicture, id, payload)
-		yield put(accountActions.updateAccountPhotoFulfilled(data))
-		yield put(notificationActions.displaySnackbarMessage('Account photo updated!', 2000))
-		successCb && successCb()
-	} catch (error) {
-		yield put(accountActions.updateAccountPhotoRejected(error))
-		errorCb && errorCb()
-	}
-}
-
 function* updateAccountBanner({ id, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(accountActions.updateAccountBannerInitialState())
@@ -156,6 +142,112 @@ function* getInvoices({ account }: AnyAction) {
 		yield put(accountActions.getInvoicesRejected(error))
 	}
 }
+//getCustomizationTypes
+export function* getCustomizationTypes({ account, payload }: AnyAction) {
+	try {
+		yield put(accountActions.setCustomizationTypesLoading())
+		const { data } = yield call(accountApi.getCustomizationTypes, account.id, payload)
+		yield put(accountActions.setCustomizationTypesFulfilled(data))
+	} catch (error) {
+		yield put(accountActions.setCustomizationTypesRejected(error))
+	}
+}
+//getAccountCustomizations
+export function* getAccountCustomizations({ account, payload }: AnyAction) {
+	try {
+		yield put(accountActions.getAccountCustomizationsInitialState())
+		yield put(accountActions.getAccountCustomizationsLoading())
+		const { data } = yield call(accountApi.getAccountCustomizations, account.id, payload)
+		yield put(accountActions.getAccountCustomizationsFulfilled(data))
+	} catch (error) {
+		yield put(accountActions.getAccountCustomizationsRejected(error))
+	}
+}
+
+//getCustomization
+export function* getCustomization({ account, payload }: AnyAction) {
+	try {
+		yield put(accountActions.getCustomizationInitialState())
+		yield put(accountActions.getCustomizationLoading())
+		const { data } = yield call(accountApi.getCustomization, account.id, payload)
+		yield put(accountActions.getCustomizationFulfilled(data))
+	} catch (error) {
+		yield put(accountActions.getCustomizationRejected(error))
+	}
+}
+
+//getCustomizationByType
+export function* getCustomizationByType({ account, type }: AnyAction) {
+	try {
+		yield put(accountActions.getCustomizationByTypeInitialState())
+		yield put(accountActions.getCustomizationByTypeLoading())
+		const { data } = yield call(accountApi.getCustomizationByType, account.id, type.id)
+		yield put(accountActions.getCustomizationByTypeFulfilled(data))
+	} catch (error) {
+		yield put(accountActions.getCustomizationByTypeRejected(error))
+	}
+}
+//createCustomization
+export function* createCustomization({ account, payload, successCb, errorCb }: AnyAction) {
+	try {
+		yield put(accountActions.createCustomizationInitialState())
+		yield put(accountActions.createCustomizationLoading())
+		const { data } = yield call(accountApi.createCustomization, account.id, payload)
+		yield put(accountActions.createCustomizationFulfilled(data))
+		yield put(notificationActions.displaySnackbarMessage('Account Customization Saved', 2000))
+		yield call(accountApi.getAccountCustomizations, account.id)
+		successCb && successCb()
+	} catch (error) {
+		yield put(accountActions.createCustomizationRejected(error))
+		errorCb && errorCb()
+	}
+}
+
+//updateCustomization
+export function* updateCustomization({ account, customization, payload, successCb, errorCb }: AnyAction) {
+	try {
+		yield put(accountActions.updateCustomizationInitialState())
+		yield put(accountActions.updateCustomizationLoading())
+		const { data } = yield call(accountApi.updateCustomization, account.id, customization.id, payload)
+		yield put(accountActions.updateCustomizationFulfilled(data))
+		yield put(notificationActions.displaySnackbarMessage('Customization updated!', 2000))
+		successCb && successCb()
+	} catch (error) {
+		yield put(accountActions.updateCustomizationRejected(error))
+		errorCb && errorCb()
+	}
+}
+
+//updateCustomizationByType
+export function* updateCustomizationByType({ account, type, payload, successCb, errorCb }: AnyAction) {
+	try {
+		yield put(accountActions.updateCustomizationByTypeInitialState())
+		yield put(accountActions.updateCustomizationByTypeLoading())
+		const { data } = yield call(accountApi.updateCustomizationByType, account.id, type.id, payload)
+		yield put(accountActions.updateCustomizationByTypeFulfilled(data))
+		yield put(notificationActions.displaySnackbarMessage('Customization updated!', 2000))
+		successCb && successCb()
+	} catch (error) {
+		yield put(accountActions.updateCustomizationByTypeRejected(error))
+		errorCb && errorCb()
+	}
+}
+
+//deleteCustomization
+export function* deleteCustomization({ account, customization, successCb, errorCb }: AnyAction) {
+	try {
+		yield put(accountActions.deleteCustomizationInitialState())
+		yield put(accountActions.deleteCustomizationLoading())
+		yield call(accountApi.deleteCustomization, account.id, customization.id)
+		yield put(accountActions.deleteCustomizationFulfilled())
+		yield put(notificationActions.displaySnackbarMessage('Customization deleted.', 2000))
+		yield call(accountApi.getAccountCustomizations, account.id)
+		successCb && successCb()
+	} catch (error) {
+		yield put(accountActions.deleteCustomizationRejected(error))
+		errorCb && errorCb()
+	}
+}
 
 export function* accounts() {
 	yield takeEvery(accountActions.LOAD_ACCOUNTS, getAccounts)
@@ -169,7 +261,14 @@ export function* accounts() {
 	yield takeEvery(accountActions.DELETE_ACCOUNT_MEMBER, deleteAccountMember)
 	yield takeEvery(accountActions.UPDATE_ACCOUNT_MEMBER, updateAccountMember)
 	yield takeEvery(accountActions.UPDATE_ACCOUNT, updateAccount)
-	yield takeEvery(accountActions.UPDATE_ACCOUNT_PHOTO, updateAccountPhoto)
+	yield takeEvery(accountActions.GET_CUSTOMIZATION_TYPES, getCustomizationTypes)
+	yield takeEvery(accountActions.GET_ACCOUNT_CUSTOMIZATIONS, getAccountCustomizations)
+	yield takeEvery(accountActions.GET_CUSTOMIZATION, getCustomization)
+	yield takeEvery(accountActions.GET_CUSTOMIZATION_BY_TYPE, getCustomizationByType)
+	yield takeEvery(accountActions.CREATE_CUSTOMIZATION, createCustomization)
+	yield takeEvery(accountActions.UPDATE_CUSTOMIZATION, updateCustomization)
+	yield takeEvery(accountActions.UPDATE_CUSTOMIZATION_BY_TYPE, updateCustomizationByType)
+	yield takeEvery(accountActions.DELETE_CUSTOMIZATION, deleteCustomization)
 	yield takeEvery(accountActions.UPDATE_ACCOUNT_BANNER, updateAccountBanner)
 	yield takeEvery(accountActions.GET_INVOICES, getInvoices)
 }
