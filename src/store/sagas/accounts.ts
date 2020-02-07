@@ -118,20 +118,6 @@ export function* updateAccount({ account, payload, successCb, errorCb }: AnyActi
 	}
 }
 
-function* updateAccountBanner({ id, payload, successCb, errorCb }: AnyAction) {
-	try {
-		yield put(accountActions.updateAccountBannerInitialState())
-		yield put(accountActions.updateAccountBannerLoading())
-		const { data } = yield call(accountApi.updateBanner, id, payload)
-		yield put(accountActions.updateAccountBannerFulfilled(data))
-		yield put(notificationActions.displaySnackbarMessage('Account banner updated!', 2000))
-		successCb && successCb()
-	} catch (error) {
-		yield put(accountActions.updateAccountBannerRejected(error))
-		errorCb && errorCb()
-	}
-}
-
 function* getInvoices({ account }: AnyAction) {
 	try {
 		yield put(accountActions.getInvoicesInitialState())
@@ -269,6 +255,5 @@ export function* accounts() {
 	yield takeEvery(accountActions.UPDATE_CUSTOMIZATION, updateCustomization)
 	yield takeEvery(accountActions.UPDATE_CUSTOMIZATION_BY_TYPE, updateCustomizationByType)
 	yield takeEvery(accountActions.DELETE_CUSTOMIZATION, deleteCustomization)
-	yield takeEvery(accountActions.UPDATE_ACCOUNT_BANNER, updateAccountBanner)
 	yield takeEvery(accountActions.GET_INVOICES, getInvoices)
 }

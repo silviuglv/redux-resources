@@ -40,6 +40,17 @@ export interface ConfirmationToken {
 	expires_at: string | null
 	user: User
 }
+export interface CustomizationType {
+	id: string
+	name?: string
+}
+
+export interface Customization {
+	customizationType?: CustomizationType
+	id?: string
+	meta?
+	file?
+}
 
 export interface ConnectedService {
 	id: string

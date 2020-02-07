@@ -42,7 +42,6 @@ export interface AccountsState {
 	deleteAccountMember: Observer
 	updateAccountMember: Observer
 	updateAccount: Observer
-	updateBanner: Observer
 	invoices: PaginatedResponse<Invoice>
 }
 

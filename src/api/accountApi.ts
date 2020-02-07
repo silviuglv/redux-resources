@@ -72,23 +72,7 @@ export const accountApi = {
 			data,
 		})
 	},
-	// TODO: find out if we need this anymore
-	// updatePicture: (id: string, data: any) => {
-	// 	return axios({
-	// 		url: `${config.apiBase}/accounts/${id}/picture`,
-	// 		method: 'POST',
-	// 		data,
-	// 	})
-	// },
 
-	// TODO: find out if we need  updateBanner anymore also
-	updateBanner: (id: string, data: any) => {
-		return axios({
-			url: `${config.apiBase}/accounts/${id}/banner`,
-			method: 'POST',
-			data,
-		})
-	},
 	getInvoices: (id: string) => {
 		return axios({
 			url: `${config.apiBase}/accounts/${id}/invoices`,

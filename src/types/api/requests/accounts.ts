@@ -1,4 +1,4 @@
-import { BaseGetRequest, AccountRoles } from '../../../types'
+import { BaseGetRequest, AccountRoles, Account } from '../../../types'
 
 export interface CreateAccountRequest {
 	name: string
@@ -14,10 +14,8 @@ export interface GetAccountUsersRequest extends BaseGetRequest {
 	order_by?: 'name' | 'id'
 }
 
-// TODO: remove hex color, make this method applicable to updating any account params
 export interface UpdateAccountRequest {
-	name?: string
-	hex_background_color?: string
+	account: Account
 }
 
 export interface UpdateAccountUserRequest {

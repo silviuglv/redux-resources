@@ -108,15 +108,3 @@ export interface RecipientType {
 	//	id: string
 	name: string
 }
-
-export interface CustomizationType {
-	id: string
-	name?: string
-}
-
-export interface Customization {
-	customizationType?: CustomizationType
-	id?: string
-	meta?
-	file?
-}
