@@ -1,4 +1,7 @@
+import { FieldTypes } from './types'
+
 import { User } from './cms'
+
 export interface Document {
 	id: string
 	name: string
@@ -27,7 +30,7 @@ export interface FieldTypePreset {
 
 export interface Field {
 	id: string
-	type: FieldType
+	type: FieldTypes
 	label: string | null
 	meta
 	is_required: boolean
