@@ -10,6 +10,7 @@ import {
 	Page,
 	PaginatedApiResponse,
 	UpdateDocumentRequest,
+	UpdateDocumentBuildRequest,
 	UpdatePackageRequest,
 	CreateRecipientRequest,
 	UpdateRecipientRequest,
@@ -74,6 +75,9 @@ const types = {
 	CREATE_PACKAGE_DOCUMENTS_REJECTED: '[packages] CREATE_PACKAGE_DOCUMENTS_REJECTED',
 
 	UPDATE_DOCUMENT: '[packages] UPDATE_DOCUMENT',
+	UPDATE_DOCUMENT_BUILD: '[packages] UPDATE_DOCUMENT_BUILD',
+	UPDATE_DOCUMENT_BUILD_LOADING: '[packages] UPDATE_DOCUMENT_BUILD_LOADING',
+	UPDATE_DOCUMENT_BUILD_FULFILLED: '[packages] UPDATE_DOCUMENT_BUILD_FULFILLED',
 	UPDATE_DOCUMENT_INITIAL_STATE: '[packages] UPDATE_DOCUMENT_INITIAL_STATE',
 	UPDATE_DOCUMENT_LOADING: '[packages] UPDATE_DOCUMENT_LOADING',
 	UPDATE_DOCUMENT_FULFILLED: '[packages] UPDATE_DOCUMENT_FULFILLED',
@@ -377,7 +381,20 @@ export const packageActions = {
 		successCb,
 		errorCb,
 	}),
-
+	updateDocumentBuild: (
+		packageId: string,
+		documentId: string,
+		payload: UpdateDocumentBuildRequest,
+		successCb?,
+		errorCb?
+	) => ({
+		type: types.UPDATE_DOCUMENT_BUILD,
+		payload,
+		packageId,
+		documentId,
+		successCb,
+		errorCb,
+	}),
 	updateDocumentInitialState: () => ({
 		type: types.UPDATE_DOCUMENT_INITIAL_STATE,
 		payload: null,
@@ -386,8 +403,17 @@ export const packageActions = {
 		type: types.UPDATE_DOCUMENT_LOADING,
 		payload: null,
 	}),
+	updateDocumentBuildLoading: (documentId) => ({
+		type: types.UPDATE_DOCUMENT_BUILD_LOADING,
+		payload: null,
+		documentId,
+	}),
 	updateDocumentFulfilled: (payload: Document) => ({
 		type: types.UPDATE_DOCUMENT_FULFILLED,
+		payload,
+	}),
+	updateDocumentBuildFulfilled: (payload) => ({
+		type: types.UPDATE_DOCUMENT_BUILD_FULFILLED,
 		payload,
 	}),
 	updateDocumentRejected: (payload: Error) => ({

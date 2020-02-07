@@ -148,6 +148,21 @@ function* createDocumentsRenderFields({ id, successCb, errorCb }: AnyAction) {
 	}
 }
 
+function* updateDocumentBuild({ packageId, documentId, payload, successCb, errorCb }: AnyAction) {
+	try {
+		yield put(packageActions.updateDocumentInitialState())
+		yield put(packageActions.updateDocumentBuildLoading(documentId))
+		const { data } = yield call(packageApi.updateDocumentBuild, packageId, documentId, payload)
+		yield put(packageActions.updateDocumentBuildFulfilled(data))
+		yield put(notificationActions.displaySnackbarMessage('Document updated', 2000))
+		successCb !== undefined && successCb()
+	} catch (error) {
+		yield put(packageActions.updateDocumentRejected(error))
+		yield put(notificationActions.displaySnackbarMessage('Failed to update', 2000))
+		errorCb !== undefined && errorCb()
+	}
+}
+
 function* updateDocument({ packageId, documentId, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.updateDocumentInitialState())
@@ -339,6 +354,7 @@ export function* packages() {
 	yield takeEvery(packageActions.CREATE_PACKAGE_DOCUMENTS_BUILD, createDocumentsBuild)
 	yield takeEvery(packageActions.CREATE_PACKAGE_DOCUMENTS_RENDER_FIELDS, createDocumentsRenderFields)
 	yield takeEvery(packageActions.UPDATE_DOCUMENT, updateDocument)
+	yield takeEvery(packageActions.UPDATE_DOCUMENT_BUILD, updateDocumentBuild)
 	yield takeEvery(packageActions.CREATE_DOCUMENT_FROM_CONNECTED_SERVICE, createDocumentFromSocialAccount)
 	yield takeEvery(packageActions.DELETE_DOCUMENT, deleteDocument)
 	yield takeEvery(packageActions.GET_PACKAGE_IMAGE_URL, getPackageImageUrl)
