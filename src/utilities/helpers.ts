@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { isArray, isObject, mapKeys, snakeCase, camelCase, mapValues } from 'lodash'
 
 export const keysToSnakeCase = (object: any): any => mapKeys(object, (v, k) => snakeCase(k))

@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable'
 import { recipientActions } from '../actions'
 import { stateUtility } from '../../utilities'
-import { PackagesState, RecipientsState } from '../../types'
+import { RecipientsState } from '../../types'
 
 const state: RecipientsState = {
 	recipients: stateUtility.getPaginationInitialState(),

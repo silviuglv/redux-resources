@@ -1,3 +1,4 @@
+/* eslint-disable */
 import config from '../config'
 
 export const getParsedObject = (list, provider, scopes?: string) => {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ItemResponse, Observer, PaginatedResponse, PaginatedApiResponse, Error } from '../types'
 
 const getPaginationInitialState = (): PaginatedResponse<any> => {
