@@ -16,10 +16,6 @@ export interface GetFieldsRequest extends BaseGetRequest {
 	recipient_ids?: string
 }
 
-export interface GetFieldTypesRequest {
-	package_type_id?: string
-}
-
 export interface UpdateFieldRequest {
 	recipient_id: string
 	type: string
@@ -29,4 +25,22 @@ export interface UpdateFieldRequest {
 	width: number
 	height: number
 	value: string
+}
+export interface GetFieldTypesRequest {
+	package_type_id?: string
+	order_by?: 'id' | 'name'
+}
+export interface GetPresetsRequest extends BaseGetRequest {
+	account_id?: string
+	order_by?: 'id' | 'name'
+}
+
+export interface CreatePresetRequest {
+	account_id: string
+	field_type_id: string
+	data
+}
+export interface UpdatePresetRequest {
+	account_id: string
+	data
 }

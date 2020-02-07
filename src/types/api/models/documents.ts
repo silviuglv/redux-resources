@@ -1,6 +1,4 @@
 import { User } from './cms'
-import { FieldTypes } from './types'
-
 export interface Document {
 	id: string
 	name: string
@@ -20,9 +18,16 @@ export interface DocumentDraft {
 	created_at: string
 }
 
+export interface FieldTypePreset {
+	id?: string
+	account_id?: string
+	field_type_id: string
+	data
+}
+
 export interface Field {
 	id: string
-	type: FieldTypes
+	type: FieldType
 	label: string | null
 	meta
 	is_required: boolean
@@ -41,7 +46,8 @@ export interface Field {
 
 export interface FieldType {
 	name: string
-	options
+	options?
+	presets?
 }
 
 export interface Folder {

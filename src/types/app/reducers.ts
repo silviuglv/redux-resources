@@ -26,14 +26,15 @@ import {
 	CustomizationType,
 	Customization,
 } from '../../types'
+import { FieldTypePreset } from '../api'
 export interface AccountsState {
 	list: PaginatedResponse<Account>
 	item: ItemResponse<Account>
 	users: PaginatedResponse<User>
 	defaultAccount: ItemResponse<Account>
 	accountCustomizations: PaginatedResponse<Customization>
-	createCustomization: Observer
-	updateCustomization: Observer
+	createCustomization: ItemResponse<Customization>
+	updateCustomization: ItemResponse<Customization>
 	customization: ItemResponse<Customization>
 	deleteCustomization: Observer
 	customizationTypes: PaginatedResponse<CustomizationType>
@@ -49,9 +50,9 @@ export interface CustomizationsState {
 	list: PaginatedResponse<Customization>
 	item: ItemResponse<Customization>
 	customizationTypes: PaginatedResponse<CustomizationType>
-	createCustomization: Observer
-	updateCustomization: Observer
-	updateCustomizationByType: Observer
+	createCustomization: ItemResponse<Customization>
+	updateCustomization: ItemResponse<Customization>
+	updateCustomizationByType: ItemResponse<Customization>
 	deleteCustomization: Observer
 }
 export interface AccountInvitesState {
@@ -100,6 +101,10 @@ export interface FieldsState {
 
 export interface FieldTypesState {
 	list: PaginatedResponse<Field>
+	presets: PaginatedResponse<FieldTypePreset>
+	createPreset: Observer
+	updatePreset: Observer
+	deletePreset: Observer
 }
 
 export interface FoldersState {

@@ -212,6 +212,7 @@ export function* updateCustomizationByType({ account, type, payload, successCb, 
 		const { data } = yield call(accountApi.updateCustomizationByType, account.id, type.id, payload)
 		yield put(accountActions.updateCustomizationByTypeFulfilled(data))
 		yield put(notificationActions.displaySnackbarMessage('Customization updated!', 2000))
+		yield call(accountApi.getAccountCustomizations, account.id)
 		successCb && successCb()
 	} catch (error) {
 		yield put(accountActions.updateCustomizationByTypeRejected(error))
