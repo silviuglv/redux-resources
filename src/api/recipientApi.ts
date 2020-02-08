@@ -5,7 +5,8 @@ import { MessageSenderRequest } from '../types'
 export const recipientApi = {
 	getRecipientTypes: () => {
 		return axios({
-			url: `${config.apiBase}/recipients/recipient_types`,
+			//		url: `${config.apiBase}/recipients/recipient_types`,
+			url: `${config.apiBase}/recipient_types`,
 			method: 'GET',
 		})
 	},
