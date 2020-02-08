@@ -1,12 +1,6 @@
 import { MessageSenderRequest } from '../../types'
 
 const types = {
-	VALIDATE_RECIPIENT: '[recipients] VALIDATE_RECIPIENT',
-	VALIDATE_RECIPIENT_INITIAL_STATE: '[recipients] VALIDATE_RECIPIENT_INITIAL_STATE',
-	VALIDATE_RECIPIENT_LOADING: '[recipients] VALIDATE_RECIPIENT_LOADING',
-	VALIDATE_RECIPIENT_FULFILLED: '[recipients] VALIDATE_RECIPIENT_FULFILLED',
-	VALIDATE_RECIPIENT_REJECTED: '[recipients] VALIDATE_RECIPIENT_REJECTED',
-
 	SIGNATURE_DECLINED: '[recipients] SIGNATURE_DECLINED',
 	SIGNATURE_DECLINED_INITIAL_STATE: '[recipients] SIGNATURE_DECLINED_INITIAL_STATE',
 	SIGNATURE_DECLINED_LOADING: '[recipients] SIGNATURE_DECLINED_LOADING',
@@ -18,53 +12,35 @@ const types = {
 	MESSAGE_SENDER_LOADING: '[recipients] MESSAGE_SENDER_LOADING',
 	MESSAGE_SENDER_FULFILLED: '[recipients] MESSAGE_SENDER_FULFILLED',
 	MESSAGE_SENDER_REJECTED: '[recipients] MESSAGE_SENDER_REJECTED',
+
+	COMPLETE: '[recipients] COMPLETE',
+	COMPLETE_INITIAL_STATE: '[recipients] COMPLETE_INITIAL_STATE',
+	COMPLETE_LOADING: '[recipients] COMPLETE_LOADING',
+	COMPLETE_FULFILLED: '[recipients] COMPLETE_FULFILLED',
+	COMPLETE_REJECTED: '[recipients] COMPLETE_REJECTED',
 }
 
 export const recipientActions = {
 	...types,
-	validateRecipient: (token: string, successCb?, errorCb?) => ({
-		type: types.VALIDATE_RECIPIENT,
-		token,
-		successCb,
-		errorCb,
-		payload: null,
-	}),
-	validateRecipientInitialState: () => ({
-		type: types.VALIDATE_RECIPIENT_INITIAL_STATE,
-		payload: null,
-	}),
-	validateRecipientLoading: () => ({
-		type: types.VALIDATE_RECIPIENT_LOADING,
-		payload: null,
-	}),
-	validateRecipientFulfilled: (payload) => ({
-		type: types.VALIDATE_RECIPIENT_FULFILLED,
-		payload,
-	}),
-	validateRecipientRejected: (payload: Error) => ({
-		type: types.VALIDATE_RECIPIENT_REJECTED,
-		payload,
-	}),
-
-	declineSignature: (package_id: string, recipient_id: string) => ({
+	decline: (recipient_id: string, package_id: string) => ({
 		type: types.SIGNATURE_DECLINED,
 		package_id,
 		recipient_id,
 		payload: null,
 	}),
-	declineSignatureInitialState: () => ({
+	declineInitialState: () => ({
 		type: types.SIGNATURE_DECLINED_INITIAL_STATE,
 		payload: null,
 	}),
-	declineSignatureLoading: () => ({
+	declineLoading: () => ({
 		type: types.SIGNATURE_DECLINED_LOADING,
 		payload: null,
 	}),
-	declineSignatureFulfilled: (payload) => ({
+	declineFulfilled: (payload) => ({
 		type: types.SIGNATURE_DECLINED_FULFILLED,
 		payload,
 	}),
-	declineSignatureRejected: (payload: Error) => ({
+	declineRejected: (payload: Error) => ({
 		type: types.SIGNATURE_DECLINED_REJECTED,
 		payload,
 	}),
@@ -91,6 +67,31 @@ export const recipientActions = {
 	}),
 	messageSenderRejected: (payload: Error) => ({
 		type: types.MESSAGE_SENDER_REJECTED,
+		payload,
+	}),
+
+	complete: (recipient_id: string, package_id: string, successCb?, errorCb?) => ({
+		type: types.COMPLETE,
+		recipient_id,
+		package_id,
+		successCb,
+		errorCb,
+		payload: null,
+	}),
+	completeInitialState: () => ({
+		type: types.COMPLETE_INITIAL_STATE,
+		payload: null,
+	}),
+	completeLoading: () => ({
+		type: types.COMPLETE_LOADING,
+		payload: null,
+	}),
+	completeFulfilled: (payload) => ({
+		type: types.COMPLETE_FULFILLED,
+		payload,
+	}),
+	completeRejected: (payload: Error) => ({
+		type: types.COMPLETE_REJECTED,
 		payload,
 	}),
 }

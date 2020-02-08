@@ -5,49 +5,32 @@ import { RecipientsState } from '../../types'
 
 const state: RecipientsState = {
 	recipients: stateUtility.getPaginationInitialState(),
-	recipient: stateUtility.getItemInitialState(),
 	recipientTypes: stateUtility.getPaginationInitialState(),
-	validateRecipient: stateUtility.getObserverInitialState(),
-	declineSignature: stateUtility.getObserverInitialState(),
+	complete: stateUtility.getObserverInitialState(),
+	decline: stateUtility.getObserverInitialState(),
 	messageSender: stateUtility.getObserverInitialState(),
 }
 const initialState = fromJS(state)
 
 export const recipients = (state = initialState, action) => {
 	switch (action.type) {
-		//validate
-		case recipientActions.VALIDATE_RECIPIENT_INITIAL_STATE:
-			return state.merge({
-				validateRecipient: stateUtility.getObserverInitialState(),
-			})
-		case recipientActions.VALIDATE_RECIPIENT_LOADING:
-			return state.merge({
-				validateRecipient: stateUtility.getObserverLoading(),
-			})
-		case recipientActions.VALIDATE_RECIPIENT_FULFILLED:
-			return state.merge({
-				validateRecipient: stateUtility.getObserverFulfilled(),
-			})
-		case recipientActions.VALIDATE_RECIPIENT_REJECTED:
-			return state.merge({
-				validateRecipient: stateUtility.getObserverRejected(action.payload),
-			})
 		//decline signature
 		case recipientActions.SIGNATURE_DECLINED_INITIAL_STATE:
 			return state.merge({
-				declineSignature: stateUtility.getObserverInitialState(),
+				decline: stateUtility.getObserverInitialState(),
 			})
 		case recipientActions.SIGNATURE_DECLINED_LOADING:
 			return state.merge({
-				declineSignature: stateUtility.getObserverLoading(),
+				decline: stateUtility.getObserverLoading(),
 			})
 		case recipientActions.SIGNATURE_DECLINED_FULFILLED:
 			return state.merge({
-				declineSignature: stateUtility.getObserverFulfilled(),
+				decline: stateUtility.getObserverFulfilled(),
+				recipients: stateUtility.getPaginationFulfilled(action.payload),
 			})
 		case recipientActions.SIGNATURE_DECLINED_REJECTED:
 			return state.merge({
-				declineSignature: stateUtility.getObserverRejected(action.payload),
+				decline: stateUtility.getObserverRejected(action.payload),
 			})
 		// message sender
 		case recipientActions.MESSAGE_SENDER_INITIAL_STATE:
@@ -65,6 +48,23 @@ export const recipients = (state = initialState, action) => {
 		case recipientActions.MESSAGE_SENDER_REJECTED:
 			return state.merge({
 				messageSender: stateUtility.getObserverRejected(action.payload),
+			})
+		case recipientActions.COMPLETE_INITIAL_STATE:
+			return state.merge({
+				complete: stateUtility.getObserverInitialState(),
+			})
+		case recipientActions.COMPLETE_LOADING:
+			return state.merge({
+				complete: stateUtility.getObserverLoading(),
+			})
+		case recipientActions.COMPLETE_FULFILLED:
+			return state.merge({
+				complete: stateUtility.getObserverFulfilled(),
+				recipients: stateUtility.getPaginationFulfilled(action.payload),
+			})
+		case recipientActions.COMPLETE_REJECTED:
+			return state.merge({
+				complete: stateUtility.getObserverRejected(action.payload),
 			})
 		default:
 			return state

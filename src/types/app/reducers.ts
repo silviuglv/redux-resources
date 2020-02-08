@@ -177,9 +177,8 @@ export interface UsersState {
 export interface RecipientsState {
 	recipientTypes: PaginatedResponse<RecipientType>
 	recipients: PaginatedResponse<Recipient>
-	recipient: Observer
-	validateRecipient: Observer
-	declineSignature: Observer
+	decline: Observer
+	complete: Observer
 	messageSender: Observer
 }
 
