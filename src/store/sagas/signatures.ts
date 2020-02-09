@@ -3,26 +3,34 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import { signatureApi } from '../../api'
 import { AnyAction } from 'redux'
 
-function* getSignatures() {
+function* getSignatures({ recipient_id, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(signatureActions.setSignaturesLoading())
-		const { data } = yield call(signatureApi.getSignatures)
+		const { data } = yield call(signatureApi.getSignatures, recipient_id)
 		yield put(signatureActions.setSignaturesFulfilled(data))
+		successCb && successCb(data)
 	} catch (error) {
 		yield put(signatureActions.setSignaturesRejected(error))
+		errorCb && errorCb()
 	}
 }
 
-function* createSignature({ payload }: AnyAction) {
+function* createSignature({ recipient_id, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(signatureActions.setCreateSignatureLoading())
-		const { data } = yield call(signatureApi.createSignature, payload)
+		const { data } = yield call(signatureApi.createSignature, recipient_id, payload)
 		yield put(signatureActions.setCreateSignatureFulfilled(data))
-		yield call(getSignatures)
+		yield call(getSignatures, recipient_id)
+		successCb && successCb(data)
 	} catch (error) {
 		yield put(signatureActions.setCreateSignatureRejected(error))
+		errorCb && errorCb()
 	}
 }
+
+//TODO: replaceSignature,
+
+//TODO: deleteSignature
 
 export function* signatures() {
 	yield takeEvery(signatureActions.GET_SIGNATURES, getSignatures)

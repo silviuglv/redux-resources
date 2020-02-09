@@ -3,17 +3,17 @@ import config from '../config'
 import { CreateSignatureRequest } from '../types'
 
 export const signatureApi = {
-	getSignatures: (params: any = {}) => {
+	getSignatures: (recipient_id: string, params: any = {}) => {
 		return axios({
-			url: `https://56ad06ad-d9f6-49f8-9901-9d1fe52f1ed0.mock.pstmn.io`,
+			url: `https://0d483f94-effd-4698-bd46-e6a440df7f9f.mock.pstmn.io/signatures/${recipient_id}`,
 			//			url: `${config.apiBase}/signatures`,
 			method: 'GET',
 			params,
 		})
 	},
-	createSignature: (data: CreateSignatureRequest) => {
+	createSignature: (recipient_id: string, data: CreateSignatureRequest) => {
 		return axios({
-			url: `https://56ad06ad-d9f6-49f8-9901-9d1fe52f1ed0.mock.pstmn.io`,
+			url: `https://0d483f94-effd-4698-bd46-e6a440df7f9f.mock.pstmn.io/signatures/${recipient_id}`,
 			//			url: `${config.apiBase}/signatures`,
 			method: 'POST',
 			data,

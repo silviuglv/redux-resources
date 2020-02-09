@@ -49,6 +49,7 @@ export const recipients = (state = initialState, action) => {
 			return state.merge({
 				messageSender: stateUtility.getObserverRejected(action.payload),
 			})
+		//complete
 		case recipientActions.COMPLETE_INITIAL_STATE:
 			return state.merge({
 				complete: stateUtility.getObserverInitialState(),
