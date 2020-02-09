@@ -1,5 +1,6 @@
 const config = {
 	apiBase: process.versions.node ? '' : process.env.REACT_APP_API_BASE_URL,
+	apiMock: process.versions.node ? '' : process.env.REACT_APP_API_MOCK_BASE_URL,
 	google: {
 		scopes: {
 			authentication: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
@@ -12,6 +13,7 @@ const config = {
 
 type Config = {
 	apiBase: string
+	apiMock: string
 	google: {
 		scopes: { [key: string]: string }
 	}

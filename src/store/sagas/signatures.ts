@@ -18,7 +18,7 @@ function* getSignatures({ recipient_id, successCb, errorCb }: AnyAction) {
 function* createSignature({ recipient_id, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(signatureActions.setCreateSignatureLoading())
-		const { data } = yield call(signatureApi.createSignature, recipient_id, payload)
+		const { data } = yield call(signatureApi.createSignature, payload)
 		yield put(signatureActions.setCreateSignatureFulfilled(data))
 		yield call(getSignatures, recipient_id)
 		successCb && successCb(data)
