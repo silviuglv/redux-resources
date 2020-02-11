@@ -3,11 +3,11 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import { recipientApi } from '../../api'
 import { AnyAction } from 'redux'
 
-function* complete({ recipient_id, package_id, successCb, errorCb }: AnyAction) {
+function* complete({ package_id, recipient_id, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(recipientActions.completeInitialState())
 		yield put(recipientActions.completeLoading())
-		const { data } = yield call(recipientApi.completePackage, recipient_id)
+		const { data } = yield call(recipientApi.completePackage, package_id, recipient_id)
 		yield put(recipientActions.completeFulfilled(data))
 		yield call(packageActions.getPackageRecipients, package_id)
 		//	yield call(recipientActions.getRecipients, package_id)

@@ -6,6 +6,7 @@ export interface CreateRecipientRequest {
 	last_name: string
 	email: string
 	type: string
+	password?: string
 }
 
 export interface UpdateRecipientRequest {
@@ -13,6 +14,7 @@ export interface UpdateRecipientRequest {
 	last_name: string
 	email: string
 	type: string
+	password?: string
 }
 
 export interface MessageSenderRequest {

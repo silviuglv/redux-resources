@@ -23,9 +23,9 @@ export const recipientApi = {
 			data,
 		})
 	},
-	completePackage: (recipient_id: string) => {
+	completePackage: (package_id: string, recipient_id: string) => {
 		return axios({
-			url: `${config.apiBase}/recpients/${recipient_id}/complete`,
+			url: `${config.apiBase}/packages/${package_id}/recpients/${recipient_id}/complete`,
 			method: 'POST',
 		})
 	},

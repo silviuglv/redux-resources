@@ -70,10 +70,10 @@ export const recipientActions = {
 		payload,
 	}),
 
-	complete: (recipient_id: string, package_id: string, successCb?, errorCb?) => ({
+	complete: (package_id: string, recipient_id: string, successCb?, errorCb?) => ({
 		type: types.COMPLETE,
-		recipient_id,
 		package_id,
+		recipient_id,
 		successCb,
 		errorCb,
 		payload: null,
