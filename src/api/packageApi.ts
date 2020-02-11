@@ -32,7 +32,7 @@ export const packageApi = {
 	},
 	showPackage: (id: string) => {
 		return axios({
-			url: `${config.apiMock}/packages/${id}`,
+			url: `${config.apiBase}/packages/${id}`,
 			method: 'GET',
 		})
 	},
@@ -72,7 +72,7 @@ export const packageApi = {
 	},
 	getFields: (packageId: string, params: GetFieldsRequest = {}) => {
 		return axios({
-			url: `${config.apiMock}/packages/${packageId}/fields`,
+			url: `${config.apiBase}/packages/${packageId}/fields`,
 			method: 'GET',
 			params,
 		})
