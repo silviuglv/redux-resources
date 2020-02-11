@@ -135,11 +135,11 @@ function* createDocumentsBuild({ id, payload, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* createDocumentsRenderFields({ id, successCb, errorCb }: AnyAction) {
+function* createDocumentsRenderPdf({ id, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(packageActions.createPackageDocumentsInitialState())
 		yield put(packageActions.createPackageDocumentsLoading())
-		const { data } = yield call(packageApi.createDocumentsRenderFields, id)
+		const { data } = yield call(packageApi.createDocumentsRenderPdf, id)
 		yield put(packageActions.createPackageDocumentsFulfilled(data))
 		successCb !== undefined && successCb(data)
 	} catch (error) {
@@ -352,7 +352,7 @@ export function* packages() {
 	yield takeEvery(packageActions.GET_PAGES, getPages)
 	yield takeEvery(packageActions.CREATE_PACKAGE_DOCUMENTS, createDocuments)
 	yield takeEvery(packageActions.CREATE_PACKAGE_DOCUMENTS_BUILD, createDocumentsBuild)
-	yield takeEvery(packageActions.CREATE_PACKAGE_DOCUMENTS_RENDER_FIELDS, createDocumentsRenderFields)
+	yield takeEvery(packageActions.CREATE_PACKAGE_DOCUMENTS_RENDER_FIELDS, createDocumentsRenderPdf)
 	yield takeEvery(packageActions.UPDATE_DOCUMENT, updateDocument)
 	yield takeEvery(packageActions.UPDATE_DOCUMENT_BUILD, updateDocumentBuild)
 	yield takeEvery(packageActions.CREATE_DOCUMENT_FROM_CONNECTED_SERVICE, createDocumentFromSocialAccount)

@@ -32,7 +32,7 @@ export const packageApi = {
 	},
 	showPackage: (id: string) => {
 		return axios({
-			url: `${config.apiBase}/packages/${id}`,
+			url: `${config.apiMock}/packages/${id}`,
 			method: 'GET',
 		})
 	},
@@ -72,7 +72,7 @@ export const packageApi = {
 	},
 	getFields: (packageId: string, params: GetFieldsRequest = {}) => {
 		return axios({
-			url: `${config.apiBase}/packages/${packageId}/fields`,
+			url: `${config.apiMock}/packages/${packageId}/fields`,
 			method: 'GET',
 			params,
 		})
@@ -91,7 +91,7 @@ export const packageApi = {
 			data,
 		})
 	},
-	createDocumentsRenderFields: (id: string) => {
+	createDocumentsRenderPdf: (id: string) => {
 		return axios({
 			url: `${config.apiBase}/packages/${id}/documents/render`,
 			method: 'POST',
