@@ -18,6 +18,12 @@ const types = {
 	COMPLETE_LOADING: '[recipients] COMPLETE_LOADING',
 	COMPLETE_FULFILLED: '[recipients] COMPLETE_FULFILLED',
 	COMPLETE_REJECTED: '[recipients] COMPLETE_REJECTED',
+
+	UPDATE_RECIPIENT_PHOTO: '[recipients] UPDATE_RECIPIENT_PHOTO',
+	UPDATE_RECIPIENT_PHOTO_INITIAL_STATE: '[recipients] UPDATE_RECIPIENT_PHOTO_INITIAL_STATE',
+	UPDATE_RECIPIENT_PHOTO_LOADING: '[recipients] UPDATE_RECIPIENT_PHOTO_LOADING',
+	UPDATE_RECIPIENT_PHOTO_FULFILLED: '[recipients] UPDATE_RECIPIENT_PHOTO_FULFILLED',
+	UPDATE_RECIPIENT_PHOTO_REJECTED: '[recipients] UPDATE_RECIPIENT_PHOTO_REJECTED',
 }
 
 export const recipientActions = {
@@ -92,6 +98,30 @@ export const recipientActions = {
 	}),
 	completeRejected: (payload: Error) => ({
 		type: types.COMPLETE_REJECTED,
+		payload,
+	}),
+
+	updateRecipientPhoto: (id: string, payload: any, successCb?, errorCb?) => ({
+		type: types.UPDATE_RECIPIENT_PHOTO,
+		payload,
+		id,
+		successCb,
+		errorCb,
+	}),
+	updateRecipientPhotoInitialState: () => ({
+		type: types.UPDATE_RECIPIENT_PHOTO_INITIAL_STATE,
+		payload: null,
+	}),
+	updateRecipientPhotoLoading: () => ({
+		type: types.UPDATE_RECIPIENT_PHOTO_LOADING,
+		payload: null,
+	}),
+	updateRecipientPhotoFulfilled: (payload) => ({
+		type: types.UPDATE_RECIPIENT_PHOTO_FULFILLED,
+		payload,
+	}),
+	updateRecipientPhotoRejected: (payload: Error) => ({
+		type: types.UPDATE_RECIPIENT_PHOTO_REJECTED,
 		payload,
 	}),
 }

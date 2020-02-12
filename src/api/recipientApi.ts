@@ -29,4 +29,11 @@ export const recipientApi = {
 			method: 'POST',
 		})
 	},
+	updatePhoto: (id: string, data: any) => {
+		return axios({
+			url: `${config.apiBase}/recipients/${id}/picture`,
+			method: 'POST',
+			data,
+		})
+	},
 }

@@ -67,6 +67,31 @@ export const recipients = (state = initialState, action) => {
 			return state.merge({
 				complete: stateUtility.getObserverRejected(action.payload),
 			})
+
+		//  updatePhoto
+		case recipientActions.UPDATE_RECIPIENT_PHOTO_INITIAL_STATE:
+			return state.merge({
+				updatePhoto: stateUtility.getObserverInitialState(),
+			})
+		case recipientActions.UPDATE_RECIPIENT_PHOTO_LOADING:
+			return state.merge({
+				updatePhoto: stateUtility.getObserverLoading(),
+			})
+		case recipientActions.UPDATE_RECIPIENT_PHOTO_FULFILLED:
+			return state.merge({
+				updatePhoto: stateUtility.getObserverFulfilled(),
+				user: {
+					...state.toJS().user,
+					data: {
+						...state.toJS().user.data,
+						image_url: state.toJS().user.data.image_url + '?date=' + Math.floor(Date.now()),
+					},
+				},
+			})
+		case recipientActions.UPDATE_RECIPIENT_PHOTO_REJECTED:
+			return state.merge({
+				updatePhoto: stateUtility.getObserverRejected(action.payload),
+			})
 		default:
 			return state
 	}

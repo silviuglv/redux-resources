@@ -1,4 +1,4 @@
-import { recipientActions, packageActions } from '../actions'
+import { recipientActions, packageActions, notificationActions } from '../actions'
 import { put, takeEvery, call } from 'redux-saga/effects'
 import { recipientApi } from '../../api'
 import { AnyAction } from 'redux'
@@ -45,8 +45,23 @@ function* messageSender({ package_id, recipient_id, payload, successCb, errorCb 
 	}
 }
 
+function* updatePhoto({ id, payload, successCb, errorCb }: any) {
+	try {
+		yield put(recipientActions.updateRecipientPhotoInitialState())
+		yield put(recipientActions.updateRecipientPhotoLoading())
+		const { data } = yield call(recipientApi.updatePhoto, id, payload)
+		yield put(recipientActions.updateRecipientPhotoFulfilled(data))
+		yield put(notificationActions.displaySnackbarMessage('Profile photo updated!', 2000))
+		successCb !== undefined && successCb()
+	} catch (error) {
+		yield put(recipientActions.updateRecipientPhotoRejected(error))
+		errorCb !== undefined && errorCb()
+	}
+}
+
 export function* recipients() {
 	yield takeEvery(recipientActions.COMPLETE, complete)
+	yield takeEvery(recipientActions.UPDATE_RECIPIENT_PHOTO, updatePhoto)
 	yield takeEvery(recipientActions.SIGNATURE_DECLINED, decline)
 	yield takeEvery(recipientActions.MESSAGE_SENDER, messageSender)
 }
