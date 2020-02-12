@@ -10,15 +10,15 @@ export const recipientApi = {
 			method: 'GET',
 		})
 	},
-	decline: (recipient_id: string) => {
+	decline: (package_id: string, recipient_id: string) => {
 		return axios({
-			url: `${config.apiBase}/recipients/${recipient_id}/decline`,
+			url: `${config.apiBase}/packages/${package_id}/recipients/${recipient_id}/decline`,
 			method: 'POST',
 		})
 	},
-	messageSender: (recipient_id: string, data: MessageSenderRequest) => {
+	messageSender: (package_id: string, recipient_id: string, data: MessageSenderRequest) => {
 		return axios({
-			url: `${config.apiBase}/recpients/${recipient_id}/message_sender`,
+			url: `${config.apiBase}/packages/${package_id}/recpients/${recipient_id}/message_sender`,
 			method: 'POST',
 			data,
 		})

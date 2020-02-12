@@ -18,14 +18,13 @@ function* complete({ package_id, recipient_id, successCb, errorCb }: AnyAction) 
 	}
 }
 
-function* decline({ recipient_id, package_id, successCb, errorCb }: AnyAction) {
+function* decline({ package_id, recipient_id, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(recipientActions.declineInitialState())
 		yield put(recipientActions.declineLoading())
-		const { data } = yield call(recipientApi.decline, recipient_id)
+		const { data } = yield call(recipientApi.decline, package_id, recipient_id)
 		yield put(recipientActions.declineFulfilled(data))
 		yield call(packageActions.getPackageRecipients, package_id)
-		//		yield call(recipientActions.getRecipients, package_id)
 		successCb && successCb()
 	} catch (error) {
 		yield put(recipientActions.declineRejected(error))
@@ -33,11 +32,11 @@ function* decline({ recipient_id, package_id, successCb, errorCb }: AnyAction) {
 	}
 }
 
-function* messageSender({ recipient_id, payload, successCb, errorCb }: AnyAction) {
+function* messageSender({ package_id, recipient_id, payload, successCb, errorCb }: AnyAction) {
 	try {
 		yield put(recipientActions.messageSenderInitialState())
 		yield put(recipientActions.messageSenderLoading())
-		const { data } = yield call(recipientApi.messageSender, recipient_id, payload)
+		const { data } = yield call(recipientApi.messageSender, package_id, recipient_id, payload)
 		yield put(recipientActions.messageSenderFulfilled(data))
 		successCb && successCb()
 	} catch (error) {

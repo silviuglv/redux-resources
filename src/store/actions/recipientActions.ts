@@ -22,7 +22,7 @@ const types = {
 
 export const recipientActions = {
 	...types,
-	decline: (recipient_id: string, package_id: string) => ({
+	decline: (package_id: string, recipient_id: string) => ({
 		type: types.SIGNATURE_DECLINED,
 		package_id,
 		recipient_id,
