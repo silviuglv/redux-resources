@@ -122,7 +122,7 @@ export const packageApi = {
 	},
 	downloadDocument: (id: string, documentId: string) => {
 		return axios({
-			url: `${config.apiBase}/packages/${id}/documents/${documentId}`,
+			url: `${config.apiMock}/packages/${id}/documents/${documentId}`,
 			method: 'GET',
 			headers: { Accept: 'application/pdf' },
 			responseType: 'blob',
