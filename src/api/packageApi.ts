@@ -124,8 +124,7 @@ export const packageApi = {
 		return axios({
 			url: `${config.apiMock}/packages/${id}/documents/${documentId}`,
 			method: 'GET',
-			headers: { Accept: 'application/pdf' },
-			responseType: 'blob',
+			headers: { Accept: 'application/json' },
 		})
 	},
 	getDocumentPageImageUrl: (url: string) => {

@@ -31,9 +31,11 @@ export const signatureActions = {
 		payload,
 	}),
 
-	createSignature: (payload: CreateSignatureRequest) => ({
+	createSignature: (payload: CreateSignatureRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_SIGNATURE,
 		payload,
+		successCb,
+		errorCb,
 	}),
 	setCreateSignatureLoading: () => ({
 		type: types.CREATE_SIGNATURE_LOADING,
