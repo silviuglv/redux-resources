@@ -20,7 +20,7 @@ function* createSignature({ recipient_id, payload, successCb, errorCb }: AnyActi
 		yield put(signatureActions.setCreateSignatureLoading())
 		const { data } = yield call(signatureApi.createSignature, payload)
 		yield put(signatureActions.setCreateSignatureFulfilled(data))
-		yield call(getSignatures, recipient_id)
+		// testing to see if this is stopping success cb. yield call(getSignatures, recipient_id)
 		successCb && successCb(data)
 	} catch (error) {
 		yield put(signatureActions.setCreateSignatureRejected(error))
