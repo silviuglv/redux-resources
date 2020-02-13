@@ -31,7 +31,7 @@ export const recipientApi = {
 	},
 	updatePhoto: (id: string, data: any) => {
 		return axios({
-			url: `${config.apiBase}/recipients/${id}/picture`,
+			url: `${config.apiMock}/recipients/${id}/picture`,
 			method: 'POST',
 			data,
 		})
