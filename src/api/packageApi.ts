@@ -177,7 +177,7 @@ export const packageApi = {
 	},
 	updateRecipient: (id: string, recipientId: string, data: UpdateRecipientRequest) => {
 		return axios({
-			url: `${config.apiBase}/packages/${id}/recipients/${recipientId}`,
+			url: `${config.apiMock}/packages/${id}/recipients/${recipientId}`,
 			method: 'PUT',
 			data: keysToSnakeCase(data),
 		})
