@@ -103,8 +103,8 @@ export const recipientActions = {
 
 	updateRecipientPhoto: (id: string, payload: any, successCb?, errorCb?) => ({
 		type: types.UPDATE_RECIPIENT_PHOTO,
-		payload,
 		id,
+		payload,
 		successCb,
 		errorCb,
 	}),
