@@ -18,14 +18,14 @@ export const recipientApi = {
 	},
 	messageSender: (package_id: string, recipient_id: string, data: MessageSenderRequest) => {
 		return axios({
-			url: `${config.apiBase}/packages/${package_id}/recpients/${recipient_id}/message_sender`,
+			url: `${config.apiBase}/packages/${package_id}/recipients/${recipient_id}/message_sender`,
 			method: 'POST',
 			data,
 		})
 	},
 	completePackage: (package_id: string, recipient_id: string) => {
 		return axios({
-			url: `${config.apiMock}/packages/${package_id}/recpients/${recipient_id}/complete`,
+			url: `${config.apiMock}/packages/${package_id}/recipients/${recipient_id}/complete`,
 			method: 'POST',
 		})
 	},
