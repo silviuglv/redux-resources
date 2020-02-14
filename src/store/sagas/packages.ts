@@ -340,6 +340,17 @@ function* getMyRecipient({ id, recipientToken }: AnyAction) {
 	}
 }
 
+function* getAuditTrail({ id }: AnyAction) {
+	try {
+		yield put(packageActions.getAuditTrailInitialState())
+		yield put(packageActions.getAuditTrailLoading())
+		const { data } = yield call(packageApi.getAuditTrail, id)
+		yield put(packageActions.getAuditTrailFulfilled(data))
+	} catch (error) {
+		yield put(packageActions.getAuditTrailRejected(error))
+	}
+}
+
 export function* packages() {
 	yield takeEvery(packageActions.GET_PACKAGES, getPackages)
 	yield takeEvery(packageActions.GET_PACKAGE_LEXICON, getPackageLexicon)
@@ -367,4 +378,5 @@ export function* packages() {
 	yield takeEvery(packageActions.UPDATE_PACKAGE_RECIPIENT, updateRecipient)
 	yield takeEvery(packageActions.DELETE_PACKAGE_RECIPIENT, deleteRecipient)
 	yield takeEvery(packageActions.GET_MY_RECIPIENT, getMyRecipient)
+	yield takeEvery(packageActions.GET_AUDIT_TRAIL, getAuditTrail)
 }

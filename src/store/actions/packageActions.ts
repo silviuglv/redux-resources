@@ -148,6 +148,12 @@ const types = {
 	DELETE_PACKAGE_RECIPIENT_LOADING: '[recipients] DELETE_PACKAGE_RECIPIENT_LOADING',
 	DELETE_PACKAGE_RECIPIENT_FULFILLED: '[recipients] DELETE_PACKAGE_RECIPIENT_FULFILLED',
 	DELETE_PACKAGE_RECIPIENT_REJECTED: '[recipients] DELETE_PACKAGE_RECIPIENT_REJECTED',
+
+	GET_AUDIT_TRAIL: '[packages] GET_AUDIT_TRAIL',
+	GET_AUDIT_TRAIL_INITIAL_STATE: '[packages] GET_AUDIT_TRAIL_INITIAL_STATE',
+	GET_AUDIT_TRAIL_LOADING: '[packages] GET_AUDIT_TRAIL_LOADING',
+	GET_AUDIT_TRAIL_FULFILLED: '[packages] GET_AUDIT_TRAIL_FULFILLED',
+	GET_AUDIT_TRAIL_REJECTED: '[packages] GET_AUDIT_TRAIL_REJECTED',
 }
 
 export const packageActions = {
@@ -683,6 +689,29 @@ export const packageActions = {
 	}),
 	deletePackageRecipientRejected: (payload: Error) => ({
 		type: types.DELETE_PACKAGE_RECIPIENT_REJECTED,
+		payload,
+	}),
+
+	getAuditTrail: (package_id: string, successCb?, errorCb?) => ({
+		type: types.GET_PACKAGES,
+		package_id,
+		successCb,
+		errorCb,
+	}),
+	getAuditTrailInitialState: () => ({
+		type: types.GET_PACKAGES_INITIAL_STATE,
+		payload: null,
+	}),
+	getAuditTrailLoading: () => ({
+		type: types.GET_PACKAGES_LOADING,
+		payload: null,
+	}),
+	getAuditTrailFulfilled: (payload: PaginatedApiResponse<Package>) => ({
+		type: types.GET_PACKAGES_FULFILLED,
+		payload,
+	}),
+	getAuditTrailRejected: (payload: Error) => ({
+		type: types.GET_PACKAGES_REJECTED,
 		payload,
 	}),
 }
