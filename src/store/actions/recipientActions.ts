@@ -50,7 +50,7 @@ export const recipientActions = {
 		type: types.SIGNATURE_DECLINED_REJECTED,
 		payload,
 	}),
-	messageSender: (package_id: string, recipient_id: string, payload: MessageSenderRequest, successCb, errorCb) => ({
+	messageSender: (package_id: string, recipient_id: string, payload: MessageSenderRequest, successCb?, errorCb?) => ({
 		type: types.MESSAGE_SENDER,
 		package_id,
 		recipient_id,
@@ -75,7 +75,7 @@ export const recipientActions = {
 		payload,
 	}),
 
-	complete: (package_id: string, recipient_id: string, successCb, errorCb) => ({
+	complete: (package_id: string, recipient_id: string, successCb?, errorCb?) => ({
 		type: types.COMPLETE,
 		package_id,
 		recipient_id,
@@ -100,7 +100,7 @@ export const recipientActions = {
 		payload,
 	}),
 
-	updateRecipientPhoto: (id: string, payload: any, successCb, errorCb) => ({
+	updateRecipientPhoto: (id: string, payload: any, successCb?, errorCb?) => ({
 		type: types.UPDATE_RECIPIENT_PHOTO,
 		id,
 		payload,
