@@ -188,4 +188,10 @@ export const packageApi = {
 			method: 'DELETE',
 		})
 	},
+	getAuditTrail: (id: string) => {
+		return axios({
+			url: `${config.apiMock}/packages/${id}/audit`,
+			method: 'GET',
+		})
+	},
 }

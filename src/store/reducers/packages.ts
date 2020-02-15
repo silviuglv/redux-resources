@@ -365,6 +365,23 @@ export const packages = (state = initialState, action) => {
 				recipient: stateUtility.getItemRejected(action.payload),
 			})
 
+		case packageActions.GET_AUDIT_TRAIL_INITIAL_STATE:
+			return state.merge({
+				documents: stateUtility.getPaginationInitialState(),
+			})
+		case packageActions.GET_AUDIT_TRAIL_LOADING:
+			return state.merge({
+				documents: stateUtility.getPaginationLoading(),
+			})
+		case packageActions.GET_AUDIT_TRAIL_FULFILLED:
+			return state.merge({
+				documents: stateUtility.getPaginationFulfilled(action.payload),
+			})
+		case packageActions.GET_AUDIT_TRAIL_REJECTED:
+			return state.merge({
+				documents: stateUtility.getPaginationRejected(action.payload),
+			})
+
 		default:
 			return state
 	}

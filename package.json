@@ -1,6 +1,6 @@
 {
 	"name": "@approveme/redux-resources",
-	"version": "2.2.46",
+	"version": "2.2.47",
 	"files": [
 		"lib/**/*"
 	],
