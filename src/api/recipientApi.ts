@@ -18,7 +18,7 @@ export const recipientApi = {
 	},
 	messageSender: (package_id: string, recipient_id: string, data: MessageSenderRequest) => {
 		return axios({
-			url: `${config.apiBase}/packages/${package_id}/recipients/${recipient_id}/message_sender`,
+			url: `${config.apiMock}/packages/${package_id}/recipients/${recipient_id}/message_sender`,
 			method: 'POST',
 			data,
 		})
