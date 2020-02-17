@@ -693,25 +693,25 @@ export const packageActions = {
 	}),
 
 	getAuditTrail: (package_id: string, successCb?, errorCb?) => ({
-		type: types.GET_PACKAGES,
+		type: types.GET_AUDIT_TRAIL,
 		package_id,
 		successCb,
 		errorCb,
 	}),
 	getAuditTrailInitialState: () => ({
-		type: types.GET_PACKAGES_INITIAL_STATE,
+		type: types.GET_AUDIT_TRAIL_INITIAL_STATE,
 		payload: null,
 	}),
 	getAuditTrailLoading: () => ({
-		type: types.GET_PACKAGES_LOADING,
+		type: types.GET_AUDIT_TRAIL_LOADING,
 		payload: null,
 	}),
-	getAuditTrailFulfilled: (payload: PaginatedApiResponse<Package>) => ({
-		type: types.GET_PACKAGES_FULFILLED,
+	getAuditTrailFulfilled: (payload: any) => ({
+		type: types.GET_AUDIT_TRAIL_FULFILLED,
 		payload,
 	}),
 	getAuditTrailRejected: (payload: Error) => ({
-		type: types.GET_PACKAGES_REJECTED,
+		type: types.GET_AUDIT_TRAIL_REJECTED,
 		payload,
 	}),
 }
