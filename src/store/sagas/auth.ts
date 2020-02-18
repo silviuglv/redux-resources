@@ -83,14 +83,16 @@ function* update({ id, payload }: any) {
 	}
 }
 
-function* create({ payload }: any) {
+function* create({ payload, successCb, errorCb }: any) {
 	try {
 		yield put(authActions.createUserInitialState())
 		yield put(authActions.createUserLoading())
 		const { data } = yield call(userApi.createUser, payload)
 		yield put(authActions.createUserFulfilled(data))
+		successCb !== undefined && successCb()
 	} catch (error) {
 		yield put(authActions.createUserRejected(error))
+		errorCb !== undefined && errorCb()
 	}
 }
 

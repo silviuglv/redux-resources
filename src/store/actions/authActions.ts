@@ -102,9 +102,11 @@ export const authActions = {
 		token_secret,
 	}),
 
-	createUser: (payload: CreateUserRequest) => ({
+	createUser: (payload: CreateUserRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_USER,
 		payload,
+		successCb, 
+		errorCb
 	}),
 	createUserInitialState: () => ({
 		type: types.CREATE_USER_INITIAL_STATE,
