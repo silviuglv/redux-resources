@@ -105,8 +105,8 @@ export const authActions = {
 	createUser: (payload: CreateUserRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_USER,
 		payload,
-		successCb, 
-		errorCb
+		successCb,
+		errorCb,
 	}),
 	createUserInitialState: () => ({
 		type: types.CREATE_USER_INITIAL_STATE,
