@@ -1,6 +1,6 @@
 import { accountActions, authActions, notificationActions } from '../actions'
 import { put, takeEvery, call, select } from 'redux-saga/effects'
-import { oauthApi, userApi } from '../../api'
+import { authApi, userApi } from '../../api'
 import { getAccounts, getDefaultAccount } from './accounts'
 import { authUser } from '../selectors'
 
@@ -22,21 +22,35 @@ function* authUserInitialState() {
 	yield put(authActions.authUserNotLoaded())
 }
 
-function* login({ payload, provider = null, access_token = null, token_secret = null }: any) {
+function* login({ payload, successCb, errorCb }: any) {
 	try {
 		yield put(authActions.createAccessTokenInitialState())
 		yield put(authActions.createAccessToken())
 		yield put(authActions.createAccessTokenLoading())
 
-		const { data } =
-			payload !== undefined
-				? yield call(oauthApi.createAccessToken, payload)
-				: yield call(oauthApi.createSocialAccessToken, provider, access_token, token_secret)
-
+		const { data } = yield call(authApi.createAccessToken, payload)
 		yield put(authActions.createAccessTokenFulfilled(data))
+		successCb && successCb()
 	} catch (error) {
 		yield put(authActions.createAccessTokenRejected(error))
 		yield put(notificationActions.displaySnackbarMessage(error.message, 2000))
+		errorCb && errorCb()
+	}
+}
+
+function* refresh({ successCb, errorCb }: any) {
+	try {
+		yield put(authActions.refreshAccessTokenInitialState())
+		yield put(authActions.refreshAccessToken())
+		yield put(authActions.refreshAccessTokenLoading())
+
+		const { data } = yield call(authApi.refreshAccessToken)
+		yield put(authActions.refreshAccessTokenFulfilled(data))
+		successCb && successCb()
+	} catch (error) {
+		yield put(authActions.refreshAccessTokenRejected(error))
+		yield put(notificationActions.displaySnackbarMessage(error.message, 2000))
+		errorCb && errorCb()
 	}
 }
 
@@ -47,7 +61,7 @@ function* logout({ successCb }: any) {
 	window.localStorage.removeItem('userMeta')
 	yield put(authActions.authUserInitialState())
 	yield put(authActions.authMetaInitialState())
-
+	yield call(authApi.invalidateAccessToken)
 	//  accounts
 	window.localStorage.removeItem('defaultAccount')
 	window.localStorage.removeItem('accountList')
@@ -123,11 +137,19 @@ function* updatePhoto({ id, payload, successCb, errorCb }: any) {
 
 export function* loginSaga() {
 	yield takeEvery(authActions.LOG_USER_IN, login)
-	yield takeEvery(authActions.CREATE_SOCIAL_ACCESS_TOKEN, login)
 
 	yield takeEvery(authActions.CREATE_AUTH_ACCESS_TOKEN_FULFILLED, getAccounts)
 	yield takeEvery(authActions.CREATE_AUTH_ACCESS_TOKEN_FULFILLED, getDefaultAccount)
 	yield takeEvery(authActions.CREATE_AUTH_ACCESS_TOKEN_FULFILLED, getAuthUser)
+	yield takeEvery(authActions.AUTH_USER_LOADED, getAuthMeta)
+}
+
+export function* refreshSaga() {
+	yield takeEvery(authActions.REFRESH_AUTH_ACCESS_TOKEN, refresh)
+
+	yield takeEvery(authActions.REFRESH_AUTH_ACCESS_TOKEN_FULFILLED, getAccounts)
+	yield takeEvery(authActions.REFRESH_AUTH_ACCESS_TOKEN_FULFILLED, getDefaultAccount)
+	yield takeEvery(authActions.REFRESH_AUTH_ACCESS_TOKEN_FULFILLED, getAuthUser)
 	yield takeEvery(authActions.AUTH_USER_LOADED, getAuthMeta)
 }
 

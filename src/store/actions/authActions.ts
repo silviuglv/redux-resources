@@ -3,7 +3,6 @@ import {
 	CreateUserFromAccountInviteRequest,
 	CreateUserRequest,
 	Error,
-	ProviderTypes,
 	UpdateUserRequest,
 	User,
 	UserMeta,
@@ -12,8 +11,6 @@ import {
 const types = {
 	LOG_USER_IN: '[auth] LOG_USER_IN',
 	LOG_USER_OUT: '[auth] LOG_USER_OUT',
-
-	CREATE_SOCIAL_ACCESS_TOKEN: '[auth] CREATE_SOCIAL_ACCESS_TOKEN',
 
 	CREATE_USER: '[auth] CREATE_USER',
 	CREATE_USER_INITIAL_STATE: '[auth] CREATE_USER_INITIAL_STATE',
@@ -32,6 +29,12 @@ const types = {
 	CREATE_AUTH_ACCESS_TOKEN_LOADING: '[auth] CREATE_AUTH_ACCESS_TOKEN_LOADING',
 	CREATE_AUTH_ACCESS_TOKEN_FULFILLED: '[auth] CREATE_AUTH_ACCESS_TOKEN_FULFILLED',
 	CREATE_AUTH_ACCESS_TOKEN_REJECTED: '[auth] CREATE_AUTH_ACCESS_TOKEN_REJECTED',
+
+	REFRESH_AUTH_ACCESS_TOKEN: '[auth] REFRESH_AUTH_ACCESS_TOKEN',
+	REFRESH_AUTH_ACCESS_TOKEN_INITIAL_STATE: '[auth] REFRESH_AUTH_ACCESS_TOKEN_INITIAL_STATE',
+	REFRESH_AUTH_ACCESS_TOKEN_LOADING: '[auth] REFRESH_AUTH_ACCESS_TOKEN_LOADING',
+	REFRESH_AUTH_ACCESS_TOKEN_FULFILLED: '[auth] REFRESH_AUTH_ACCESS_TOKEN_FULFILLED',
+	REFRESH_AUTH_ACCESS_TOKEN_REJECTED: '[auth] REFRESH_AUTH_ACCESS_TOKEN_REJECTED',
 
 	LOAD_AUTH_USER_META: '[auth] LOAD_AUTH_USER_META',
 	LOAD_AUTH_USER_META_INITIAL_STATE: '[auth] LOAD_AUTH_USER_META_INITIAL_STATE',
@@ -94,14 +97,6 @@ export const authActions = {
 		payload: null,
 		successCb,
 	}),
-	createSocialAccessToken: (provider: ProviderTypes, access_token: string, token_secret: string) => ({
-		type: types.CREATE_SOCIAL_ACCESS_TOKEN,
-		payload: null,
-		provider,
-		access_token,
-		token_secret,
-	}),
-
 	createUser: (payload: CreateUserRequest, successCb?, errorCb?) => ({
 		type: types.CREATE_USER,
 		payload,
@@ -146,9 +141,11 @@ export const authActions = {
 		payload,
 	}),
 
-	createAccessToken: () => ({
+	createAccessToken: (successCb?, errorCb?) => ({
 		type: types.CREATE_AUTH_ACCESS_TOKEN,
 		payload: null,
+		successCb,
+		errorCb,
 	}),
 	createAccessTokenInitialState: () => ({
 		type: types.CREATE_AUTH_ACCESS_TOKEN_INITIAL_STATE,
@@ -164,6 +161,29 @@ export const authActions = {
 	}),
 	createAccessTokenRejected: (payload: Error) => ({
 		type: types.CREATE_AUTH_ACCESS_TOKEN_REJECTED,
+		payload,
+	}),
+
+	refreshAccessToken: (successCb?, errorCb?) => ({
+		type: types.REFRESH_AUTH_ACCESS_TOKEN,
+		payload: null,
+		successCb,
+		errorCb,
+	}),
+	refreshAccessTokenInitialState: () => ({
+		type: types.REFRESH_AUTH_ACCESS_TOKEN_INITIAL_STATE,
+		payload: null,
+	}),
+	refreshAccessTokenLoading: () => ({
+		type: types.REFRESH_AUTH_ACCESS_TOKEN_LOADING,
+		payload: null,
+	}),
+	refreshAccessTokenFulfilled: (payload: AccessToken) => ({
+		type: types.REFRESH_AUTH_ACCESS_TOKEN_FULFILLED,
+		payload,
+	}),
+	refreshAccessTokenRejected: (payload: Error) => ({
+		type: types.REFRESH_AUTH_ACCESS_TOKEN_REJECTED,
 		payload,
 	}),
 
