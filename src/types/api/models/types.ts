@@ -30,6 +30,6 @@ export type FieldTypes =
 
 //export type RecipientTypes = 'signer' | 'viewer'
 
-//export type ProviderTypes = 'google' | 'dropbox' | 'approveme' | 'box'
+export type ProviderTypes = 'google' | 'dropbox' | 'approveme' | 'box'
 
 export type SignatureTypes = 'signature' | 'initials'

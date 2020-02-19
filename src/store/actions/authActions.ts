@@ -4,6 +4,7 @@ import {
 	CreateUserRequest,
 	Error,
 	UpdateUserRequest,
+	ProviderTypes,
 	User,
 	UserMeta,
 } from '../../types'
@@ -11,6 +12,8 @@ import {
 const types = {
 	LOG_USER_IN: '[auth] LOG_USER_IN',
 	LOG_USER_OUT: '[auth] LOG_USER_OUT',
+
+	CREATE_SOCIAL_ACCESS_TOKEN: '[auth] CREATE_SOCIAL_ACCESS_TOKEN',
 
 	CREATE_USER: '[auth] CREATE_USER',
 	CREATE_USER_INITIAL_STATE: '[auth] CREATE_USER_INITIAL_STATE',
@@ -83,6 +86,13 @@ export const authActions = {
 	authUserData: (payload) => ({
 		type: types.AUTH_USER_DATA,
 		payload,
+	}),
+	createSocialAccessToken: (provider: ProviderTypes, access_token: string, token_secret: string) => ({
+		type: types.CREATE_SOCIAL_ACCESS_TOKEN,
+		payload: null,
+		provider,
+		access_token,
+		token_secret,
 	}),
 	authUserError: (payload: Error) => ({
 		type: types.AUTH_USER_ERROR,

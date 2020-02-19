@@ -22,13 +22,17 @@ function* authUserInitialState() {
 	yield put(authActions.authUserNotLoaded())
 }
 
-function* login({ payload, successCb, errorCb }: any) {
+function* login({ payload, successCb, errorCb, provider = null, access_token = null, token_secret = null }: any) {
 	try {
 		yield put(authActions.createAccessTokenInitialState())
 		yield put(authActions.createAccessToken())
 		yield put(authActions.createAccessTokenLoading())
 
-		const { data } = yield call(authApi.createAccessToken, payload)
+		const { data } =
+			payload !== undefined
+				? yield call(authApi.createAccessToken, payload)
+				: yield call(authApi.createSocialAccessToken, provider, access_token, token_secret)
+
 		yield put(authActions.createAccessTokenFulfilled(data))
 		successCb && successCb()
 	} catch (error) {
@@ -137,6 +141,7 @@ function* updatePhoto({ id, payload, successCb, errorCb }: any) {
 
 export function* loginSaga() {
 	yield takeEvery(authActions.LOG_USER_IN, login)
+	yield takeEvery(authActions.CREATE_SOCIAL_ACCESS_TOKEN, login)
 
 	yield takeEvery(authActions.CREATE_AUTH_ACCESS_TOKEN_FULFILLED, getAccounts)
 	yield takeEvery(authActions.CREATE_AUTH_ACCESS_TOKEN_FULFILLED, getDefaultAccount)
