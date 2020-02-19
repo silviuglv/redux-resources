@@ -13,7 +13,6 @@ export interface CreateUserFromAccountInviteRequest {
 	last_name: string
 	email: string
 	password: string
-	password_confirmation: string
 	account_invite_id: string
 	account_invite_token: string
 }
@@ -33,7 +32,6 @@ export interface UpdateNotificationPreferencesRequest {
 export interface UpdatePasswordRequest {
 	password: string
 	new_password: string
-	new_password_confirmation: string
 }
 
 export interface UpdateUserRequest {
