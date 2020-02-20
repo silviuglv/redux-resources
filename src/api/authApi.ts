@@ -8,7 +8,7 @@ export const authApi = {
 			url: `${config.apiBase}/auth/login`,
 			method: 'POST',
 			data: {
-				grant_type: 'password',
+				grant_type: 'user',
 				username: user.email,
 				password: user.password,
 			},
