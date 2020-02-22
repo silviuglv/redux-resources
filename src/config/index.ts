@@ -1,5 +1,5 @@
 const config = {
-	dev_env: true,
+	dev_env: process.versions.node ? false : process.env.USE_REACT_MOCK_ENV,
 	apiBase: process.versions.node ? '' : process.env.REACT_APP_API_BASE_URL,
 	apiMock: process.versions.node ? '' : process.env.REACT_APP_API_MOCK_BASE_URL,
 	google: {
