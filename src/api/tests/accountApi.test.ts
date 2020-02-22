@@ -1,8 +1,8 @@
-import { oauthApi } from '../oauthApi'
+import { authApi } from '../authApi'
 
 test('adds 1 + 2 to equal 3', () => {
 	expect(1 + 2).toBe(3)
-	oauthApi
+	authApi
 		.createAccessToken({
 			email: 'james@approveme.com',
 			password: 'approveme',

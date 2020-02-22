@@ -75,6 +75,25 @@ export const auth = (state = initialState, action) => {
 				accessToken: stateUtility.getItemRejected(action.payload),
 			})
 
+		//  refresh access token
+		case authActions.REFRESH_AUTH_ACCESS_TOKEN_INITIAL_STATE:
+			return state.merge({
+				accessToken: stateUtility.getItemInitialState(),
+			})
+		case authActions.REFRESH_AUTH_ACCESS_TOKEN_LOADING:
+			return state.merge({
+				accessToken: stateUtility.getItemLoading(),
+			})
+		case authActions.REFRESH_AUTH_ACCESS_TOKEN_FULFILLED:
+			window.localStorage.setItem('accessToken', action.payload.access_token)
+			return state.merge({
+				accessToken: stateUtility.getItemFulfilled(action.payload.access_token),
+			})
+		case authActions.REFRESH_AUTH_ACCESS_TOKEN_REJECTED:
+			return state.merge({
+				accessToken: stateUtility.getItemRejected(action.payload),
+			})
+
 		//  meta
 		case authActions.LOAD_AUTH_USER_META_INITIAL_STATE:
 			return state.merge({
