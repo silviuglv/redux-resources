@@ -5,14 +5,14 @@ import { GetFieldsRequest, CreateFieldRequest, UpdateFieldRequest } from '../typ
 export const fieldApi = {
 	getFields: (packageId: string, params: GetFieldsRequest = {}) => {
 		return axios({
-			url: `${config.apiBase}/packages/${packageId}/fields`,
+			url: `${config.apiMock}/packages/${packageId}/fields`,
 			method: 'GET',
 			params,
 		})
 	},
 	createField: (packageId: string, data: CreateFieldRequest) => {
 		return axios({
-			url: `${config.apiBase}/packages/${packageId}/fields`,
+			url: `${config.apiMock}/packages/${packageId}/fields`,
 			method: 'POST',
 			data,
 		})

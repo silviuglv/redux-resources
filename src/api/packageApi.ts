@@ -32,7 +32,7 @@ export const packageApi = {
 	},
 	showPackage: (id: string) => {
 		return axios({
-			url: `${config.apiBase}/packages/${id}`,
+			url: `${config.apiMock}/packages/${id}`,
 			method: 'GET',
 		})
 	},
