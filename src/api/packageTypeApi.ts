@@ -5,7 +5,7 @@ import { GetPackageTypesRequest } from '../types'
 export const packageTypeApi = {
 	getPackageTypes: (params: GetPackageTypesRequest) => {
 		return axios({
-			url: `${config.apiBase}/package_types`,
+			url: `${config.apiBase}/package-types`,
 			method: 'GET',
 			params,
 		})
