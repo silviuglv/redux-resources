@@ -5,7 +5,7 @@ import { CreateFeedbackRequest } from '../types'
 export const feedbackApi = {
 	sendFeedback: (data: CreateFeedbackRequest) => {
 		return axios({
-			url: `${config.apiBase}/feedback`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/feedback`,
 			method: 'POST',
 			data,
 		})

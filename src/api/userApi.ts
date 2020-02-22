@@ -11,73 +11,73 @@ import {
 export const userApi = {
 	createUser: (data: CreateUserRequest) => {
 		return axios({
-			url: `${config.apiBase}/users`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/users`,
 			method: 'POST',
 			data,
 		})
 	},
 	createUserFromAccountInvite: (data: CreateUserFromAccountInviteRequest) => {
 		return axios({
-			url: `${config.apiBase}/users/account_invite`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/users/account_invite`,
 			method: 'POST',
 			data,
 		})
 	},
 	me: () => {
 		return axios({
-			url: `${config.apiBase}/users/me`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/users/me`,
 			method: 'GET',
 		})
 	},
 	getUserMeta: (userId: string) => {
 		return axios({
-			url: `${config.apiBase}/users/${userId}/meta`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/users/${userId}/meta`,
 			method: 'GET',
 		})
 	},
 	updateUser: (id: string, data: UpdateUserRequest) => {
 		return axios({
-			url: `${config.apiBase}/users/${id}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/users/${id}`,
 			method: 'PUT',
 			data,
 		})
 	},
 	updateUserPassword: (id: string, data: UpdatePasswordRequest) => {
 		return axios({
-			url: `${config.apiBase}/users/${id}/password`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/users/${id}/password`,
 			method: 'PUT',
 			data,
 		})
 	},
 	resendEmailConfirmation: () => {
 		return axios({
-			url: `${config.apiBase}/users/email_confirmation`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/users/email_confirmation`,
 			method: 'GET',
 		})
 	},
 	getNotificationPreferences: (id: string) => {
 		return axios({
-			url: `${config.apiBase}/users/${id}/notification_preferences`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/users/${id}/notification_preferences`,
 			method: 'GET',
 		})
 	},
 	updateNotificationPreferences: (id: string, data: UpdateNotificationPreferencesRequest) => {
 		return axios({
-			url: `${config.apiBase}/users/${id}/notification_preferences`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/users/${id}/notification_preferences`,
 			method: 'PUT',
 			data,
 		})
 	},
 	updatePicture: (id: string, data: any) => {
 		return axios({
-			url: `${config.apiBase}/users/${id}/picture`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/users/${id}/picture`,
 			method: 'POST',
 			data,
 		})
 	},
 	confirmEmail: (token: string) => {
 		return axios({
-			url: `${config.apiBase}/users/email_confirmation/${token}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/users/email_confirmation/${token}`,
 			method: 'PUT',
 		})
 	},
