@@ -1,5 +1,5 @@
 const config = {
-	dev_env: process.env.REACT_DATA_PROVIDER === 'production' ? false : true,
+	dev_env: false,
 	apiBase: process.env.REACT_APP_API_BASE_URL,
 	apiMock: process.env.REACT_APP_API_MOCK_BASE_URL,
 	google: {
