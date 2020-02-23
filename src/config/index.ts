@@ -1,7 +1,7 @@
 const config = {
-	dev_env: process.versions.node ? true : process.env.USE_REACT_MOCK_ENV,
-	apiBase: process.versions.node ? '' : process.env.REACT_APP_API_BASE_URL,
-	apiMock: process.versions.node ? '' : process.env.REACT_APP_API_MOCK_BASE_URL,
+	dev_env: process.env.REACT_DATA_PROVIDER === 'production' ? false : true,
+	apiBase: process.env.REACT_APP_API_BASE_URL,
+	apiMock: process.env.REACT_APP_API_MOCK_BASE_URL,
 	google: {
 		scopes: {
 			authentication: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
