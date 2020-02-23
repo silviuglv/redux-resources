@@ -12,14 +12,18 @@ export const notificationApi = {
 	},
 	deleteNotification: (id: string, data: any) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/notifications/${id}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/notifications/${
+				config.dev_env === true ? config.mockData.notification_id : id
+			}`,
 			method: 'PUT',
 			data,
 		})
 	},
 	update: (id: string, data: UpdateNotificationRequest) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/notifications/${id}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/notifications/${
+				config.dev_env === true ? config.mockData.notification_id : id
+			}`,
 			method: 'PUT',
 			data,
 		})

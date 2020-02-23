@@ -1,5 +1,5 @@
 const config = {
-	dev_env: process.versions.node ? false : process.env.USE_REACT_MOCK_ENV,
+	dev_env: process.versions.node ? true : process.env.USE_REACT_MOCK_ENV,
 	apiBase: process.versions.node ? '' : process.env.REACT_APP_API_BASE_URL,
 	apiMock: process.versions.node ? '' : process.env.REACT_APP_API_MOCK_BASE_URL,
 	google: {
@@ -19,6 +19,17 @@ const config = {
 		field_id: 'ck6ebbbin0001e4kt98oc16zl',
 		page_id: 'ck69oo8d400czgpktzddv5yq7',
 		package_type_id: 'ck5yi0cwk030mwgpb7llx086d',
+		card_id: 'test',
+		provider: 'approveme',
+		connected_service_id: 'test',
+		preset_id: 'test',
+		field_type_id: 'ck6ljx8ur00dh4uifvc8glfgh',
+		folder_id: 'ck6o57x2e00024tifgefkrbj8',
+		notification_id: 'ck6ljwi8i00014uif36fuxuqg',
+		subscription_id: 'test',
+		token: 'test',
+		customization_id: 'test',
+		customization_type_id: 'test',
 	},
 }
 
@@ -38,6 +49,17 @@ type Config = {
 		field_id: string
 		page_id: string
 		package_type_id: string
+		card_id: string
+		provider: string
+		connected_service_id: string
+		preset_id: string
+		field_type_id: string
+		folder_id: string
+		notification_id: string
+		subscription_id: string
+		token: string
+		customization_id: string
+		customization_type_id: string
 	}
 }
 

@@ -12,14 +12,18 @@ export const accountInviteApi = {
 	},
 	showAccountInvite: (id: string, accountInviteToken?: string) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/account_invites/${id}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/account_invites/${
+				config.dev_env === true ? config.mockData.account_id : id
+			}`,
 			method: 'GET',
 			headers: accountInviteToken ? { AccountInviteToken: accountInviteToken } : {},
 		})
 	},
 	deleteAccountInvite: (id: string, accountInviteToken?: string) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/account_invites/${id}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/account_invites/${
+				config.dev_env === true ? config.mockData.account_id : id
+			}`,
 			method: 'DELETE',
 			headers: accountInviteToken ? { AccountInviteToken: accountInviteToken } : {},
 		})
@@ -33,7 +37,9 @@ export const accountInviteApi = {
 	},
 	accept: (id: string) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/account_invites/${id}/accept`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/account_invites/${
+				config.dev_env === true ? config.mockData.account_id : id
+			}/accept`,
 			method: 'PUT',
 		})
 	},

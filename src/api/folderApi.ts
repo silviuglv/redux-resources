@@ -12,7 +12,9 @@ export const folderApi = {
 	},
 	showFolder: (id: string) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/folders/${id}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/folders/${
+				config.dev_env === true ? config.mockData.folder_id : id
+			}`,
 			method: 'GET',
 		})
 	},
@@ -25,7 +27,9 @@ export const folderApi = {
 	},
 	updateFolder: (id: string, data: UpdateFolderRequest) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/folders/${id}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/folders/${
+				config.dev_env === true ? config.mockData.folder_id : id
+			}`,
 			method: 'PUT',
 			data,
 		})

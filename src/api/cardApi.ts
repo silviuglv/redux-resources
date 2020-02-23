@@ -12,7 +12,9 @@ export const cardApi = {
 	},
 	deleteCard: (id: string) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/cards/${id}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/cards/${
+				config.dev_env === true ? config.mockData.card_id : id
+			}`,
 			method: 'DELETE',
 		})
 	},
@@ -25,14 +27,18 @@ export const cardApi = {
 	},
 	updateCard: (id: string, data: UpdateCardRequest) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/cards/${id}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/cards/${
+				config.dev_env === true ? config.mockData.card_id : id
+			}`,
 			method: 'PUT',
 			data,
 		})
 	},
 	setDefaultCard: (id: string) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/cards/${id}/default`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/cards/${
+				config.dev_env === true ? config.mockData.card_id : id
+			}/default`,
 			method: 'PUT',
 		})
 	},

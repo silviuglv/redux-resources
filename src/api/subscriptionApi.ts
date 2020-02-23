@@ -19,20 +19,26 @@ export const subscriptionApi = {
 	},
 	updateSubscription: (id: string, data: UpdateSubscriptionRequest) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/subscriptions/${id}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/subscriptions/${
+				config.dev_env === true ? config.mockData.subscription_id : id
+			}`,
 			method: 'PUT',
 			data,
 		})
 	},
 	deleteSubscription: (id: string) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/subscriptions/${id}`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/subscriptions/${
+				config.dev_env === true ? config.mockData.subscription_id : id
+			}`,
 			method: 'DELETE',
 		})
 	},
 	getUpcomingInvoices: (id: string, params: any = {}) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/subscriptions/${id}/upcoming_invoices`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/subscriptions/${
+				config.dev_env === true ? config.mockData.subscription_id : id
+			}/upcoming_invoices`,
 			method: 'GET',
 			params,
 		})

@@ -11,32 +11,34 @@ export const recipientApi = {
 	},
 	decline: (package_id: string, recipient_id: string) => {
 		return axios({
-			url: `${
-				config.dev_env === true ? config.apiMock : config.apiBase
-			}/packages/${package_id}/recipients/${recipient_id}/decline`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/packages/${
+				config.dev_env === true ? config.mockData.package_id : package_id
+			}/recipients/${config.dev_env === true ? config.mockData.recipient_id : recipient_id}/decline`,
 			method: 'POST',
 		})
 	},
 	messageSender: (package_id: string, recipient_id: string, data: MessageSenderRequest) => {
 		return axios({
-			url: `${
-				config.dev_env === true ? config.apiMock : config.apiBase
-			}/packages/${package_id}/recipients/${recipient_id}/message_sender`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/packages/${
+				config.dev_env === true ? config.mockData.package_id : package_id
+			}/recipients/${config.dev_env === true ? config.mockData.recipient_id : recipient_id}/message_sender`,
 			method: 'POST',
 			data,
 		})
 	},
 	completePackage: (package_id: string, recipient_id: string) => {
 		return axios({
-			url: `${
-				config.dev_env === true ? config.apiMock : config.apiBase
-			}/packages/${package_id}/recipients/${recipient_id}/complete`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/packages/${
+				config.dev_env === true ? config.mockData.package_id : package_id
+			}/recipients/${config.dev_env === true ? config.mockData.recipient_id : recipient_id}/complete`,
 			method: 'POST',
 		})
 	},
 	updatePhoto: (id: string, data: any) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/recipients/${id}/picture`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/recipients/${
+				config.dev_env === true ? config.mockData.recipient_id : id
+			}/picture`,
 			method: 'POST',
 			data,
 		})
