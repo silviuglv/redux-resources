@@ -5,14 +5,14 @@ import { GetFieldTypesRequest, GetPresetsRequest, CreatePresetRequest, UpdatePre
 export const fieldTypeApi = {
 	getFieldTypes: (params: GetFieldTypesRequest = {}) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/field_types`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/field-types`,
 			method: 'GET',
 			params,
 		})
 	},
 	getPresets: (field_type_id: string, params: GetPresetsRequest = {}) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/field_types/${
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/field-types/${
 				config.dev_env === true ? config.mockData.field_type_id : field_type_id
 			}/presets`,
 			method: 'GET',
@@ -21,14 +21,14 @@ export const fieldTypeApi = {
 	},
 	createPreset: (params: CreatePresetRequest) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/field_types/presets`,
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/field-types/presets`,
 			method: 'POST',
 			params,
 		})
 	},
 	updatePreset: (preset_id: string, params: UpdatePresetRequest) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/field_types/presets/${
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/field-types/presets/${
 				config.dev_env === true ? config.mockData.preset_id : preset_id
 			}`,
 			method: 'PUT',
@@ -37,7 +37,7 @@ export const fieldTypeApi = {
 	},
 	deletePreset: (preset_id: string) => {
 		return axios({
-			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/field_types/presets/${
+			url: `${config.dev_env === true ? config.apiMock : config.apiBase}/field-types/presets/${
 				config.dev_env === true ? config.mockData.preset_id : preset_id
 			}`,
 			method: 'DELETE',
